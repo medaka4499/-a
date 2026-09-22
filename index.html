@@ -20,7 +20,12 @@ button{border:0;color:#fff;font:inherit;font-weight:700;touch-action:manipulatio
 .headerBtn{background:#222a35;border-radius:12px;padding:10px 12px}
 .card{background:#151b23;border:1px solid #27303c;border-radius:18px;padding:15px;margin-bottom:11px}
 .label{font-size:12px;color:#9da8b7}
-.machineRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.machineRow{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center}
+.topGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:11px}
+.topCard{background:#151b23;border:1px solid #27303c;border-radius:18px;padding:12px}
+.judgeBtn{width:100%;height:50px;border-radius:14px;background:#2563eb}
+.counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.counterGrid .card{margin-bottom:0}
 select{width:100%;height:50px;border-radius:14px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font:inherit;font-weight:700}
 .gbox{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:stretch;padding:10px}
 .gitem{background:#10151c;border-radius:12px;padding:10px}.gcount,.startGames{font-size:24px;font-weight:800;letter-spacing:-1px;cursor:pointer;margin-top:3px}.ginput{width:100%;height:42px;border:1px solid #303a48;border-radius:10px;background:#0d1218;color:#fff;padding:0 8px;font:inherit;font-size:22px;font-weight:800}.ginput:focus{outline:2px solid #2563eb}
@@ -44,12 +49,15 @@ footer{text-align:center;color:#697586;font-size:11px;padding:8px}
 </head>
 <body>
 <main>
-<header><div><div class="sub">機種別データ保存</div></div><button class="headerBtn" id="manage">⚙ 機種</button></header>
-<section class="card"><div class="label">機種</div><div class="machineRow" style="margin-top:7px"><select id="machine"></select><button class="headerBtn" id="addMachine">＋</button></div></section>
+<div class="topGrid">
+<section class="topCard"><div class="label">機種</div><div style="margin-top:7px"><select id="machine"></select></div></section>
+<section class="topCard"><div class="label">設定判別</div><button class="judgeBtn" id="judge" style="margin-top:7px">設定判別</button></section>
+</div>
 <section class="card gbox"><div class="gitem"><div class="label">総ゲーム数</div><input class="ginput" id="gamesInput" type="number" inputmode="numeric" min="0" step="1" value="0"></div><div class="gitem"><div class="label">打ち始めゲーム数</div><input class="ginput" id="startGamesInput" type="number" inputmode="numeric" min="0" step="1" value="0"></div></section>
-<div id="counters"></div>
+<div id="counters" class="counterGrid"></div>
 <section class="card"><div class="label">集計</div><div class="stats"><div class="stat"><span class="label">小役合計</span><b id="total">0</b></div><div class="stat"><span class="label">最頻小役</span><b id="top">—</b></div></div></section>
 <button class="reset" id="reset">この機種のデータをリセット</button>
+<button class="headerBtn" id="manage" style="width:100%;margin-top:10px">⚙ 機種を追加・管理</button>
 <footer>機種ごとにゲーム数・小役データを保存します。</footer>
 </main>
 <div class="modal" id="modal"><div class="sheet"><div class="label">機種を追加</div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div></div></div>
@@ -65,10 +73,11 @@ function renderMachineSelect(){const s=document.getElementById("machine");s.inne
 function render(){renderMachineSelect();const d=current();document.getElementById("gamesInput").value=d.games;document.getElementById("startGamesInput").value=d.startGames||0;const root=document.getElementById("counters");root.innerHTML="";d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div><div class="name"></div><div class="rate"></div><div class="small">この機種のカウント</div></div><div class="actions"><button class="minus">−</button><button class="plus">＋</button></div>';card.querySelector(".name").textContent=c.name+"  "+c.count;card.querySelector(".rate").textContent=rate(c.count);card.querySelector(".minus").onclick=()=>{if(c.count>0){c.count--;save()}};card.querySelector(".plus").onclick=()=>{c.count++;save()};root.appendChild(card)});const total=d.counters.reduce((a,c)=>a+c.count,0),top=d.counters.reduce((a,c)=>c.count>a.count?c:a,{name:"—",count:0});document.getElementById("total").textContent=total;document.getElementById("top").textContent=top.count?`${top.name} ${top.count}`:"—";renderMachineList()}
 function renderMachineList(){const e=document.getElementById("machines");e.innerHTML="";Object.keys(state.machines).forEach(n=>{const r=document.createElement("div");r.className="item";r.innerHTML='<span></span><button class="del">削除</button>';r.firstChild.textContent=n;r.querySelector(".del").onclick=()=>{if(Object.keys(state.machines).length<=1){alert("機種は1台以上必要です");return}if(confirm(`「${n}」を削除しますか？`)){delete state.machines[n];if(state.selected===n)state.selected=Object.keys(state.machines)[0];save()}};e.appendChild(r)})}
 document.getElementById("machine").onchange=e=>{state.selected=e.target.value;save()};
+document.getElementById("judge").onclick=()=>alert("設定判別機能は準備中です。小役データをもとに判別機能を追加できます。");
 document.getElementById("gamesInput").onchange=e=>{current().games=Math.max(0,parseInt(e.target.value||"0",10)||0);save()};
 document.getElementById("startGamesInput").onchange=e=>{current().startGames=Math.max(0,parseInt(e.target.value||"0",10)||0);save()};
 document.getElementById("reset").onclick=()=>{if(confirm(`「${state.selected}」のゲーム数と小役カウントをリセットしますか？`)){current().games=0;current().startGames=0;current().counters.forEach(c=>c.count=0);save()}};
-const modal=document.getElementById("modal");document.getElementById("manage").onclick=()=>{modal.style.display="flex";document.getElementById("newMachine").focus()};document.getElementById("addMachine").onclick=()=>{modal.style.display="flex";document.getElementById("newMachine").focus()};document.getElementById("close").onclick=()=>modal.style.display="none";document.getElementById("add").onclick=()=>{const i=document.getElementById("newMachine"),n=i.value.trim();if(!n)return;if(state.machines[n]){alert("その機種はすでに登録されています");return}state.machines[n]=blankMachine();state.selected=n;i.value="";save();modal.style.display="none"};
+const modal=document.getElementById("modal");document.getElementById("manage").onclick=()=>{modal.style.display="flex";document.getElementById("newMachine").focus()};document.getElementById("close").onclick=()=>modal.style.display="none";document.getElementById("add").onclick=()=>{const i=document.getElementById("newMachine"),n=i.value.trim();if(!n)return;if(state.machines[n]){alert("その機種はすでに登録されています");return}state.machines[n]=blankMachine();state.selected=n;i.value="";save();modal.style.display="none"};
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));render();
 </script>
 </body>
