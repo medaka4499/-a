@@ -8,20 +8,20 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="小役カウンター">
 <link rel="manifest" href="manifest.webmanifest">
-<title>カウンター v1.0.10</title>
+<title>カウンター v1.1.1</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
-html{touch-action:manipulation;-webkit-text-size-adjust:100%}body{margin:0;background:#0b0f14;color:#f5f7fa;min-height:100vh;touch-action:manipulation}
+html{touch-action:pan-y;-webkit-text-size-adjust:100%;overscroll-behavior:none}body{margin:0;touch-action:pan-y;background:#0b0f14;color:#f5f7fa;min-height:100vh;touch-action:pan-y;overscroll-behavior:none}
 main{max-width:560px;margin:auto;padding:calc(env(safe-area-inset-top) + 10px) 14px calc(env(safe-area-inset-bottom) + 24px)}
 header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 h1{font-size:22px;margin:0}.sub{font-size:12px;color:#7f8a99;margin-top:3px}
-button{border:0;color:#fff;font:inherit;font-weight:700;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none} input,select{user-select:text;-webkit-user-select:text;touch-action:manipulation;-webkit-appearance:none}
+button{border:0;touch-action:manipulation;color:#fff;font:inherit;font-weight:700;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none} input,select{user-select:text;-webkit-user-select:text;touch-action:manipulation;-webkit-appearance:none;font-size:16px} input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .headerBtn{background:#222a35;border-radius:12px;padding:10px 12px}
 .card{background:#151b23;border:1px solid #27303c;border-radius:18px;padding:15px;margin-bottom:11px}
 .label{font-size:12px;color:#9da8b7}
 .machineRow{display:grid;grid-template-columns:1fr auto;gap:5px;align-items:center}.machineRow select{height:30px;padding:0 8px;font-size:16px}.machineMinus{width:34px;height:30px;border-radius:9px;background:#343d49;font-size:20px}
-.topGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:7px}.machineTop{grid-column:1 / -1}.compactCard{padding:4px 6px;height:62px}.gamePair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.compactJudge{height:34px;margin-top:4px}.ginput{height:34px;font-size:18px;padding:0 6px}
+.topGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:7px}.machineTop{grid-column:1 / -1;height:62px}.compactCard{padding:4px 6px;height:62px;min-height:62px}.gamePair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.compactJudge{height:34px;margin-top:4px}.ginput{height:34px;font-size:18px;padding:0 6px}
 .topCard{background:#151b23;border:1px solid #27303c;border-radius:14px;padding:7px}
 .judgeBtn{width:100%;height:34px;border-radius:10px;background:#2563eb}.rateBtn{width:100%;height:34px;border-radius:10px;background:#343d49;font-size:14px}.rateBtn.active{background:#2563eb}
 .counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -57,10 +57,10 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 <section class="topCard compactCard"><div class="label">設定判別</div><button class="judgeBtn compactJudge" id="judge">設定判別</button></section>
 </div>
 <div id="counters" class="counterGrid"></div>
-<section class="card"><div class="label">集計</div><div class="stats"><div class="stat"><span class="label">小役合計</span><b id="total">0</b></div><div class="stat"><span class="label">最頻小役</span><b id="top">—</b></div></div></section>
+
 <button class="reset" id="reset">この機種のデータをリセット</button>
 <button class="headerBtn" id="manage" style="width:100%;margin-top:10px">⚙ 機種を追加・管理</button>
-<footer><span>Ver. 1.1.0</span></footer>
+<footer><span>Ver. 1.1.3</span></footer>
 </main>
 <div class="modal" id="modal"><div class="sheet"><div class="label">機種を追加</div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div></div></div>
 <script>
@@ -87,13 +87,13 @@ function setupGameInput(id,key){const el=document.getElementById(id);el.addEvent
 setupGameInput("gamesInput","games");setupGameInput("startGamesInput","startGames");
 document.getElementById("reset").onclick=()=>{if(confirm(`「${state.selected}」のゲーム数と小役カウントをリセットしますか？`)){current().games=0;current().startGames=0;current().counters.forEach(c=>c.count=0);save()}};
 const modal=document.getElementById("modal");document.getElementById("manage").onclick=()=>{modal.style.display="flex";document.getElementById("newMachine").focus()};document.getElementById("close").onclick=()=>modal.style.display="none";document.getElementById("add").onclick=()=>{const i=document.getElementById("newMachine"),n=i.value.trim();if(!n)return;if(state.machines[n]){alert("その機種はすでに登録されています");return}state.machines[n]=blankMachine();state.selected=n;i.value="";save();modal.style.display="none"};
-// 拡大防止（スマホのダブルタップ・ピンチ操作）
+let lastTouchEnd=0;
+document.addEventListener("touchstart",e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
+document.addEventListener("touchend",e=>{const now=Date.now();if(now-lastTouchEnd<450)e.preventDefault();lastTouchEnd=now},{passive:false});
 document.addEventListener("gesturestart",e=>e.preventDefault(),{passive:false});
 document.addEventListener("gesturechange",e=>e.preventDefault(),{passive:false});
 document.addEventListener("gestureend",e=>e.preventDefault(),{passive:false});
-let lastTouchEnd=0;
-document.addEventListener("touchend",e=>{const now=Date.now();if(now-lastTouchEnd<350){e.preventDefault()}lastTouchEnd=now},{passive:false});
-
+document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));render();
 </script>
 </body>
