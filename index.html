@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="小役カウンター">
 <link rel="manifest" href="manifest.webmanifest">
-<title>カウンター</title>
+<title>カウンター v1.0.6</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
@@ -59,7 +59,7 @@ footer{text-align:center;color:#697586;font-size:11px;padding:8px}
 <section class="card"><div class="label">集計</div><div class="stats"><div class="stat"><span class="label">小役合計</span><b id="total">0</b></div><div class="stat"><span class="label">最頻小役</span><b id="top">—</b></div></div></section>
 <button class="reset" id="reset">この機種のデータをリセット</button>
 <button class="headerBtn" id="manage" style="width:100%;margin-top:10px">⚙ 機種を追加・管理</button>
-<footer>機種ごとにゲーム数・小役データを保存します。</footer>
+<footer>機種ごとにゲーム数・小役データを保存します。<br><span>Ver. 1.0.6</span></footer>
 </main>
 <div class="modal" id="modal"><div class="sheet"><div class="label">機種を追加</div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div></div></div>
 <script>
