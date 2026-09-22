@@ -19,8 +19,11 @@ h1{font-size:22px;margin:0}.sub{font-size:12px;color:#7f8a99;margin-top:3px}
 button{border:0;color:#fff;font:inherit;font-weight:700;touch-action:manipulation}
 .headerBtn{background:#222a35;border-radius:12px;padding:10px 12px}
 .card{background:#151b23;border:1px solid #27303c;border-radius:18px;padding:15px;margin-bottom:11px}
+.label{font-size:12px;color:#9da8b7}
+.machineRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+select{width:100%;height:50px;border-radius:14px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font:inherit;font-weight:700}
 .gbox{display:grid;grid-template-columns:1fr auto;align-items:center}
-.label{font-size:12px;color:#9da8b7}.gcount{font-size:38px;font-weight:800;letter-spacing:-1px}
+.gcount{font-size:38px;font-weight:800;letter-spacing:-1px}
 .gbuttons{display:flex;gap:7px}.gbuttons button{min-width:58px;height:50px;border-radius:14px;background:#2a3340}
 .primary,.plus{background:#2563eb!important}
 .counter{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
@@ -41,68 +44,32 @@ footer{text-align:center;color:#697586;font-size:11px;padding:8px}
 </head>
 <body>
 <main>
-<header><div><h1>小役カウンター</h1><div class="sub">iPhone / PWA対応</div></div><button class="headerBtn" id="manage">⚙ 小役</button></header>
-<section class="card gbox"><div><div class="label">総ゲーム数</div><div class="gcount" id="games">0 G</div></div>
-<div class="gbuttons"><button id="gminus">−1</button><button class="primary" id="gplus">＋1</button></div></section>
+<header><div><h1>小役カウンター</h1><div class="sub">機種別データ保存</div></div><button class="headerBtn" id="manage">⚙ 機種</button></header>
+<section class="card"><div class="label">機種</div><div class="machineRow" style="margin-top:7px"><select id="machine"></select><button class="headerBtn" id="addMachine">＋</button></div></section>
+<section class="card gbox"><div><div class="label">総ゲーム数</div><div class="gcount" id="games">0 G</div></div><div class="gbuttons"><button id="gminus">−1</button><button class="primary" id="gplus">＋1</button></div></section>
 <div id="counters"></div>
-<section class="card"><div class="label">集計</div><div class="stats">
-<div class="stat"><span class="label">小役合計</span><b id="total">0</b></div>
-<div class="stat"><span class="label">最頻小役</span><b id="top">—</b></div>
-</div></section>
-<button class="reset" id="reset">データをリセット</button>
-<footer>データはこのiPhoneのブラウザに保存されます。オフラインでも利用できます。</footer>
+<section class="card"><div class="label">集計</div><div class="stats"><div class="stat"><span class="label">小役合計</span><b id="total">0</b></div><div class="stat"><span class="label">最頻小役</span><b id="top">—</b></div></div></section>
+<button class="reset" id="reset">この機種のデータをリセット</button>
+<footer>機種ごとにゲーム数・小役データを保存します。</footer>
 </main>
-
-<div class="modal" id="modal"><div class="sheet">
-<div class="label">小役を追加</div>
-<div style="margin-top:7px"><input id="newName" maxlength="20" placeholder="例：弱チェリー"></div>
-<div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div>
-<div id="items"></div>
-</div></div>
-
+<div class="modal" id="modal"><div class="sheet"><div class="label">機種を追加</div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div></div></div>
 <script>
-const KEY="koyaku-counter-v2";
-const DEFAULT={games:0,counters:[{name:"ベル",count:0},{name:"スイカ",count:0},{name:"チェリー",count:0}]};
-let state=JSON.parse(localStorage.getItem(KEY)||"null")||structuredClone(DEFAULT);
+const KEY="koyaku-counter-v3",OLD_KEY="koyaku-counter-v2",DEFAULT_COUNTERS=["ベル","スイカ","チェリー"],DEFAULT_MACHINES=["マイジャグラーV","アイムジャグラーEX","その他"];
+function blankMachine(){return {games:0,counters:DEFAULT_COUNTERS.map(name=>({name,count:0}))}}
+let state=JSON.parse(localStorage.getItem(KEY)||"null");
+if(!state){const old=JSON.parse(localStorage.getItem(OLD_KEY)||"null");state={selected:"マイジャグラーV",machines:{}};DEFAULT_MACHINES.forEach(n=>state.machines[n]=blankMachine());if(old)state.machines["マイジャグラーV"]={games:old.games||0,counters:(old.counters||[]).map(c=>({name:c.name,count:c.count||0}))};localStorage.setItem(KEY,JSON.stringify(state))}
+function current(){return state.machines[state.selected]}
 function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
-function rate(n){return n&&state.games?`1/${(state.games/n).toFixed(2)}`:"—"}
-function render(){
- document.getElementById("games").textContent=state.games+" G";
- const root=document.getElementById("counters"); root.innerHTML="";
- state.counters.forEach((c,i)=>{
-  const card=document.createElement("section"); card.className="card counter";
-  card.innerHTML='<div><div class="name"></div><div class="rate"></div><div class="small">この小役のカウント</div></div><div class="actions"><button class="minus">−</button><button class="plus">＋</button></div>';
-  card.querySelector(".name").textContent=c.name+"  "+c.count;
-  card.querySelector(".rate").textContent=rate(c.count);
-  card.querySelector(".minus").onclick=()=>{if(c.count>0){c.count--;save()}};
-  card.querySelector(".plus").onclick=()=>{c.count++;save()};
-  root.appendChild(card);
- });
- const total=state.counters.reduce((a,c)=>a+c.count,0);
- const top=state.counters.reduce((a,c)=>c.count>a.count?c:a,{name:"—",count:0});
- document.getElementById("total").textContent=total;
- document.getElementById("top").textContent=top.count?`${top.name} ${top.count}`:"—";
- renderItems();
-}
-function renderItems(){
- const el=document.getElementById("items"); el.innerHTML="";
- state.counters.forEach((c,i)=>{
-  const row=document.createElement("div");row.className="item";
-  row.innerHTML=`<span></span><button class="del">削除</button>`;
-  row.firstChild.textContent=c.name;
-  row.querySelector(".del").onclick=()=>{if(confirm(`「${c.name}」を削除しますか？`)){state.counters.splice(i,1);save()}};
-  el.appendChild(row);
- });
-}
-document.getElementById("gplus").onclick=()=>{state.games++;save()};
-document.getElementById("gminus").onclick=()=>{if(state.games>0)state.games--;save()};
-document.getElementById("reset").onclick=()=>{if(confirm("現在のゲーム数と小役カウントをすべてリセットしますか？")){state.games=0;state.counters.forEach(c=>c.count=0);save()}};
-const modal=document.getElementById("modal");
-document.getElementById("manage").onclick=()=>{modal.style.display="flex";document.getElementById("newName").focus()};
-document.getElementById("close").onclick=()=>modal.style.display="none";
-document.getElementById("add").onclick=()=>{const input=document.getElementById("newName"),name=input.value.trim();if(name){state.counters.push({name,count:0});input.value="";save();modal.style.display="none"}};
-if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));
-render();
+function rate(n){return n&&current().games?`1/${(current().games/n).toFixed(2)}`:"—"}
+function renderMachineSelect(){const s=document.getElementById("machine");s.innerHTML="";Object.keys(state.machines).forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;o.selected=n===state.selected;s.appendChild(o)})}
+function render(){renderMachineSelect();const d=current();document.getElementById("games").textContent=d.games+" G";const root=document.getElementById("counters");root.innerHTML="";d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div><div class="name"></div><div class="rate"></div><div class="small">この機種のカウント</div></div><div class="actions"><button class="minus">−</button><button class="plus">＋</button></div>';card.querySelector(".name").textContent=c.name+"  "+c.count;card.querySelector(".rate").textContent=rate(c.count);card.querySelector(".minus").onclick=()=>{if(c.count>0){c.count--;save()}};card.querySelector(".plus").onclick=()=>{c.count++;save()};root.appendChild(card)});const total=d.counters.reduce((a,c)=>a+c.count,0),top=d.counters.reduce((a,c)=>c.count>a.count?c:a,{name:"—",count:0});document.getElementById("total").textContent=total;document.getElementById("top").textContent=top.count?`${top.name} ${top.count}`:"—";renderMachineList()}
+function renderMachineList(){const e=document.getElementById("machines");e.innerHTML="";Object.keys(state.machines).forEach(n=>{const r=document.createElement("div");r.className="item";r.innerHTML='<span></span><button class="del">削除</button>';r.firstChild.textContent=n;r.querySelector(".del").onclick=()=>{if(Object.keys(state.machines).length<=1){alert("機種は1台以上必要です");return}if(confirm(`「${n}」を削除しますか？`)){delete state.machines[n];if(state.selected===n)state.selected=Object.keys(state.machines)[0];save()}};e.appendChild(r)})}
+document.getElementById("machine").onchange=e=>{state.selected=e.target.value;save()};
+document.getElementById("gplus").onclick=()=>{current().games++;save()};
+document.getElementById("gminus").onclick=()=>{if(current().games>0)current().games--;save()};
+document.getElementById("reset").onclick=()=>{if(confirm(`「${state.selected}」のゲーム数と小役カウントをリセットしますか？`)){current().games=0;current().counters.forEach(c=>c.count=0);save()}};
+const modal=document.getElementById("modal");document.getElementById("manage").onclick=()=>{modal.style.display="flex";document.getElementById("newMachine").focus()};document.getElementById("addMachine").onclick=()=>{modal.style.display="flex";document.getElementById("newMachine").focus()};document.getElementById("close").onclick=()=>modal.style.display="none";document.getElementById("add").onclick=()=>{const i=document.getElementById("newMachine"),n=i.value.trim();if(!n)return;if(state.machines[n]){alert("その機種はすでに登録されています");return}state.machines[n]=blankMachine();state.selected=n;i.value="";save();modal.style.display="none"};
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));render();
 </script>
 </body>
 </html>
