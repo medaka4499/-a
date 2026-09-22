@@ -57,9 +57,10 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 <section class="topCard compactCard"><div class="label">設定判別</div><button class="judgeBtn compactJudge" id="judge">設定判別</button></section>
 </div>
 <div id="counters" class="counterGrid"></div>
+<section class="card"><div class="label">集計</div><div class="stats"><div class="stat"><span class="label">小役合計</span><b id="total">0</b></div><div class="stat"><span class="label">最頻小役</span><b id="top">—</b></div></div></section>
 <button class="reset" id="reset">この機種のデータをリセット</button>
 <button class="headerBtn" id="manage" style="width:100%;margin-top:10px">⚙ 機種を追加・管理</button>
-<footer><span>Ver. 1.1.1</span></footer>
+<footer><span>Ver. 1.1.0</span></footer>
 </main>
 <div class="modal" id="modal"><div class="sheet"><div class="label">機種を追加</div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div></div></div>
 <script>
@@ -86,6 +87,13 @@ function setupGameInput(id,key){const el=document.getElementById(id);el.addEvent
 setupGameInput("gamesInput","games");setupGameInput("startGamesInput","startGames");
 document.getElementById("reset").onclick=()=>{if(confirm(`「${state.selected}」のゲーム数と小役カウントをリセットしますか？`)){current().games=0;current().startGames=0;current().counters.forEach(c=>c.count=0);save()}};
 const modal=document.getElementById("modal");document.getElementById("manage").onclick=()=>{modal.style.display="flex";document.getElementById("newMachine").focus()};document.getElementById("close").onclick=()=>modal.style.display="none";document.getElementById("add").onclick=()=>{const i=document.getElementById("newMachine"),n=i.value.trim();if(!n)return;if(state.machines[n]){alert("その機種はすでに登録されています");return}state.machines[n]=blankMachine();state.selected=n;i.value="";save();modal.style.display="none"};
+// 拡大防止（スマホのダブルタップ・ピンチ操作）
+document.addEventListener("gesturestart",e=>e.preventDefault(),{passive:false});
+document.addEventListener("gesturechange",e=>e.preventDefault(),{passive:false});
+document.addEventListener("gestureend",e=>e.preventDefault(),{passive:false});
+let lastTouchEnd=0;
+document.addEventListener("touchend",e=>{const now=Date.now();if(now-lastTouchEnd<350){e.preventDefault()}lastTouchEnd=now},{passive:false});
+
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));render();
 </script>
 </body>
