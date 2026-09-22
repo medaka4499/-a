@@ -2,96 +2,91 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#111827">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="小役カウンター">
 <link rel="manifest" href="manifest.webmanifest">
-<title>小役カウンター Ver.1.1.2</title>
+<title>カウンター v1.0.10</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{touch-action:manipulation}
 :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
-body{margin:0;background:#0b0f14;color:#f5f7fa;min-height:100vh}
+html{touch-action:manipulation;-webkit-text-size-adjust:100%}body{margin:0;background:#0b0f14;color:#f5f7fa;min-height:100vh;touch-action:manipulation}
 main{max-width:560px;margin:auto;padding:calc(env(safe-area-inset-top) + 10px) 14px calc(env(safe-area-inset-bottom) + 24px)}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 h1{font-size:22px;margin:0}.sub{font-size:12px;color:#7f8a99;margin-top:3px}
-button,input,select{font:inherit;touch-action:manipulation}
-button{border:0;color:#fff;font-weight:700}
+button{border:0;color:#fff;font:inherit;font-weight:700;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none} input,select{user-select:text;-webkit-user-select:text;touch-action:manipulation;-webkit-appearance:none}
 .headerBtn{background:#222a35;border-radius:12px;padding:10px 12px}
-.card{background:#151b23;border:1px solid #27303c;border-radius:16px;padding:12px;margin-bottom:9px}
-.machineRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
-select{width:100%;height:50px;border-radius:13px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font-size:16px;font-weight:700}
-.modeBtn{width:50px;height:50px;border-radius:13px;background:#343d49;font-size:20px}.modeBtn.on{background:#b91c1c}
-.topGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:9px}
-.infoBox{background:#151b23;border:1px solid #27303c;border-radius:16px;padding:10px;min-height:70px}
-.infoLabel{font-size:11px;color:#9da8b7}.numInput{width:100%;border:0;outline:0;background:transparent;color:#fff;font-size:23px;font-weight:800;padding:4px 0 0}
-.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:9px}
-.actionBtn{height:54px;border-radius:14px;background:#222a35;font-size:15px}.actionBtn.primary{background:#2563eb}
+.card{background:#151b23;border:1px solid #27303c;border-radius:18px;padding:15px;margin-bottom:11px}
+.label{font-size:12px;color:#9da8b7}
+.machineRow{display:grid;grid-template-columns:1fr auto;gap:5px;align-items:center}.machineRow select{height:30px;padding:0 8px;font-size:16px}.machineMinus{width:34px;height:30px;border-radius:9px;background:#343d49;font-size:20px}
+.topGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:7px}.machineTop{grid-column:1 / -1}.compactCard{padding:4px 6px;height:62px}.gamePair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.compactJudge{height:34px;margin-top:4px}.ginput{height:34px;font-size:18px;padding:0 6px}
+.topCard{background:#151b23;border:1px solid #27303c;border-radius:14px;padding:7px}
+.judgeBtn{width:100%;height:34px;border-radius:10px;background:#2563eb}.rateBtn{width:100%;height:34px;border-radius:10px;background:#343d49;font-size:14px}.rateBtn.active{background:#2563eb}
+.counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.counterGrid .card{margin-bottom:0}
+select{width:100%;height:30px;border-radius:10px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font:inherit;font-weight:700}
+.gbox{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:stretch;padding:10px}
+.gitem{background:#10151c;border-radius:12px;padding:10px}.gcount,.startGames{font-size:24px;font-weight:800;letter-spacing:-1px;cursor:pointer;margin-top:3px}.ginput{width:100%;height:34px;border:1px solid #303a48;border-radius:9px;background:#0d1218;color:#fff;padding:0 8px;font:inherit;font-size:20px;font-weight:800;touch-action:manipulation}.ginput:focus{outline:2px solid #2563eb}
+
+.primary,.plus{background:#2563eb!important}
 .counter{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
-.counterInfo{min-width:0}.name{font-size:18px;font-weight:800}.countLine{font-size:13px;color:#aeb8c5;margin-top:5px}.countLine b{font-size:18px;color:#fff}.rate{font-size:14px;color:#aeb8c5;margin-top:3px;font-weight:800}.rate.hasData{color:#fff}
-.actions{display:flex;gap:7px}.minus{width:48px;height:58px;border-radius:14px;background:#343d49;font-size:22px}.plus{width:76px;height:58px;border-radius:14px;font-size:28px;background:#2563eb}
-.reset{width:100%;height:46px;border-radius:14px;color:#ffb4b4;background:#2a2022;margin-top:2px}
-footer{text-align:center;color:#697586;font-size:11px;padding:8px}
-.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:5}.modal.show{display:flex}
-.sheet{width:100%;max-width:560px;margin:auto;background:#151b23;border-radius:22px 22px 0 0;padding:18px;max-height:82vh;overflow:auto}
-.sheetTitle{font-size:17px;font-weight:800;margin-bottom:10px}.sheet input{width:100%;height:48px;border-radius:12px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font-size:17px}
-.sheetRow{display:flex;gap:8px;margin-top:10px}.sheetRow button{flex:1;height:46px;border-radius:12px;background:#2a3340}.sheetRow .primary{background:#2563eb}
-.item{padding:11px 0;border-bottom:1px solid #26303b}.itemHead{display:flex;justify-content:space-between;align-items:center;gap:8px}.del{background:#3a2528;border-radius:9px;padding:7px 10px;color:#ffb4b4}.savedMeta{font-size:11px;color:#8994a3;margin-top:4px}.savedBody{font-size:13px;color:#dce2ea;margin-top:6px;line-height:1.6}
-.empty{color:#8994a3;text-align:center;padding:20px 0}
+.name{font-size:18px;font-weight:800}.rate{font-size:15px;font-weight:800;color:#f5f7fa;margin-top:4px}
+.actions{display:flex;gap:7px}.minus{width:48px;height:58px;border-radius:14px;background:#343d49;font-size:22px}
+.plus{width:76px;height:58px;border-radius:14px;font-size:28px}
+.small{margin-top:7px;font-size:11px;color:#687585}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#10151c;border-radius:14px;padding:11px}
+.stat b{display:block;font-size:19px;margin-top:3px}
+.reset{width:100%;height:48px;border-radius:14px;color:#ffb4b4;background:#2a2022;margin-top:2px}
+footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12px 8px 4px;margin-top:8px;border-top:1px solid #27303c}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:5}
+.sheet{width:100%;max-width:560px;margin:auto;background:#151b23;border-radius:22px 22px 0 0;padding:18px}
+.sheet input{width:100%;height:48px;border-radius:12px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font-size:17px}
+.sheetRow{display:flex;gap:8px;margin-top:10px}.sheetRow button{flex:1;height:46px;border-radius:12px;background:#2a3340}.sheetRow .primary{background:#2563eb}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.keypad button{height:52px;border-radius:12px;background:#2a3340;font-size:20px}.keypad .wide{grid-column:span 2}
+.item{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding:10px 0;border-bottom:1px solid #26303b}.del{background:#3a2528;border-radius:9px;padding:7px 10px;color:#ffb4b4}
 </style>
 </head>
 <body>
 <main>
-<header><div><h1>小役カウンター</h1><div class="sub">Ver.1.1.2</div></div><button class="headerBtn" id="manage">⚙ 機種</button></header>
-<section class="card"><div class="machineRow"><select id="machine"></select><button class="modeBtn" id="minusMode" title="マイナスモード">−</button></div></section>
-<section class="topGrid">
-  <div class="infoBox"><div class="infoLabel">総ゲーム</div><input class="numInput" id="gamesInput" type="number" min="0" inputmode="numeric" value="0"></div>
-  <div class="infoBox"><div class="infoLabel">打ち始め</div><input class="numInput" id="startInput" type="number" min="0" inputmode="numeric" value="0"></div>
-</section>
-<section class="actionGrid">
-  <button class="actionBtn" id="winRate">当選率<br><b id="settingNum">設定1</b></button>
-  <button class="actionBtn" id="judge">設定判別</button>
-  <button class="actionBtn primary" id="saveData">データを保存</button>
-  <button class="actionBtn" id="viewData">保存データ</button>
-</section>
-<div id="counters"></div>
+<div class="topGrid">
+<section class="topCard compactCard machineTop"><div class="label">機種</div><div class="machineRow" style="margin-top:6px"><select id="machine"></select><button class="machineMinus" id="machineMinus">−</button></div></section>
+<section class="topCard compactCard"><div class="label">総ゲーム</div><input class="ginput" id="gamesInput" type="number" inputmode="numeric" min="0" step="1" value="0"></section>
+<section class="topCard compactCard"><div class="label">打ち始め</div><input class="ginput" id="startGamesInput" type="number" inputmode="numeric" min="0" step="1" value="0"></section>
+<section class="topCard compactCard"><div class="label">当選率</div><button class="rateBtn" id="rateBtn">当選率</button></section>
+<section class="topCard compactCard"><div class="label">設定判別</div><button class="judgeBtn compactJudge" id="judge">設定判別</button></section>
+</div>
+<div id="counters" class="counterGrid"></div>
 <button class="reset" id="reset">この機種のデータをリセット</button>
-<footer>Ver.1.1.2</footer>
+<button class="headerBtn" id="manage" style="width:100%;margin-top:10px">⚙ 機種を追加・管理</button>
+<footer><span>Ver. 1.1.1</span></footer>
 </main>
-<div class="modal" id="machineModal"><div class="sheet"><div class="sheetTitle">機種を追加・管理</div><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"><div class="sheetRow"><button id="closeMachine">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div></div></div>
-<div class="modal" id="savedModal"><div class="sheet"><div class="sheetTitle">保存データ</div><div class="savedMeta">「データを保存」を押した時点の記録を後から確認できます。</div><div id="savedList"></div><div class="sheetRow"><button id="clearSaved">保存データを全削除</button><button class="primary" id="closeSaved">閉じる</button></div></div></div>
+<div class="modal" id="modal"><div class="sheet"><div class="label">機種を追加</div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div></div></div>
 <script>
-const APP_VERSION="1.1.2";
-const KEY="koyaku-counter-v3",SAVE_KEY="koyaku-counter-history-v1",OLD_KEY="koyaku-counter-v2";
-const DEFAULT_COUNTERS=["ベル","スイカ","チェリー"],DEFAULT_MACHINES=["マイジャグラーV","アイムジャグラーEX","その他"];
-function blankMachine(){return {games:0,startGames:0,setting:1,counters:DEFAULT_COUNTERS.map(name=>({name,count:0}))}}
-let state=JSON.parse(localStorage.getItem(KEY)||"null");
-if(!state){const old=JSON.parse(localStorage.getItem(OLD_KEY)||"null");state={selected:"マイジャグラーV",machines:{}};DEFAULT_MACHINES.forEach(n=>state.machines[n]=blankMachine());if(old)state.machines["マイジャグラーV"]={...blankMachine(),games:old.games||0,counters:(old.counters||[]).map(c=>({name:c.name,count:c.count||0}))};localStorage.setItem(KEY,JSON.stringify(state))}
-Object.values(state.machines).forEach(d=>{if(typeof d.games!=="number")d.games=0;if(typeof d.startGames!=="number")d.startGames=0;if(typeof d.setting!=="number")d.setting=1;if(!Array.isArray(d.counters))d.counters=[]});
+const KEY="koyaku-counter-v3",OLD_KEY="koyaku-counter-v2",DEFAULT_COUNTERS=["ベル","スイカ","チェリー"],DEFAULT_MACHINES=["マイジャグラーV","アイムジャグラーEX","その他"];
 let minusMode=false;
+function blankMachine(){return {games:0,startGames:0,counters:DEFAULT_COUNTERS.map(name=>({name,count:0}))}}
+let state=JSON.parse(localStorage.getItem(KEY)||"null");
+if(!state){const old=JSON.parse(localStorage.getItem(OLD_KEY)||"null");state={selected:"マイジャグラーV",machines:{}};DEFAULT_MACHINES.forEach(n=>state.machines[n]=blankMachine());if(old)state.machines["マイジャグラーV"]={games:old.games||0,startGames:old.startGames||0,counters:(old.counters||[]).map(c=>({name:c.name,count:c.count||0}))};localStorage.setItem(KEY,JSON.stringify(state))}
 function current(){return state.machines[state.selected]}
-function persist(){localStorage.setItem(KEY,JSON.stringify(state));render()}
-function rate(n){return n&&current().games?`1/${(current().games/n).toFixed(2)}`:"—"}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
+function rate(n){const games=Number(current().games)||0;const count=Number(n)||0;return games>0&&count>0?`1/${(games/count).toFixed(2)}`:"—"}
 function renderMachineSelect(){const s=document.getElementById("machine");s.innerHTML="";Object.keys(state.machines).forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;o.selected=n===state.selected;s.appendChild(o)})}
-function render(){renderMachineSelect();const d=current();document.getElementById("gamesInput").value=d.games;document.getElementById("startInput").value=d.startGames;document.getElementById("settingNum").textContent=`設定${d.setting}`;document.getElementById("minusMode").classList.toggle("on",minusMode);const root=document.getElementById("counters");root.innerHTML="";d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div class="counterInfo"><div class="name"></div><div class="countLine">回数 <b></b></div><div class="rate"></div></div><div class="actions"><button class="minus">−</button><button class="plus">＋</button></div>';card.querySelector(".name").textContent=c.name;card.querySelector(".countLine b").textContent=c.count;const rr=rate(c.count);card.querySelector(".rate").textContent=`確率 ${rr}`;card.querySelector(".rate").classList.toggle("hasData",rr!=="—");card.querySelector(".minus").onclick=()=>changeCounter(c,-1);card.querySelector(".plus").onclick=()=>changeCounter(c,1);let timer;card.addEventListener("pointerdown",()=>{timer=setTimeout(()=>{const v=prompt(`${c.name}の回数を入力`,String(c.count));if(v!==null){const n=Math.max(0,parseInt(v,10)||0);c.count=n;persist()}},550)});["pointerup","pointercancel","pointerleave"].forEach(e=>card.addEventListener(e,()=>clearTimeout(timer)));root.appendChild(card)});renderMachineList()}
-function changeCounter(c,dir){const actual=minusMode?-1:dir;c.count=Math.max(0,c.count+actual);persist()}
-function renderMachineList(){const e=document.getElementById("machines");e.innerHTML="";Object.keys(state.machines).forEach(n=>{const r=document.createElement("div");r.className="item";r.innerHTML='<div class="itemHead"><span></span><button class="del">削除</button></div>';r.querySelector("span").textContent=n;r.querySelector(".del").onclick=()=>{if(Object.keys(state.machines).length<=1){alert("機種は1台以上必要です");return}if(confirm(`「${n}」を削除しますか？`)){delete state.machines[n];if(state.selected===n)state.selected=Object.keys(state.machines)[0];persist()}};e.appendChild(r)})}
-function openModal(id){document.getElementById(id).classList.add("show")};function closeModal(id){document.getElementById(id).classList.remove("show")}
-document.getElementById("machine").onchange=e=>{state.selected=e.target.value;persist()};
-document.getElementById("minusMode").onclick=()=>{minusMode=!minusMode;render()};
-function bindNumberInput(id,key){const el=document.getElementById(id);el.addEventListener("focus",()=>{if(el.value==="0")el.select()});el.addEventListener("change",()=>{current()[key]=Math.max(0,parseInt(el.value,10)||0);persist()});el.addEventListener("blur",()=>{if(el.value==="")el.value="0"})}
-bindNumberInput("gamesInput","games");bindNumberInput("startInput","startGames");
-document.getElementById("winRate").onclick=()=>{current().setting=current().setting%6+1;persist()};
-document.getElementById("judge").onclick=()=>alert(`現在の表示設定：設定${current().setting}`);
-document.getElementById("reset").onclick=()=>{if(confirm(`「${state.selected}」のゲーム数・打ち始め・小役カウントをリセットしますか？`)){const d=current();d.games=0;d.startGames=0;d.counters.forEach(c=>c.count=0);persist()}};
-document.getElementById("manage").onclick=()=>{openModal("machineModal");document.getElementById("newMachine").focus()};document.getElementById("closeMachine").onclick=()=>closeModal("machineModal");document.getElementById("add").onclick=()=>{const i=document.getElementById("newMachine"),n=i.value.trim();if(!n)return;if(state.machines[n]){alert("その機種はすでに登録されています");return}state.machines[n]=blankMachine();state.selected=n;i.value="";persist();closeModal("machineModal")};
-document.getElementById("saveData").onclick=()=>{const d=current();const history=JSON.parse(localStorage.getItem(SAVE_KEY)||"[]");history.unshift({id:Date.now(),time:new Date().toLocaleString("ja-JP"),machine:state.selected,games:d.games,startGames:d.startGames,setting:d.setting,counters:d.counters.map(c=>({...c}))});localStorage.setItem(SAVE_KEY,JSON.stringify(history.slice(0,100)));alert("現在のデータを保存しました");};
-document.getElementById("viewData").onclick=()=>{renderSaved();openModal("savedModal")};document.getElementById("closeSaved").onclick=()=>closeModal("savedModal");document.getElementById("clearSaved").onclick=()=>{if(confirm("保存したデータをすべて削除しますか？")){localStorage.removeItem(SAVE_KEY);renderSaved()}};
-function renderSaved(){const root=document.getElementById("savedList"),history=JSON.parse(localStorage.getItem(SAVE_KEY)||"[]");root.innerHTML="";if(!history.length){root.innerHTML='<div class="empty">まだ保存データはありません。</div>';return}history.forEach(x=>{const row=document.createElement("div");row.className="item";row.innerHTML='<div class="itemHead"><b></b><button class="del">削除</button></div><div class="savedMeta"></div><div class="savedBody"></div>';row.querySelector("b").textContent=x.machine;row.querySelector(".savedMeta").textContent=x.time;row.querySelector(".savedBody").textContent=`総ゲーム ${x.games} G ／ 打ち始め ${x.startGames} G ／ 設定${x.setting} ／ `+x.counters.map(c=>`${c.name} ${c.count}回`).join("・");row.querySelector(".del").onclick=()=>{const next=history.filter(y=>y.id!==x.id);localStorage.setItem(SAVE_KEY,JSON.stringify(next));renderSaved()};root.appendChild(row)})}
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));
-render();
+function render(){renderMachineSelect();const d=current();document.getElementById("gamesInput").value=d.games;document.getElementById("startGamesInput").value=d.startGames||0;const root=document.getElementById("counters");root.innerHTML="";d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div><div class="name"></div><div class="rate"></div></div>';card.querySelector(".name").textContent=c.name+"  "+c.count;card.querySelector(".rate").textContent=rate(c.count);let pressTimer=null; let longPress=false;
+card.addEventListener("pointerdown",()=>{longPress=false;pressTimer=setTimeout(()=>{longPress=true;const v=prompt(`${c.name} のカウントを入力`,String(c.count));if(v!==null){const n=parseInt(v,10);if(!Number.isNaN(n)&&n>=0){c.count=n;save()}}},600)});
+card.addEventListener("pointerup",()=>{clearTimeout(pressTimer);if(!longPress){c.count=Math.max(0,c.count+(minusMode?-1:1));save()}});
+card.addEventListener("pointerleave",()=>clearTimeout(pressTimer));root.appendChild(card)});const total=d.counters.reduce((a,c)=>a+c.count,0),top=d.counters.reduce((a,c)=>c.count>a.count?c:a,{name:"—",count:0});document.getElementById("total").textContent=total;document.getElementById("top").textContent=top.count?`${top.name} ${top.count}`:"—";renderMachineList()}
+function renderMachineList(){const e=document.getElementById("machines");e.innerHTML="";Object.keys(state.machines).forEach(n=>{const r=document.createElement("div");r.className="item";r.innerHTML='<span></span><button class="del">削除</button>';r.firstChild.textContent=n;r.querySelector(".del").onclick=()=>{if(Object.keys(state.machines).length<=1){alert("機種は1台以上必要です");return}if(confirm(`「${n}」を削除しますか？`)){delete state.machines[n];if(state.selected===n)state.selected=Object.keys(state.machines)[0];save()}};e.appendChild(r)})}
+document.getElementById("machine").onchange=e=>{state.selected=e.target.value;save()};
+document.getElementById("machineMinus").onclick=()=>{minusMode=!minusMode;document.getElementById("machineMinus").textContent=minusMode?"＋":"−";document.getElementById("machineMinus").style.background=minusMode?"#2563eb":"#343d49";};
+document.getElementById("judge").onclick=()=>alert("設定判別機能は準備中です。小役データをもとに判別機能を追加できます。");
+let rateSetting=1;
+document.getElementById("rateBtn").onclick=()=>{rateSetting=rateSetting>=6?1:rateSetting+1;const b=document.getElementById("rateBtn");b.textContent=`設定${rateSetting}`;b.classList.add("active");};
+function setupGameInput(id,key){const el=document.getElementById(id);el.addEventListener("focus",()=>{if(el.value==="0")el.value=""});el.addEventListener("click",()=>{if(el.value==="0")el.value=""});el.addEventListener("blur",()=>{if(el.value==="")el.value="0"});el.addEventListener("change",()=>{current()[key]=Math.max(0,parseInt(el.value||"0",10)||0);save()})}
+setupGameInput("gamesInput","games");setupGameInput("startGamesInput","startGames");
+document.getElementById("reset").onclick=()=>{if(confirm(`「${state.selected}」のゲーム数と小役カウントをリセットしますか？`)){current().games=0;current().startGames=0;current().counters.forEach(c=>c.count=0);save()}};
+const modal=document.getElementById("modal");document.getElementById("manage").onclick=()=>{modal.style.display="flex";document.getElementById("newMachine").focus()};document.getElementById("close").onclick=()=>modal.style.display="none";document.getElementById("add").onclick=()=>{const i=document.getElementById("newMachine"),n=i.value.trim();if(!n)return;if(state.machines[n]){alert("その機種はすでに登録されています");return}state.machines[n]=blankMachine();state.selected=n;i.value="";save();modal.style.display="none"};
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));render();
 </script>
 </body>
 </html>
