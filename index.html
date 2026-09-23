@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="小役カウンター">
 <link rel="manifest" href="manifest.webmanifest">
-<title>カウンター v1.1.1</title>
+<title>小役カウンター v1.1.10</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
@@ -24,7 +24,7 @@ button{border:0;touch-action:manipulation;color:#fff;font:inherit;font-weight:70
 .topGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:7px}.machineTop{grid-column:1 / -1;height:62px}.compactCard{padding:4px 6px;height:62px;min-height:62px}.gamePair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.compactJudge{height:34px;margin-top:4px}.ginput{height:34px;font-size:18px;padding:0 6px}
 .topCard{background:#151b23;border:1px solid #27303c;border-radius:14px;padding:7px}
 .judgeBtn{width:100%;height:34px;border-radius:10px;background:#2563eb}.rateBtn{width:100%;height:34px;border-radius:10px;background:#343d49;font-size:14px}.rateBtn.active{background:#2563eb}
-.counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modeSwitch{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#2a2d27;border-radius:12px;padding:2px;margin:0 0 9px}.modeBtn{height:38px;border-radius:10px;background:transparent;color:#aeb4aa;font-weight:800}.modeBtn.active{background:#19d8e8;color:#071114}.counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .counterGrid .card{margin-bottom:0}
 select{width:100%;height:30px;border-radius:10px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font:inherit;font-weight:700}
 .gbox{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:stretch;padding:10px}
@@ -40,15 +40,16 @@ select{width:100%;height:30px;border-radius:10px;border:1px solid #303a48;backgr
 .stat b{display:block;font-size:19px;margin-top:3px}
 .reset{width:100%;height:48px;border-radius:14px;color:#ffb4b4;background:#2a2022;margin-top:2px}
 footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12px 8px 4px;margin-top:8px;border-top:1px solid #27303c}
-.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:5}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:1000;pointer-events:auto}.modal.show{display:flex}.sheet{position:relative;z-index:1001;pointer-events:auto;max-height:85vh;overflow-y:auto}
 .machineTools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.machineTools button{width:100%;height:44px}.sheet{width:100%;max-width:560px;margin:auto;background:#151b23;border-radius:22px 22px 0 0;padding:18px}
 .sheet input{width:100%;height:48px;border-radius:12px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font-size:17px}
 .sheetRow{display:flex;gap:8px;margin-top:10px}.sheetRow button{flex:1;height:46px;border-radius:12px;background:#2a3340}.sheetRow .primary{background:#2563eb}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.keypad button{height:52px;border-radius:12px;background:#2a3340;font-size:20px}.keypad .wide{grid-column:span 2}
-.item{display:grid;grid-template-columns:1fr auto auto;gap:7px;align-items:center;margin-top:10px;padding:10px 0;border-bottom:1px solid #26303b}.rename{background:#263a52;border-radius:9px;padding:7px 10px}.del{background:#3a2528;border-radius:9px;padding:7px 10px;color:#ffb4b4}
+.item{display:grid;grid-template-columns:1fr auto auto auto;gap:7px;align-items:center;margin-top:10px;padding:10px 0;border-bottom:1px solid #26303b}.rename{background:#263a52;border-radius:9px;padding:7px 10px}.del{background:#3a2528;border-radius:9px;padding:7px 10px;color:#ffb4b4}
 </style>
 </head>
 <body>
 <main>
+<div class="modeSwitch"><button class="modeBtn active" id="normalMode">通常</button><button class="modeBtn" id="combineMode">合成</button></div>
 <div class="topGrid">
 <section class="topCard compactCard machineTop"><div class="machineRow"><select id="machine"></select><button class="machineMinus" id="machineMinus">−</button></div></section>
 <section class="topCard compactCard"><div class="label">総ゲーム</div><input class="ginput" id="gamesInput" type="number" inputmode="numeric" min="0" step="1" value="0"></section>
@@ -60,40 +61,59 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 
 <button class="reset" id="reset">この機種のデータをリセット</button>
 <div class="machineTools"><button class="headerBtn" id="addMachine">＋ 機種を追加</button><button class="headerBtn" id="manage">⚙ 機種を管理</button></div>
-<footer><span>Ver. 1.1.6</span></footer>
+<footer><span>Ver. 1.1.10</span></footer>
 </main>
-<div class="modal" id="modal"><div class="sheet"><div class="label" id="modalTitle">機種を追加</div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div></div></div>
+<div class="modal" id="modal"><div class="sheet"><div style="display:flex;justify-content:space-between;align-items:center"><div class="label" id="modalTitle">機種を追加</div><button id="closeTop" class="headerBtn" type="button">閉じる</button></div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div><div id="modeSettings" style="display:none"></div></div></div>
 <script>
 const KEY="koyaku-counter-v3",OLD_KEY="koyaku-counter-v2",DEFAULT_COUNTERS=["ベル","スイカ","チェリー"],DEFAULT_MACHINES=["マイジャグラーV","アイムジャグラーEX","その他"];
 let minusMode=false;
-function blankMachine(){return {games:0,startGames:0,counters:DEFAULT_COUNTERS.map(name=>({name,count:0}))}}
+function blankData(){return {games:0,startGames:0,counters:DEFAULT_COUNTERS.map(name=>({name,count:0}))}}
+function normalizeMachine(m){
+  if(!m.modes){m.modes={通常:{games:Number(m.games)||0,startGames:Number(m.startGames)||0,counters:(m.counters||DEFAULT_COUNTERS.map(name=>({name,count:0}))).map(c=>({name:c.name,count:Number(c.count)||0}))}}}
+  if(!m.modes.通常)m.modes.通常=blankData();
+  if(!m.modes.合成)m.modes.合成=blankData();
+  Object.values(m.modes).forEach(d=>{d.games=Number(d.games)||0;d.startGames=Number(d.startGames)||0;d.counters=(d.counters||[]).map(c=>({name:c.name,count:Number(c.count)||0}))});
+  delete m.games;delete m.startGames;delete m.counters;
+  return m;
+}
+function blankMachine(){return {modes:{通常:blankData(),合成:blankData()}}}
 let state=JSON.parse(localStorage.getItem(KEY)||"null");
-if(!state){const old=JSON.parse(localStorage.getItem(OLD_KEY)||"null");state={selected:"マイジャグラーV",machines:{}};DEFAULT_MACHINES.forEach(n=>state.machines[n]=blankMachine());if(old)state.machines["マイジャグラーV"]={games:old.games||0,startGames:old.startGames||0,counters:(old.counters||[]).map(c=>({name:c.name,count:c.count||0}))};localStorage.setItem(KEY,JSON.stringify(state))}
+if(!state){const old=JSON.parse(localStorage.getItem(OLD_KEY)||"null");state={selected:"マイジャグラーV",machines:{}};DEFAULT_MACHINES.forEach(n=>state.machines[n]=blankMachine());if(old)state.machines["マイジャグラーV"].modes.通常={games:old.games||0,startGames:old.startGames||0,counters:(old.counters||[]).map(c=>({name:c.name,count:c.count||0}))};localStorage.setItem(KEY,JSON.stringify(state))}
+Object.keys(state.machines||{}).forEach(n=>state.machines[n]=normalizeMachine(state.machines[n]));
+let displayMode="通常";
+let combined=false;
 function current(){return state.machines[state.selected]}
+function currentData(){const m=current();if(!m.modes[displayMode]){displayMode=Object.keys(m.modes)[0]||"通常";if(!m.modes[displayMode])m.modes.通常=blankData()}return m.modes[displayMode]}
 function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
-function rate(n){const games=Number(current().games)||0;const count=Number(n)||0;return games>0&&count>0?`1/${(games/count).toFixed(2)}`:"—"}
+function displayData(){return currentData()}
+function rate(n,data){const games=Number(data?.games)||0;const count=Number(n)||0;return games>0&&count>0?`1/${(games/count).toFixed(2)}`:"—"}
+function renderModeSwitch(){const sw=document.querySelector('.modeSwitch');sw.innerHTML='';const modes=Object.keys(current().modes||{通常:blankData(),合成:blankData()});modes.forEach(mode=>{const b=document.createElement('button');b.className='modeBtn'+(displayMode===mode?' active':'');b.textContent=mode;b.onclick=()=>setDisplayMode(mode);sw.appendChild(b)});sw.style.gridTemplateColumns=`repeat(${Math.max(1,modes.length)},1fr)`}
 function renderMachineSelect(){const s=document.getElementById("machine");s.innerHTML="";Object.keys(state.machines).forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;o.selected=n===state.selected;s.appendChild(o)})}
-function render(){renderMachineSelect();const d=current();document.getElementById("gamesInput").value=d.games;document.getElementById("startGamesInput").value=d.startGames||0;const root=document.getElementById("counters");root.innerHTML="";d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div><div class="name"></div><div class="rate"></div></div>';card.querySelector(".name").textContent=c.name+"  "+c.count;card.querySelector(".rate").textContent=rate(c.count);let pressTimer=null; let longPress=false;
-card.addEventListener("pointerdown",()=>{longPress=false;pressTimer=setTimeout(()=>{longPress=true;const v=prompt(`${c.name} のカウントを入力`,String(c.count));if(v!==null){const n=parseInt(v,10);if(!Number.isNaN(n)&&n>=0){c.count=n;save()}}},600)});
-card.addEventListener("pointerup",()=>{clearTimeout(pressTimer);if(!longPress){c.count=Math.max(0,c.count+(minusMode?-1:1));save()}});
-card.addEventListener("pointerleave",()=>clearTimeout(pressTimer));root.appendChild(card)});const total=d.counters.reduce((a,c)=>a+c.count,0),top=d.counters.reduce((a,c)=>c.count>a.count?c:a,{name:"—",count:0});document.getElementById("total").textContent=total;document.getElementById("top").textContent=top.count?`${top.name} ${top.count}`:"—";renderMachineList()}
-function renderMachineList(){const e=document.getElementById("machines");e.innerHTML="";Object.keys(state.machines).forEach(n=>{const r=document.createElement("div");r.className="item";r.innerHTML=`<span></span><button class="rename">変更</button><button class="del">削除</button>`;r.querySelector("span").textContent=n;r.querySelector(".rename").onclick=()=>{const nn=prompt("変更後の機種名を入力してください",n);if(nn===null)return;const name=nn.trim();if(!name){alert("機種名を入力してください");return}if(name!==n&&state.machines[name]){alert("その機種名はすでに登録されています");return}if(name!==n){state.machines[name]=state.machines[n];delete state.machines[n];if(state.selected===n)state.selected=name;save()}};r.querySelector(".del").onclick=()=>{if(Object.keys(state.machines).length<=1){alert("機種は1台以上必要です");return}if(confirm(`「${n}」を削除しますか？`)){delete state.machines[n];if(state.selected===n)state.selected=Object.keys(state.machines)[0];save()}};e.appendChild(r)})}
-document.getElementById("machine").onchange=e=>{state.selected=e.target.value;save()};
-document.getElementById("machineMinus").onclick=()=>{minusMode=!minusMode;document.getElementById("machineMinus").textContent=minusMode?"＋":"−";document.getElementById("machineMinus").style.background=minusMode?"#2563eb":"#343d49";};
-document.getElementById("judge").onclick=()=>alert("設定判別機能は準備中です。小役データをもとに判別機能を追加できます。");
-let rateSetting=1;
-document.getElementById("rateBtn").onclick=()=>{rateSetting=rateSetting>=6?1:rateSetting+1;const b=document.getElementById("rateBtn");b.textContent=`設定${rateSetting}`;b.classList.add("active");};
-function setupGameInput(id,key){const el=document.getElementById(id);el.addEventListener("focus",()=>{if(el.value==="0")el.value=""});el.addEventListener("click",()=>{if(el.value==="0")el.value=""});el.addEventListener("blur",()=>{if(el.value==="")el.value="0"});el.addEventListener("change",()=>{current()[key]=Math.max(0,parseInt(el.value||"0",10)||0);save()})}
-setupGameInput("gamesInput","games");setupGameInput("startGamesInput","startGames");
-document.getElementById("reset").onclick=()=>{if(confirm(`「${state.selected}」のゲーム数と小役カウントをリセットしますか？`)){current().games=0;current().startGames=0;current().counters.forEach(c=>c.count=0);save()}};
-const modal=document.getElementById("modal");document.getElementById("manage").onclick=()=>{modal.style.display="flex";document.getElementById("modalTitle").textContent="機種を管理";document.getElementById("newMachine").style.display="none";document.querySelector(".sheetRow").style.display="none"};document.getElementById("addMachine").onclick=()=>{modal.style.display="flex";document.getElementById("modalTitle").textContent="機種を追加";document.getElementById("newMachine").style.display="block";document.querySelector(".sheetRow").style.display="flex";document.getElementById("newMachine").focus()};document.getElementById("close").onclick=()=>modal.style.display="none";document.getElementById("add").onclick=()=>{const i=document.getElementById("newMachine"),n=i.value.trim();if(!n)return;if(state.machines[n]){alert("その機種はすでに登録されています");return}state.machines[n]=blankMachine();state.selected=n;i.value="";save();modal.style.display="none"};
-let lastTouchEnd=0;
-document.addEventListener("touchstart",e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
-document.addEventListener("touchend",e=>{const now=Date.now();if(now-lastTouchEnd<450)e.preventDefault();lastTouchEnd=now},{passive:false});
-document.addEventListener("gesturestart",e=>e.preventDefault(),{passive:false});
-document.addEventListener("gesturechange",e=>e.preventDefault(),{passive:false});
-document.addEventListener("gestureend",e=>e.preventDefault(),{passive:false});
-document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
+function render(){
+  renderMachineSelect();renderModeSwitch();
+  const d=displayData();
+  document.getElementById("gamesInput").value=d.games;document.getElementById("startGamesInput").value=d.startGames||0;
+  const root=document.getElementById("counters");root.innerHTML="";
+  d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div><div class="name"></div><div class="rate"></div></div>';card.querySelector('.name').textContent=c.name+'  '+c.count;card.querySelector('.rate').textContent=rate(c.count,d);let pressTimer=null,longPress=false;
+    if(!combined){card.addEventListener('pointerdown',()=>{longPress=false;pressTimer=setTimeout(()=>{longPress=true;const v=prompt(`${c.name} のカウントを入力`,String(c.count));if(v!==null){const n=parseInt(v,10);if(!Number.isNaN(n)&&n>=0){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=n;save()}}}},600)});card.addEventListener('pointerup',()=>{clearTimeout(pressTimer);if(!longPress){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=Math.max(0,target.count+(minusMode?-1:1));save()}}});card.addEventListener('pointerleave',()=>clearTimeout(pressTimer));}else{card.style.opacity='.92';card.style.cursor='default'}
+    root.appendChild(card);
+  });
+  document.getElementById('gamesInput').disabled=combined;document.getElementById('startGamesInput').disabled=combined;document.getElementById('machineMinus').disabled=combined;document.getElementById('reset').style.display=combined?'none':'block';document.getElementById('machine').disabled=combined;renderMachineList();
+}
+function renderMachineList(){const e=document.getElementById('machines');e.style.display='block';document.getElementById('modeSettings').style.display='none';e.innerHTML='';Object.keys(state.machines).forEach(n=>{const r=document.createElement('div');r.className='item';r.innerHTML=`<span></span><button class="rename">変更</button><button class="modeManage">モード</button><button class="del">削除</button>`;r.querySelector('span').textContent=n;
+  r.querySelector('.rename').onclick=()=>{const nn=prompt('変更後の機種名を入力してください',n);if(nn===null)return;const name=nn.trim();if(!name){alert('機種名を入力してください');return}if(name!==n&&state.machines[name]){alert('その機種名はすでに登録されています');return}if(name!==n){state.machines[name]=state.machines[n];delete state.machines[n];if(state.selected===n)state.selected=name;save()}};
+  r.querySelector('.modeManage').onclick=()=>openModeSettings(n);
+  r.querySelector('.del').onclick=()=>{if(Object.keys(state.machines).length<=1){alert('機種は1台以上必要です');return}if(confirm(`「${n}」を削除しますか？`)){delete state.machines[n];if(state.selected===n)state.selected=Object.keys(state.machines)[0];save()}};e.appendChild(r)})}
+function openModeSettings(machineName){const machine=state.machines[machineName];document.getElementById('machines').style.display='none';const box=document.getElementById('modeSettings');box.style.display='block';box.innerHTML='';const title=document.createElement('div');title.className='label';title.textContent=`「${machineName}」のモード設定`;box.appendChild(title);const list=document.createElement('div');list.style.marginTop='8px';Object.keys(machine.modes).forEach(mode=>{const row=document.createElement('div');row.className='item';row.style.gridTemplateColumns='1fr auto auto';row.innerHTML=`<span></span><button class="rename modeRename">変更</button><button class="del modeDel">削除</button>`;row.querySelector('span').textContent=mode;if(mode==='通常'){row.querySelector('.modeDel').disabled=true;row.querySelector('.modeDel').style.opacity='.4'}row.querySelector('.modeRename').onclick=()=>{if(mode==='通常'){alert('「通常」は基本モードのため名前を変更できません');return}const nn=prompt('変更後のモード名を入力してください',mode);if(nn===null)return;const name=nn.trim();if(!name){alert('モード名を入力してください');return}if(name!==mode&&machine.modes[name]){alert('そのモード名はすでに登録されています');return}if(name!==mode){machine.modes[name]=machine.modes[mode];delete machine.modes[mode];if(displayMode===mode)displayMode=name;save();openModeSettings(machineName)}};row.querySelector('.modeDel').onclick=()=>{if(mode==='通常')return;if(confirm(`「${mode}」を削除しますか？`)){delete machine.modes[mode];if(state.selected===machineName&&displayMode===mode)displayMode='通常';save();openModeSettings(machineName)}};list.appendChild(row)});box.appendChild(list);const add=document.createElement('button');add.className='primary';add.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:10px';add.textContent='＋ モードを追加';add.onclick=()=>{const name=(prompt('追加するモード名を入力してください','')||'').trim();if(!name)return;if(machine.modes[name]){alert('そのモードはすでにあります');return}machine.modes[name]=blankData();save();openModeSettings(machineName)};box.appendChild(add);const back=document.createElement('button');back.className='headerBtn';back.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:8px';back.textContent='← 機種管理に戻る';back.onclick=()=>renderMachineList();box.appendChild(back)}
+document.getElementById('machine').onchange=e=>{state.selected=e.target.value;displayMode=Object.keys(current().modes)[0]||'通常';combined=false;save()};
+document.getElementById('machineMinus').onclick=()=>{minusMode=!minusMode;document.getElementById('machineMinus').textContent=minusMode?'＋':'−';document.getElementById('machineMinus').style.background=minusMode?'#2563eb':'#343d49'};
+document.getElementById('judge').onclick=()=>alert('設定判別機能は準備中です。小役データをもとに判別機能を追加できます。');
+let rateSetting=1;document.getElementById('rateBtn').onclick=()=>{rateSetting=rateSetting>=6?1:rateSetting+1;const b=document.getElementById('rateBtn');b.textContent=`設定${rateSetting}`;b.classList.add('active')};
+function setDisplayMode(mode){displayMode=mode;combined=false;render()}
+function setupGameInput(id,key){const el=document.getElementById(id);el.addEventListener('focus',()=>{if(el.value==='0')el.value=''});el.addEventListener('click',()=>{if(el.value==='0')el.value=''});el.addEventListener('blur',()=>{if(el.value==='')el.value='0'});el.addEventListener('change',()=>{if(combined)return;currentData()[key]=Math.max(0,parseInt(el.value||'0',10)||0);save()})}
+setupGameInput('gamesInput','games');setupGameInput('startGamesInput','startGames');
+document.getElementById('reset').onclick=()=>{if(confirm(`「${state.selected}」の「${displayMode}」のゲーム数と小役カウントをリセットしますか？`)){const d=currentData();d.games=0;d.startGames=0;d.counters.forEach(c=>c.count=0);save()}};
+const modal=document.getElementById('modal');document.getElementById('manage').onclick=()=>{modal.classList.add('show');document.getElementById('modalTitle').textContent='機種を管理';document.getElementById('newMachine').style.display='none';document.querySelector('.sheetRow').style.display='none';renderMachineList()};document.getElementById('addMachine').onclick=()=>{modal.classList.add('show');document.getElementById('modalTitle').textContent='機種を追加';document.getElementById('newMachine').style.display='block';document.querySelector('.sheetRow').style.display='flex';document.getElementById('newMachine').focus()};document.getElementById('close').onclick=()=>modal.classList.remove('show');document.getElementById('closeTop').onclick=()=>modal.classList.remove('show');modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show')});document.getElementById('add').onclick=()=>{const i=document.getElementById('newMachine'),n=i.value.trim();if(!n)return;if(state.machines[n]){alert('その機種はすでに登録されています');return}state.machines[n]=blankMachine();state.selected=n;displayMode='通常';combined=false;i.value='';save();modal.classList.remove('show')};
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));render();
 </script>
 </body>
