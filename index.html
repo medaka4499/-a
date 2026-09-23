@@ -24,14 +24,14 @@ button{border:0;touch-action:manipulation;color:#fff;font:inherit;font-weight:70
 .topGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:7px}.machineTop{grid-column:1 / -1;height:62px}.compactCard{padding:4px 6px;height:62px;min-height:62px}.gamePair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.compactJudge{height:34px;margin-top:4px}.ginput{height:34px;font-size:18px;padding:0 6px}
 .topCard{background:#151b23;border:1px solid #27303c;border-radius:14px;padding:7px}
 .judgeBtn{width:100%;height:34px;border-radius:10px;background:#2563eb}.rateBtn{width:100%;height:34px;border-radius:10px;background:#343d49;font-size:14px}.rateBtn.active{background:#2563eb}
-.modeSwitch{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#2a2d27;border-radius:12px;padding:2px;margin:0 0 9px}.modeBtn{height:38px;border-radius:10px;background:transparent;color:#aeb4aa;font-weight:800}.modeBtn.active{background:#19d8e8;color:#071114}.counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modeSwitch{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#2a2d27;border-radius:8px;padding:1px;margin:0 auto 7px;max-width:50%}.modeBtn{height:20px;border-radius:7px;background:transparent;color:#aeb4aa;font-weight:800;font-size:11px;padding:0}.modeBtn.active{background:#19d8e8;color:#071114}.counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .counterGrid .card{margin-bottom:0;min-height:112px;padding:10px}
 select{width:100%;height:30px;border-radius:10px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font:inherit;font-weight:700}
 .gbox{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:stretch;padding:10px}
 .gitem{background:#10151c;border-radius:12px;padding:10px}.gcount,.startGames{font-size:24px;font-weight:800;letter-spacing:-1px;cursor:pointer;margin-top:3px}.ginput{width:100%;height:34px;border:1px solid #303a48;border-radius:9px;background:#0d1218;color:#fff;padding:0 8px;font:inherit;font-size:20px;font-weight:800;touch-action:manipulation}.ginput:focus{outline:2px solid #2563eb}
 
 .primary,.plus{background:#2563eb!important}
-.counter{display:block;min-height:112px;cursor:pointer}.name{font-size:18px;font-weight:800;line-height:1.2}.countLine{font-size:22px;font-weight:800;line-height:1.25;margin-top:5px}.rate{font-size:15px;font-weight:800;color:#f5f7fa;line-height:1.2;margin-top:4px}
+.counter{display:flex;min-height:112px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;text-align:center}.name{font-size:18px;font-weight:800;line-height:1.2;width:100%;text-align:center}.countLine{font-size:22px;font-weight:800;line-height:1.25;margin-top:5px;width:100%;text-align:center}.rate{font-size:15px;font-weight:800;color:#f5f7fa;line-height:1.2;margin-top:4px;width:100%;text-align:center}
 .actions{display:flex;gap:7px}.minus{width:48px;height:58px;border-radius:14px;background:#343d49;font-size:22px}
 .plus{width:76px;height:58px;border-radius:14px;font-size:28px}
 .small{margin-top:7px;font-size:11px;color:#687585}
@@ -60,7 +60,7 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 
 <button class="reset" id="reset">この機種のデータをリセット</button>
 <div class="machineTools"><button class="headerBtn" id="addMachine">＋ 機種を追加</button><button class="headerBtn" id="manage">⚙ 機種を管理</button></div>
-<footer><span>Ver. 1.1.12</span></footer>
+<footer><span>Ver. 1.1.13</span></footer>
 </main>
 <div class="modal" id="modal"><div class="sheet"><div style="display:flex;justify-content:space-between;align-items:center"><div class="label" id="modalTitle">機種を追加</div><button id="closeTop" class="headerBtn" type="button">閉じる</button></div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div><div id="modeSettings" style="display:none"></div></div></div>
 <script>
@@ -101,7 +101,7 @@ function render(){
   const d=displayData();
   document.getElementById("gamesInput").value=d.games;document.getElementById("startGamesInput").value=d.startGames||0;
   const root=document.getElementById("counters");root.innerHTML="";
-  d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div class="name"></div><div class="countLine"></div><div class="rate"></div>';card.querySelector('.name').textContent=c.name;card.querySelector('.countLine').textContent=`回数 ${c.count}`;card.querySelector('.rate').textContent=c.count?rate(c.count,d):'0確率';let pressTimer=null,longPress=false;
+  d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div class="name"></div><div class="countLine"></div><div class="rate"></div>';card.querySelector('.name').textContent=c.name;card.querySelector('.countLine').textContent=String(c.count);card.querySelector('.rate').textContent=c.count?rate(c.count,d):'0確率';let pressTimer=null,longPress=false;
     if(!combined){card.addEventListener('pointerdown',()=>{longPress=false;pressTimer=setTimeout(()=>{longPress=true;const v=prompt(`${c.name} のカウントを入力`,String(c.count));if(v!==null){const n=parseInt(v,10);if(!Number.isNaN(n)&&n>=0){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=n;save()}}}},600)});card.addEventListener('pointerup',()=>{clearTimeout(pressTimer);if(!longPress){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=Math.max(0,target.count+(minusMode?-1:1));save()}}});card.addEventListener('pointerleave',()=>clearTimeout(pressTimer));}else{card.style.opacity='.92';card.style.cursor='default'}
     root.appendChild(card);
   });
