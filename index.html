@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="小役カウンター">
 <link rel="manifest" href="manifest.webmanifest">
-<title>小役カウンター v1.1.15</title>
+<title>小役カウンター v1.1.17</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
@@ -61,7 +61,7 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 <div class="progressTools"><button id="saveProgress">途中経過の保存</button><button id="showTrend">小役確率の推移</button></div>
 <button class="reset" id="reset">この機種のデータをリセット</button>
 <div class="machineTools"><button class="headerBtn" id="addMachine">＋ 機種を追加</button><button class="headerBtn" id="manage">⚙ 機種を管理</button></div>
-<footer><span>Ver. 1.1.15</span></footer>
+<footer><span>Ver. 1.1.17</span></footer>
 </main>
 <div class="modal" id="modal"><div class="sheet"><div style="display:flex;justify-content:space-between;align-items:center"><div class="label" id="modalTitle">機種を追加</div><button id="closeTop" class="headerBtn" type="button">閉じる</button></div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div><div id="modeSettings" style="display:none"></div><div id="historyView" style="display:none"></div></div></div>
 <script>
@@ -102,7 +102,7 @@ function render(){
   const d=displayData();
   document.getElementById("gamesInput").value=d.games;document.getElementById("startGamesInput").value=d.startGames||0;
   const root=document.getElementById("counters");root.innerHTML="";
-  d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div class="name"></div><div class="countLine"></div><div class="rate"></div>';card.querySelector('.name').textContent=c.name;card.querySelector('.countLine').textContent=String(c.count);card.querySelector('.rate').textContent=rate(c.count,d);let pressTimer=null,longPress=false;
+  d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div class="name"></div><div class="countLine"></div><div class="rate"></div>';if(rateSettingActive){card.querySelector('.name').textContent=`設定${rateSetting}`;card.querySelector('.countLine').textContent='1/0.00';card.querySelector('.rate').textContent='';}else{card.querySelector('.name').textContent=c.name;card.querySelector('.countLine').textContent=String(c.count);card.querySelector('.rate').textContent=rate(c.count,d);}let pressTimer=null,longPress=false;
     if(!combined){card.addEventListener('pointerdown',()=>{longPress=false;pressTimer=setTimeout(()=>{longPress=true;const v=prompt(`${c.name} のカウントを入力`,String(c.count));if(v!==null){const n=parseInt(v,10);if(!Number.isNaN(n)&&n>=0){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=n;save()}}}},600)});card.addEventListener('pointerup',()=>{clearTimeout(pressTimer);if(!longPress){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=Math.max(0,target.count+(minusMode?-1:1));save()}}});card.addEventListener('pointerleave',()=>clearTimeout(pressTimer));}else{card.style.opacity='.92';card.style.cursor='default'}
     root.appendChild(card);
   });
@@ -118,7 +118,7 @@ function openModeSettings(machineName){
 document.getElementById('machine').onchange=e=>{state.selected=e.target.value;displayMode=Object.keys(current().modes)[0]||'通常';combined=false;save()};
 document.getElementById('machineMinus').onclick=()=>{minusMode=!minusMode;document.getElementById('machineMinus').textContent=minusMode?'＋':'−';document.getElementById('machineMinus').style.background=minusMode?'#2563eb':'#343d49'};
 document.getElementById('judge').onclick=()=>alert('設定判別機能は準備中です。小役データをもとに判別機能を追加できます。');
-let rateSetting=1;document.getElementById('rateBtn').onclick=()=>{rateSetting=rateSetting>=6?1:rateSetting+1;const b=document.getElementById('rateBtn');b.textContent=`設定${rateSetting}`;b.classList.add('active')};
+let rateSetting=1,rateSettingActive=false;document.getElementById('rateBtn').onclick=()=>{if(!rateSettingActive){rateSettingActive=true;rateSetting=1;}else{rateSetting=rateSetting>=6?1:rateSetting+1;}const b=document.getElementById('rateBtn');b.textContent=`設定${rateSetting}`;b.classList.add('active');render()};
 function setDisplayMode(mode){const m=current();if(!m||!m.modes||!m.modes[mode])return;displayMode=mode;combined=false;render()}
 function setupGameInput(id,key){const el=document.getElementById(id);el.addEventListener('focus',()=>{if(el.value==='0')el.value=''});el.addEventListener('click',()=>{if(el.value==='0')el.value=''});el.addEventListener('blur',()=>{if(el.value==='')el.value='0'});el.addEventListener('change',()=>{if(combined)return;currentData()[key]=Math.max(0,parseInt(el.value||'0',10)||0);save()})}
 setupGameInput('gamesInput','games');setupGameInput('startGamesInput','startGames');
