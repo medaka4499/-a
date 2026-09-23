@@ -21,7 +21,7 @@ button{border:0;touch-action:manipulation;color:#fff;font:inherit;font-weight:70
 .card{background:#151b23;border:1px solid #27303c;border-radius:18px;padding:15px;margin-bottom:11px}
 .label{font-size:12px;color:#9da8b7}
 .machineRow{display:grid;grid-template-columns:1fr auto;gap:5px;align-items:center}.machineRow select{height:30px;padding:0 8px;font-size:16px}.machineMinus{width:34px;height:30px;border-radius:9px;background:#343d49;font-size:20px}
-.topGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:7px}.machineTop{grid-column:1 / -1;height:62px}.compactCard{padding:4px 6px;height:62px;min-height:62px}.gamePair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.compactJudge{height:34px;margin-top:4px}.ginput{height:34px;font-size:18px;padding:0 6px}
+.topGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:7px}.machineTop{grid-column:1 / -1;height:62px}.compactCard{padding:4px 6px;height:62px;min-height:62px}.buttonOnly{display:flex;align-items:center;justify-content:center}.gamePair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.compactJudge{height:34px;margin-top:4px}.ginput{height:34px;font-size:18px;padding:0 4px;text-align:center;letter-spacing:-1px}
 .topCard{background:#151b23;border:1px solid #27303c;border-radius:14px;padding:7px}
 .judgeBtn{width:100%;height:34px;border-radius:10px;background:#2563eb}.rateBtn{width:100%;height:34px;border-radius:10px;background:#343d49;font-size:14px}.rateBtn.active{background:#2563eb}
 .modeSwitch{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#2a2d27;border-radius:8px;padding:1px;margin:0 auto 7px;max-width:50%}.modeBtn{height:20px;border-radius:7px;background:transparent;color:#aeb4aa;font-weight:800;font-size:11px;padding:0}.modeBtn.active{background:#19d8e8;color:#071114}.counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -53,14 +53,14 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 <section class="topCard compactCard machineTop"><div class="machineRow"><select id="machine"></select><button class="machineMinus" id="machineMinus">−</button></div></section>
 <section class="topCard compactCard"><div class="label">総ゲーム</div><input class="ginput" id="gamesInput" type="number" inputmode="numeric" min="0" step="1" value="0"></section>
 <section class="topCard compactCard"><div class="label">打ち始め</div><input class="ginput" id="startGamesInput" type="number" inputmode="numeric" min="0" step="1" value="0"></section>
-<section class="topCard compactCard"><div class="label">当選率</div><button class="rateBtn" id="rateBtn">当選率</button></section>
-<section class="topCard compactCard"><div class="label">設定判別</div><button class="judgeBtn compactJudge" id="judge">設定判別</button></section>
+<section class="topCard compactCard buttonOnly"><button class="rateBtn" id="rateBtn">当選率</button></section>
+<section class="topCard compactCard buttonOnly"><button class="judgeBtn compactJudge" id="judge">設定判別</button></section>
 </div>
 <div id="counters" class="counterGrid"></div>
 
 <button class="reset" id="reset">この機種のデータをリセット</button>
 <div class="machineTools"><button class="headerBtn" id="addMachine">＋ 機種を追加</button><button class="headerBtn" id="manage">⚙ 機種を管理</button></div>
-<footer><span>Ver. 1.1.13</span></footer>
+<footer><span>Ver. 1.1.14</span></footer>
 </main>
 <div class="modal" id="modal"><div class="sheet"><div style="display:flex;justify-content:space-between;align-items:center"><div class="label" id="modalTitle">機種を追加</div><button id="closeTop" class="headerBtn" type="button">閉じる</button></div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div><div id="modeSettings" style="display:none"></div></div></div>
 <script>
