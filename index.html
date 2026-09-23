@@ -8,11 +8,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="小役カウンター">
 <link rel="manifest" href="manifest.webmanifest">
-<title>小役カウンター v1.1.10</title>
+<title>小役カウンター v1.1.11</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
-html{touch-action:pan-y;-webkit-text-size-adjust:100%;overscroll-behavior:none}body{margin:0;touch-action:pan-y;background:#0b0f14;color:#f5f7fa;min-height:100vh;touch-action:pan-y;overscroll-behavior:none}
+html{touch-action:manipulation;-webkit-text-size-adjust:100%;overscroll-behavior:none}body{margin:0;touch-action:manipulation;background:#0b0f14;color:#f5f7fa;min-height:100vh;overscroll-behavior:none}
 main{max-width:560px;margin:auto;padding:calc(env(safe-area-inset-top) + 10px) 14px calc(env(safe-area-inset-bottom) + 24px)}
 header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 h1{font-size:22px;margin:0}.sub{font-size:12px;color:#7f8a99;margin-top:3px}
@@ -25,14 +25,13 @@ button{border:0;touch-action:manipulation;color:#fff;font:inherit;font-weight:70
 .topCard{background:#151b23;border:1px solid #27303c;border-radius:14px;padding:7px}
 .judgeBtn{width:100%;height:34px;border-radius:10px;background:#2563eb}.rateBtn{width:100%;height:34px;border-radius:10px;background:#343d49;font-size:14px}.rateBtn.active{background:#2563eb}
 .modeSwitch{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#2a2d27;border-radius:12px;padding:2px;margin:0 0 9px}.modeBtn{height:38px;border-radius:10px;background:transparent;color:#aeb4aa;font-weight:800}.modeBtn.active{background:#19d8e8;color:#071114}.counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.counterGrid .card{margin-bottom:0}
+.counterGrid .card{margin-bottom:0;min-height:112px;padding:10px}
 select{width:100%;height:30px;border-radius:10px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font:inherit;font-weight:700}
 .gbox{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:stretch;padding:10px}
 .gitem{background:#10151c;border-radius:12px;padding:10px}.gcount,.startGames{font-size:24px;font-weight:800;letter-spacing:-1px;cursor:pointer;margin-top:3px}.ginput{width:100%;height:34px;border:1px solid #303a48;border-radius:9px;background:#0d1218;color:#fff;padding:0 8px;font:inherit;font-size:20px;font-weight:800;touch-action:manipulation}.ginput:focus{outline:2px solid #2563eb}
 
 .primary,.plus{background:#2563eb!important}
-.counter{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
-.name{font-size:18px;font-weight:800}.rate{font-size:15px;font-weight:800;color:#f5f7fa;margin-top:4px}
+.counter{display:block;min-height:112px;cursor:pointer}.name{font-size:18px;font-weight:800;line-height:1.2}.countLine{font-size:22px;font-weight:800;line-height:1.25;margin-top:5px}.rate{font-size:15px;font-weight:800;color:#f5f7fa;line-height:1.2;margin-top:4px}
 .actions{display:flex;gap:7px}.minus{width:48px;height:58px;border-radius:14px;background:#343d49;font-size:22px}
 .plus{width:76px;height:58px;border-radius:14px;font-size:28px}
 .small{margin-top:7px;font-size:11px;color:#687585}
@@ -61,10 +60,18 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 
 <button class="reset" id="reset">この機種のデータをリセット</button>
 <div class="machineTools"><button class="headerBtn" id="addMachine">＋ 機種を追加</button><button class="headerBtn" id="manage">⚙ 機種を管理</button></div>
-<footer><span>Ver. 1.1.10</span></footer>
+<footer><span>Ver. 1.1.11</span></footer>
 </main>
 <div class="modal" id="modal"><div class="sheet"><div style="display:flex;justify-content:space-between;align-items:center"><div class="label" id="modalTitle">機種を追加</div><button id="closeTop" class="headerBtn" type="button">閉じる</button></div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div><div id="modeSettings" style="display:none"></div></div></div>
 <script>
+// スマホの意図しない拡大を防止
+document.addEventListener("gesturestart",e=>e.preventDefault(),{passive:false});
+document.addEventListener("gesturechange",e=>e.preventDefault(),{passive:false});
+document.addEventListener("gestureend",e=>e.preventDefault(),{passive:false});
+let lastTouchEnd=0;
+document.addEventListener("touchend",e=>{const now=Date.now();if(now-lastTouchEnd<350)e.preventDefault();lastTouchEnd=now},{passive:false});
+document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
+
 const KEY="koyaku-counter-v3",OLD_KEY="koyaku-counter-v2",DEFAULT_COUNTERS=["ベル","スイカ","チェリー"],DEFAULT_MACHINES=["マイジャグラーV","アイムジャグラーEX","その他"];
 let minusMode=false;
 function blankData(){return {games:0,startGames:0,counters:DEFAULT_COUNTERS.map(name=>({name,count:0}))}}
@@ -94,7 +101,7 @@ function render(){
   const d=displayData();
   document.getElementById("gamesInput").value=d.games;document.getElementById("startGamesInput").value=d.startGames||0;
   const root=document.getElementById("counters");root.innerHTML="";
-  d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div><div class="name"></div><div class="rate"></div></div>';card.querySelector('.name').textContent=c.name+'  '+c.count;card.querySelector('.rate').textContent=rate(c.count,d);let pressTimer=null,longPress=false;
+  d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";card.innerHTML='<div class="name"></div><div class="countLine"></div><div class="rate"></div>';card.querySelector('.name').textContent=c.name;card.querySelector('.countLine').textContent=`回数 ${c.count}`;card.querySelector('.rate').textContent=c.count?rate(c.count,d):'0確率';let pressTimer=null,longPress=false;
     if(!combined){card.addEventListener('pointerdown',()=>{longPress=false;pressTimer=setTimeout(()=>{longPress=true;const v=prompt(`${c.name} のカウントを入力`,String(c.count));if(v!==null){const n=parseInt(v,10);if(!Number.isNaN(n)&&n>=0){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=n;save()}}}},600)});card.addEventListener('pointerup',()=>{clearTimeout(pressTimer);if(!longPress){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=Math.max(0,target.count+(minusMode?-1:1));save()}}});card.addEventListener('pointerleave',()=>clearTimeout(pressTimer));}else{card.style.opacity='.92';card.style.cursor='default'}
     root.appendChild(card);
   });
