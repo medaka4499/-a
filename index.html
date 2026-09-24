@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="小役カウンター">
 <link rel="manifest" href="manifest.webmanifest">
-<title>小役カウンター v1.1.72</title>
+<title>小役カウンター v1.1.143</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
@@ -31,7 +31,7 @@ select{width:100%;height:30px;border-radius:10px;border:1px solid #303a48;backgr
 .gitem{background:#10151c;border-radius:12px;padding:10px}.gcount,.startGames{font-size:24px;font-weight:800;letter-spacing:-1px;cursor:pointer;margin-top:3px}.ginput{width:100%;height:34px;border:1px solid #303a48;border-radius:9px;background:#0d1218;color:#fff;padding:0 8px;font:inherit;font-size:20px;font-weight:800;touch-action:manipulation}.ginput:focus{outline:2px solid #2563eb}
 
 .primary,.plus{background:#2563eb!important}
-.counter{display:flex;min-height:112px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;text-align:center}.counter.settingRates{height:112px;min-height:112px;max-height:112px;padding:6px 8px;gap:0}.settingRate{display:flex;justify-content:center;align-items:center;gap:6px;width:100%;font-size:11px;font-weight:800;line-height:1}.settingRate span{min-width:44px;text-align:right}.settingRate b{min-width:54px;text-align:left}.name{font-size:18px;font-weight:800;line-height:1.2;width:100%;text-align:center}.countLine{font-size:22px;font-weight:800;line-height:1.25;margin-top:5px;width:100%;text-align:center}.rate{font-size:15px;font-weight:800;color:#f5f7fa;line-height:1.2;margin-top:4px;width:100%;text-align:center}
+.counter{display:flex;min-height:112px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;text-align:center}.counter.settingRates{height:112px;min-height:112px;max-height:112px;padding:6px 8px;gap:0}.settingRate{display:flex;justify-content:center;align-items:center;gap:6px;width:100%;font-size:11px;font-weight:800;line-height:1}.settingRate span{min-width:44px;text-align:right}.settingRate b{min-width:54px;text-align:left}.name{order:1;font-size:18px;font-weight:800;line-height:1.2;width:100%;text-align:center}.countLine{order:2;font-size:22px;font-weight:800;line-height:1.25;margin-top:5px;width:100%;text-align:center}.rate{order:3;font-size:15px;font-weight:800;color:#f5f7fa;line-height:1.2;margin-top:4px;width:100%;text-align:center}
 .actions{display:flex;gap:7px}.minus{width:48px;height:58px;border-radius:14px;background:#343d49;font-size:22px}
 .plus{width:76px;height:58px;border-radius:14px;font-size:28px}
 .small{margin-top:7px;font-size:11px;color:#687585}
@@ -43,7 +43,7 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 .machineTools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.machineTools button{width:100%;height:44px}.sheet{width:100%;max-width:560px;margin:auto;background:#151b23;border-radius:22px 22px 0 0;padding:18px}
 .sheet input{width:100%;height:48px;border-radius:12px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font-size:17px}
 .sheetRow{display:flex;gap:8px;margin-top:10px}.sheetRow button{flex:1;height:46px;border-radius:12px;background:#2a3340}.sheetRow .primary{background:#2563eb}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.keypad button{height:52px;border-radius:12px;background:#2a3340;font-size:20px}.keypad .wide{grid-column:span 2}
-.item.dragging{opacity:.95;transform:scale(1.02);box-shadow:0 8px 20px rgba(0,0,0,.35);z-index:10;position:relative}.dragRow{transition:transform .12s ease}.dragHandle{touch-action:none}.item{display:grid;grid-template-columns:1fr auto auto auto;gap:7px;align-items:center;margin-top:10px;padding:10px 0;border-bottom:1px solid #26303b}.rename{background:#263a52;border-radius:9px;padding:7px 10px}.del{background:#3a2528;border-radius:9px;padding:7px 10px;color:#ffb4b4}
+.item.dragging{opacity:.95;box-shadow:0 8px 20px rgba(0,0,0,.35);z-index:10;position:relative}.dragRow{transition:transform .12s ease}.dragHandle{touch-action:none}.item{display:grid;grid-template-columns:1fr auto auto auto;gap:7px;align-items:center;margin-top:10px;padding:10px 0;border-bottom:1px solid #26303b}.rename{background:#263a52;border-radius:9px;padding:7px 10px}.del{background:#3a2528;border-radius:9px;padding:7px 10px;color:#ffb4b4}
 </style>
 </head>
 <body>
@@ -61,9 +61,9 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 <div class="progressTools"><button id="saveProgress">途中経過の保存</button><button id="showTrend">小役確率の推移</button></div>
 <button class="reset" id="reset">この機種のデータをリセット</button>
 <div class="machineTools"><button class="headerBtn" id="addMachine">＋ 機種を追加</button><button class="headerBtn" id="manage">⚙ 機種を管理</button></div>
-<footer><span>Ver. 1.1.73</span></footer>
+<footer><span>Ver. 1.1.143</span></footer>
 </main>
-<div class="modal" id="modal"><div class="sheet"><div style="display:flex;justify-content:space-between;align-items:center"><div class="label" id="modalTitle">機種を追加</div><div style="display:flex;gap:8px;align-items:center"><button id="manageEdit" class="headerBtn" type="button" style="display:none">編集</button><button id="closeTop" class="headerBtn" type="button">閉じる</button></div></div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div><div id="modeSettings" style="display:none"></div><div id="historyView" style="display:none"></div></div></div>
+<div class="modal" id="modal"><div class="sheet"><div style="display:flex;justify-content:space-between;align-items:center"><div class="label" id="modalTitle">機種を追加</div><div style="display:flex;gap:8px;align-items:center"><button id="manageAdd" class="headerBtn" type="button" style="display:none">＋</button><button id="manageEdit" class="headerBtn" type="button" style="display:none">編集</button><button id="closeTop" class="headerBtn" type="button">閉じる</button></div></div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div><div id="modeSettings" style="display:none"></div><div id="historyView" style="display:none"></div></div></div>
 <script>
 // スマホの意図しない拡大を防止
 document.addEventListener("gesturestart",e=>e.preventDefault(),{passive:false});
@@ -79,7 +79,7 @@ let modeEditActive=false;
 function blankData(){return {games:0,startGames:0,counters:DEFAULT_COUNTERS.map(name=>({name,count:0})),layout:'2',memo:''}}
 function normalizeData(d){
   d.games=Number(d.games)||0;d.startGames=Number(d.startGames)||0;
-  d.counters=(d.counters&&d.counters.length?d.counters:DEFAULT_COUNTERS.map(name=>({name,count:0}))).map(c=>({name:String(c.name||'小役'),count:Number(c.count)||0}));
+  d.counters=(d.counters&&d.counters.length?d.counters:DEFAULT_COUNTERS.map(name=>({name,count:0}))).map(c=>({name:String(c.name||'小役'),count:Number(c.count)||0,color:String(c.color||''),countMethod:String(c.countMethod||'プッシュ'),countFormula:String(c.countFormula||''),gameFormula:String(c.gameFormula||''),displayFormat:['fraction','percent'].includes(c.displayFormat)?c.displayFormat:'fraction',settingRates:Array.from({length:6},(_,i)=>String(Array.isArray(c.settingRates)?(c.settingRates[i]??''):(c.settingRates&&typeof c.settingRates==='object'?c.settingRates[i+1]??'':''))),zeroCountGuess:c.zeroCountGuess!==false,countOnly:c.countOnly===true,includeTrend:c.includeTrend!==false,alias:String(c.alias||'')}));
   d.layout=['2','1','first1','first2','memo'].includes(d.layout)?d.layout:'2';
   d.memo=String(d.memo||'');
   return d;
@@ -105,7 +105,42 @@ function current(){return state.machines[state.selected]}
 function currentData(){const m=current();if(!m.modes[displayMode]){displayMode=m.modeOrder[0]||Object.keys(m.modes)[0]||"通常";if(!m.modes[displayMode])m.modes.通常=blankData()}return normalizeData(m.modes[displayMode])}
 function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
 function displayData(){return currentData()}
-function rate(n,data){const games=Number(data?.games)||0;const count=Number(n)||0;if(count===0)return "1/0.00";return games>0?`1/${(games/count).toFixed(2)}`:"1/0.00"}
+function evalFormula(data,formula,counter){
+  const games=Number(data?.games)||0;
+  const start=Number(data?.startGames)||0;
+  let expr=String(formula||'').trim();
+  if(!expr)return 0;
+  expr=expr.replace(/総ゲーム\s*[-−－ー]\s*打ち始めゲーム数/g,'(総ゲーム-打ち始めゲーム数)');
+  const values={};
+  (data?.counters||[]).forEach(c=>{values[String(c.name)]=Number(c.count)||0;if(c.alias)values[String(c.alias)]=Number(c.count)||0});
+  values['総ゲーム']=games;values['打ち始め']=start;values['総ゲーム数']=games;values['打ち始めゲーム数']=start;
+  values['小役数']=Number(counter?.count)||0;
+  Object.keys(values).sort((a,b)=>b.length-a.length).forEach(k=>{const esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');expr=expr.replace(new RegExp(esc,'g'),String(values[k]))});
+  expr=expr.replace(/[×✕xX]/g,'*').replace(/÷/g,'/').replace(/[−－ー]/g,'-').replace(/[＋]/g,'+').replace(/[^0-9+\-*/(). ]/g,'');
+  if(!expr)return 0;
+  try{const v=Function('return ('+expr+')')();return Number.isFinite(v)?v:0}catch(e){return 0}
+}
+function calcCountFormula(data,counter){return evalFormula(data,counter?.countFormula,counter)}
+function calcGameFormula(data,counter){return evalFormula(data,counter?.gameFormula,counter)}
+function effectiveCount(data,counter){
+  if(!counter)return 0;
+  const formula=String(counter.countFormula||'').trim();
+  if(String(counter.countMethod||'プッシュ')==='計算式' && formula){
+    const result=calcCountFormula(data,counter);
+    return Number.isFinite(result)?result:Number(counter.count)||0;
+  }
+  return Number(counter.count)||0;
+}
+function rate(n,data,counter){
+  const count=counter?effectiveCount(data,counter):Number(n)||0;
+  if(count===0)return counter?.displayFormat==='percent'?'0.00%':'1/0.00';
+  const formula=String(counter?.gameFormula||'').trim();
+  let denominator=Number(data?.games)||0;
+  if(formula)denominator=calcGameFormula(data,counter);
+  if(!Number.isFinite(denominator)||denominator<=0)return counter?.displayFormat==='percent'?'0.00%':'1/0.00';
+  const ratio=denominator/count;
+  return counter?.displayFormat==='percent'?`${(100/ratio).toFixed(2)}%`:`1/${ratio.toFixed(2)}`;
+}
 function renderModeSwitch(){const sw=document.querySelector('.modeSwitch');sw.innerHTML='';const machine=current();const modes=(machine.modeOrder||Object.keys(machine.modes||{})).filter(x=>machine.modes[x]);modes.forEach(mode=>{const b=document.createElement('button');b.className='modeBtn'+(displayMode===mode?' active':'');b.textContent=mode;b.onclick=()=>setDisplayMode(mode);sw.appendChild(b)});sw.style.gridTemplateColumns=`repeat(${Math.max(1,modes.length)},1fr)`}
 function renderMachineSelect(){const s=document.getElementById("machine");s.innerHTML="";Object.keys(state.machines).forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;o.selected=n===state.selected;s.appendChild(o)})}
 function render(){
@@ -114,7 +149,7 @@ function render(){
   document.getElementById("gamesInput").value=d.games;document.getElementById("startGamesInput").value=d.startGames||0;
   const root=document.getElementById("counters");root.className='counterGrid'+(d.layout==='1'?' oneCol':d.layout==='first1'?' firstOne':d.layout==='first2'?' firstTwo':'');root.innerHTML="";
   if(d.layout==='memo'){const memo=document.createElement('textarea');memo.className='memoBox';memo.placeholder='ここに自由にメモを書けます';memo.value=d.memo;memo.addEventListener('input',()=>{d.memo=memo.value;localStorage.setItem(KEY,JSON.stringify(state))});root.appendChild(memo);return}
-  d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";if(rateSettingActive){card.classList.add('settingRates');card.innerHTML=Array.from({length:6},(_,i)=>`<div class="settingRate"><span>設定${i+1}</span><b>1/0.00</b></div>`).join('');}else{card.innerHTML='<div class="name"></div><div class="countLine"></div><div class="rate"></div>';card.querySelector('.name').textContent=c.name;card.querySelector('.countLine').textContent=String(c.count);card.querySelector('.rate').textContent=rate(c.count,d);}let pressTimer=null,longPress=false;
+  d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";if(c.color)card.style.background=c.color;if(rateSettingActive){card.classList.add('settingRates');card.innerHTML=Array.from({length:6},(_,i)=>`<div class="settingRate"><span>設定${i+1}</span><b>${c.settingRates?.[i]||'1/0.00'}</b></div>`).join('');}else{card.innerHTML='<div class="name"></div><div class="countLine"></div><div class="rate"></div>';card.querySelector('.name').textContent=c.name;const numerator=effectiveCount(d,c);card.querySelector('.countLine').textContent=String(numerator);card.querySelector('.rate').textContent=c.countOnly?'':rate(numerator,d,c);}let pressTimer=null,longPress=false;
     if(!combined){card.addEventListener('pointerdown',()=>{longPress=false;pressTimer=setTimeout(()=>{longPress=true;const v=prompt(`${c.name} のカウントを入力`,String(c.count));if(v!==null){const n=parseInt(v,10);if(!Number.isNaN(n)&&n>=0){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=n;save()}}}},600)});card.addEventListener('pointerup',()=>{clearTimeout(pressTimer);if(!longPress){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=Math.max(0,target.count+(minusMode?-1:1));save()}}});card.addEventListener('pointerleave',()=>clearTimeout(pressTimer));}else{card.style.opacity='.92';card.style.cursor='default'}
     root.appendChild(card);
   });
@@ -159,9 +194,10 @@ function openModeSettings(machineName){
   const machine=state.machines[machineName];
   modeEditActive=false;
   const editBtn=document.getElementById('manageEdit');
-  if(editBtn)editBtn.textContent='編集';
+  if(editBtn){editBtn.style.display='inline-flex';editBtn.textContent='編集';editBtn.onclick=()=>toggleModeEdit();}
   resetModalSections();
   const box=document.getElementById('modeSettings');box.style.display='block';box.innerHTML='';
+  const oldCounterBack=document.getElementById('counterBackTop');if(oldCounterBack)oldCounterBack.remove();
   const title=document.createElement('div');title.className='label';title.textContent=`「${machineName}」の機種・モード管理`;box.appendChild(title);
   const hint=document.createElement('div');hint.className='small';hint.textContent='「編集」を押すと、この画面のままモード左側に☰が表示され、ドラッグして順番を変更できます。';box.appendChild(hint);
   const modeTitle=document.createElement('div');modeTitle.className='label';modeTitle.style.marginTop='14px';modeTitle.textContent='この機種のモード';box.appendChild(modeTitle);
@@ -169,43 +205,266 @@ function openModeSettings(machineName){
   let drag=null;
   (machine.modeOrder||Object.keys(machine.modes)).forEach(mode=>{
     if(!machine.modes[mode])return;
-    const row=document.createElement('div');row.className='item modeReorderRow';row.dataset.mode=mode;row.style.gridTemplateColumns='34px 1fr auto auto';
+    const row=document.createElement('div');row.className='item modeReorderRow';row.dataset.mode=mode;row.style.gridTemplateColumns='34px 1fr auto auto auto';
     const handle=document.createElement('div');handle.className='dragHandle modeDragHandle';handle.textContent='☰';handle.setAttribute('aria-label','モードを並び替え');handle.style.cssText='font-size:22px;line-height:1;text-align:center;cursor:grab;touch-action:none;user-select:none;visibility:hidden;opacity:0;transition:opacity .15s';
     const span=document.createElement('span');span.textContent=mode;span.style.cssText='font-weight:800;display:flex;align-items:center';
-    const counter=document.createElement('button');counter.className='headerBtn';counter.style.cssText='height:38px;border-radius:9px;padding:0 10px;font-size:13px';counter.textContent='⚙ カウンター編集';counter.onclick=()=>openCounterEdit(machineName,mode);
+    const layout=document.createElement('button');layout.className='headerBtn';layout.style.cssText='height:38px;min-width:120px;border-radius:9px;padding:0 10px;font-size:13px;display:none;align-items:center;justify-content:center;text-align:center;white-space:nowrap;';layout.textContent='レイアウト編集';layout.onclick=()=>openLayoutEdit(machineName,mode);
+    const counter=document.createElement('button');counter.className='headerBtn';counter.style.cssText='height:38px;border-radius:9px;padding:0 10px;font-size:13px';counter.textContent='⚙ カウンター編集';if(normalizeData(machine.modes[mode]).layout==='memo'){counter.disabled=true;counter.title='メモ帳レイアウトではカウンター編集できません';counter.style.opacity='.45';counter.style.cursor='not-allowed'}else{counter.onclick=()=>openCounterEdit(machineName,mode)}
     const edit=document.createElement('button');edit.className='rename';edit.textContent='変更';edit.style.display='none';edit.onclick=()=>openModeRename(machineName,mode);
-    row.append(handle,span,counter,edit);list.appendChild(row);
+    row.append(handle,span,layout,counter,edit);list.appendChild(row);
     handle.addEventListener('pointerdown',ev=>{if(!modeEditActive)return;ev.preventDefault();handle.setPointerCapture?.(ev.pointerId);drag={row,startY:ev.clientY,moved:false};row.classList.add('dragging');row.style.transition='none'});
     handle.addEventListener('pointermove',ev=>{if(!drag||drag.row!==row||!modeEditActive)return;ev.preventDefault();const dy=ev.clientY-drag.startY;drag.moved=true;row.style.transform=`translateY(${dy}px)`;const rows=[...list.querySelectorAll('.modeReorderRow')],idx=rows.indexOf(row),next=rows[idx+1],prev=rows[idx-1];if(next&&ev.clientY>next.getBoundingClientRect().top+next.offsetHeight/2){list.insertBefore(next,row);drag.startY=ev.clientY;row.style.transform='translateY(0)'}else if(prev&&ev.clientY<prev.getBoundingClientRect().top+prev.offsetHeight/2){list.insertBefore(row,prev);drag.startY=ev.clientY;row.style.transform='translateY(0)'}});
     const end=()=>{if(!drag||drag.row!==row)return;row.classList.remove('dragging');row.style.transition='';row.style.transform='';if(drag.moved){machine.modeOrder=[...list.querySelectorAll('.modeReorderRow')].map(r=>r.dataset.mode);save();if(state.selected===machineName)renderModeSwitch()}drag=null};
     handle.addEventListener('pointerup',end);handle.addEventListener('pointercancel',end);handle.addEventListener('lostpointercapture',end);
   });
   const add=document.createElement('button');add.className='primary';add.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:10px;display:none';add.textContent='＋ モードを追加';add.onclick=()=>{const name=(prompt('追加するモード名を入力してください','')||'').trim();if(!name)return;if(machine.modes[name]){alert('そのモードはすでにあります');return}machine.modes[name]=blankData();machine.modeOrder.push(name);save();openModeSettings(machineName)};box.appendChild(add);
-  const back=document.createElement('button');back.className='headerBtn';back.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:8px';back.textContent='← 機種管理に戻る';back.onclick=()=>renderMachineList();box.appendChild(back);
+
   box._toggleModeEdit=()=>{
     modeEditActive=!modeEditActive;
     if(editBtn)editBtn.textContent=modeEditActive?'完了':'編集';
     list.querySelectorAll('.modeDragHandle').forEach(h=>{h.style.visibility=modeEditActive?'visible':'hidden';h.style.opacity=modeEditActive?'1':'0'});
-    list.querySelectorAll('.modeReorderRow').forEach(r=>{r.style.gridTemplateColumns=modeEditActive?'34px 1fr auto auto':'0 1fr auto auto'});
-    list.querySelectorAll('.modeReorderRow .rename').forEach(b=>{b.style.display=modeEditActive?'inline-flex':'none'});
+    list.querySelectorAll('.modeReorderRow').forEach(r=>{r.style.gridTemplateColumns=modeEditActive?'34px 1fr auto auto auto':'0 1fr auto auto auto'});
+    list.querySelectorAll('.modeReorderRow .rename').forEach(b=>{b.style.display=modeEditActive?'inline-flex':'none'});list.querySelectorAll('.modeReorderRow .headerBtn').forEach((b,i)=>{if(i%2===0)b.style.display=modeEditActive?'inline-flex':'none'});
   };
 }
 function toggleModeEdit(){const box=document.getElementById('modeSettings');if(box&&typeof box._toggleModeEdit==='function')box._toggleModeEdit();}
 
 function openModeRename(machineName,onlyMode){const machine=state.machines[machineName];const mode=onlyMode||displayMode;const nn=prompt('変更後のモード名を入力してください',mode);if(nn===null)return;const name=nn.trim();if(!name){alert('モード名を入力してください');return}if(mode==='通常'){alert('「通常」は基本モードのため名前を変更できません');return}if(name!==mode&&machine.modes[name]){alert('そのモード名はすでにあります');return}if(name!==mode){machine.modes[name]=machine.modes[mode];delete machine.modes[mode];machine.modeOrder=machine.modeOrder.map(x=>x===mode?name:x);if(state.selected===machineName&&displayMode===mode)displayMode=name;save()}openModeSettings(machineName)}
-function openCounterEdit(machineName,onlyMode){
-  const machine=state.machines[machineName];const editMode=onlyMode||displayMode;if(!machine||!machine.modes[editMode])return;
+function openCounterSettings(machineName,modeName,counter){
+  const machine=state.machines[machineName];if(!machine||!machine.modes[modeName])return;
+  const d=normalizeData(machine.modes[modeName]);
+  const target=d.counters.find(c=>c===counter)||d.counters.find(c=>c.name===counter.name);if(!target)return;
   resetModalSections();
   const box=document.getElementById('modeSettings');box.style.display='block';box.innerHTML='';
+  const addBtn=document.getElementById('manageAdd'),editBtn=document.getElementById('manageEdit');
+  if(addBtn)addBtn.style.display='none';if(editBtn)editBtn.style.display='none';
+  const sub=document.createElement('div');sub.className='label';sub.style.cssText='text-align:center;font-size:16px;color:#fff;font-weight:800';sub.textContent=`「${target.name}」`;box.appendChild(sub);
+  const form=document.createElement('div');form.style.cssText='display:grid;gap:10px;margin-top:12px';box.appendChild(form);
+  function field(label,control){const wrap=document.createElement('div');const lab=document.createElement('div');lab.className='label';lab.textContent=label;lab.style.marginBottom='5px';wrap.append(lab,control);form.appendChild(wrap);return control}
+  const nameInput=document.createElement('input');nameInput.value=target.name;nameInput.maxLength=40;field('小役の名前',nameInput);
+  const color=document.createElement('input');color.type='color';color.value=/^#[0-9a-fA-F]{6}$/.test(target.color)?target.color:'#151b23';color.style.cssText='width:100%;height:44px;border:1px solid #303a48;border-radius:10px;background:#0d1218;padding:4px';field('カウンターの色',color);
+  const method=document.createElement('select');['プッシュ','計算式','エイリアス'].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;method.appendChild(o)});method.value=target.countMethod||'プッシュ';field('カウント方法',method);
+  const gameFormula=document.createElement('button');gameFormula.type='button';gameFormula.className='headerBtn';gameFormula.style.cssText='width:100%;height:48px;border-radius:10px;text-align:center;font-weight:800';gameFormula.textContent=target.gameFormula||'計算式を入力';field('ゲームの計算式',gameFormula);
+  function openFormulaInput(kind){
+    const isCount=kind==='count';
+    if(isCount){target.countMethod='計算式'}
+    machine.modes[modeName]=d;
+    localStorage.setItem(KEY,JSON.stringify(state));
+    const sourceFormula=isCount?(target.countFormula||''):(target.gameFormula||'');
+    gameFormula.textContent=target.gameFormula||'計算式を入力';
+    form.style.display='none';formulaBox.innerHTML='';
+    const ft=document.createElement('div');ft.className='label';ft.style.cssText='text-align:center;font-size:16px;color:#fff;font-weight:800';ft.textContent=isCount?'計算式の入力':'ゲームの計算式の入力';formulaBox.appendChild(ft);
+    const fs=document.createElement('div');fs.className='small';fs.style.cssText='text-align:center;margin:6px 0 12px';fs.textContent=isCount?'この式の結果が小役のカウント（分子）になります。':'ゲーム数を計算する式を入力してください。';formulaBox.appendChild(fs);
+    const fi=document.createElement('input');fi.type='text';fi.value=sourceFormula;fi.placeholder=isCount?'例：ベル＋チェリー':'例：総ゲーム−打ち始めゲーム数';fi.style.cssText='width:100%;height:54px;font-size:18px;font-weight:800;text-align:center;border:1px solid #3b4655;border-radius:10px;background:#0d1218;color:#fff;padding:0 12px';formulaBox.appendChild(fi);
+    const varRow=document.createElement('div');varRow.style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px';formulaBox.appendChild(varRow);
+    const addVar=(label,fn)=>{const b=document.createElement('button');b.type='button';b.className='headerBtn';b.style.cssText='height:44px;border-radius:9px;font-size:15px;font-weight:800';b.textContent=label;b.onclick=fn;varRow.appendChild(b)};
+    const linkedGames=()=>Number(currentData().games)||0;
+    const linkedStartGames=()=>Number(currentData().startGames)||0;
+    const persistFormula=()=>{
+      const stored=machine.modes[modeName];
+      const storedCounter=stored?.counters?.find(c=>c===target)||stored?.counters?.find(c=>c.name===target.name)||target;
+      if(isCount){storedCounter.countFormula=fi.value.trim();storedCounter.countMethod='計算式';target.countFormula=storedCounter.countFormula;target.countMethod='計算式'}
+      else{storedCounter.gameFormula=fi.value.trim();target.gameFormula=storedCounter.gameFormula}
+      machine.modes[modeName]=stored;localStorage.setItem(KEY,JSON.stringify(state));gameFormula.textContent=storedCounter.gameFormula||'計算式を入力';
+      if(isCount)render();
+    };
+    const addToken=(token)=>{fi.value=fi.value.replace(/\s*$/, '')+token;persistFormula();fi.focus()};
+    fi.addEventListener('input',persistFormula);
+    if(isCount){
+      const otherCounters=(d.counters||[]).filter(c=>c!==target && c.name!==target.name);
+      otherCounters.forEach(c=>addVar(String(c.name),()=>addToken(String(c.name))));
+      addVar('総ゲーム',()=>addToken('総ゲーム'));addVar('打ち始め',()=>addToken('打ち始めゲーム数'));addVar('小役数',()=>addToken('小役数'));
+    }else{
+      addVar('総ゲーム-打ち始めゲーム数',()=>addToken('総ゲーム-打ち始めゲーム数'));addVar(`総ゲーム（${linkedGames()}）`,()=>addToken('総ゲーム'));addVar(`打ち始め（${linkedStartGames()}）`,()=>addToken('打ち始めゲーム数'));addVar('ベル',()=>addToken('ベル'));addVar('スイカ',()=>addToken('スイカ'));addVar('チェリー',()=>addToken('チェリー'));
+    }
+    const keyRow=document.createElement('div');keyRow.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:8px';formulaBox.appendChild(keyRow);
+    const addOp=(label,fn)=>{const b=document.createElement('button');b.type='button';b.className='headerBtn';b.style.cssText='height:44px;border-radius:9px;font-size:16px;font-weight:800';b.textContent=label;b.onclick=fn;keyRow.appendChild(b)};
+    addOp('AC',()=>{fi.value='';persistFormula();fi.focus()});addOp('←',()=>{fi.value=fi.value.slice(0,-1);persistFormula();fi.focus()});addOp('＋',()=>{fi.value=fi.value.replace(/\s*$/, '')+'＋';persistFormula();fi.focus()});addOp('－',()=>{fi.value=fi.value.replace(/\s*$/, '')+'－';persistFormula();fi.focus()});addOp('÷',()=>{fi.value=fi.value.replace(/\s*$/, '')+'÷';persistFormula();fi.focus()});
+    const keyRow2=document.createElement('div');keyRow2.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:7px';formulaBox.appendChild(keyRow2);
+    const addOp2=(label,fn)=>{const b=document.createElement('button');b.type='button';b.className='headerBtn';b.style.cssText='height:44px;border-radius:9px;font-size:16px;font-weight:800';b.textContent=label;b.onclick=fn;keyRow2.appendChild(b)};
+    addOp2('×',()=>{fi.value=fi.value.replace(/\s*$/, '')+'×';persistFormula();fi.focus()});addOp2('(',()=>{fi.value=fi.value.replace(/\s*$/, '')+'(';persistFormula();fi.focus()});addOp2(')',()=>{fi.value=fi.value.replace(/\s*$/, '')+')';persistFormula();fi.focus()});
+    const fback=document.createElement('button');fback.className='headerBtn';fback.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:8px';fback.textContent='← 設定画面に戻る';fback.onclick=()=>{formulaBox.style.display='none';form.style.display='grid';render()};formulaBox.appendChild(fback);formulaBox.style.display='block';
+  }
+  const formulaBox=document.createElement('div');formulaBox.style.cssText='display:none;margin-top:12px';box.appendChild(formulaBox);
+  gameFormula.onclick=()=>openFormulaInput('game');
+  method.onchange=()=>{
+    target.countMethod=method.value;
+    if(method.value!=='計算式'){target.countFormula='';}
+    d.counters=d.counters.map(c=>c===target?target:c);machine.modes[modeName]=d;localStorage.setItem(KEY,JSON.stringify(state));
+    if(method.value==='計算式')openFormulaInput('count');
+  };
+  const display=document.createElement('select');[['fraction','分数（1/○○）'],['percent','パーセント（○○%）']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;display.appendChild(o)});display.value=target.displayFormat||'fraction';field('表示形式',display);
+  const ratesWrap=document.createElement('div');const ratesTitle=document.createElement('div');ratesTitle.className='label';ratesTitle.textContent='設定ごとの確率';ratesTitle.style.marginBottom='5px';ratesWrap.appendChild(ratesTitle);const ratesGrid=document.createElement('div');ratesGrid.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:7px';ratesWrap.appendChild(ratesGrid);form.appendChild(ratesWrap);
+  const rateInputs=[];for(let i=0;i<6;i++){const w=document.createElement('div');w.style.cssText='display:grid;grid-template-columns:42px 1fr;gap:5px;align-items:center';const l=document.createElement('span');l.textContent=`設定${i+1}`;l.style.fontSize='12px';const inp=document.createElement('input');inp.value=target.settingRates?.[i]||'';inp.placeholder='1/○○';inp.style.height='40px';w.append(l,inp);ratesGrid.appendChild(w);rateInputs.push(inp)}
+  const zero=document.createElement('label');zero.style.cssText='display:flex;align-items:center;gap:8px;padding:8px 0;font-size:13px;font-weight:700';const zc=document.createElement('input');zc.type='checkbox';zc.checked=target.zeroCountGuess!==false;zc.style.width='20px';zc.style.height='20px';zero.append(zc,document.createTextNode('カウントが0でも設定推測に反映する'));form.appendChild(zero);
+  const only=document.createElement('label');only.style.cssText='display:flex;align-items:center;gap:8px;padding:8px 0;font-size:13px;font-weight:700';const oc=document.createElement('input');oc.type='checkbox';oc.checked=target.countOnly===true;oc.style.width='20px';oc.style.height='20px';only.append(oc,document.createTextNode('カウントのみのボタンにする'));form.appendChild(only);
+  const trend=document.createElement('label');trend.style.cssText='display:flex;align-items:center;gap:8px;padding:8px 0;font-size:13px;font-weight:700';const tc=document.createElement('input');tc.type='checkbox';tc.checked=target.includeTrend!==false;tc.style.width='20px';tc.style.height='20px';trend.append(tc,document.createTextNode('カウントの推移に反映する'));form.appendChild(trend);
+  function persistSettings(){
+    const nn=nameInput.value.trim();
+    if(nn && !d.counters.some(x=>x!==target&&x.name===nn)) target.name=nn;
+    target.color=color.value;
+    target.countMethod=method.value;
+    target.countFormula=target.countFormula||'';target.gameFormula=target.gameFormula||'';
+    target.displayFormat=display.value;
+    target.settingRates=rateInputs.map(x=>x.value.trim());
+    target.zeroCountGuess=zc.checked;
+    target.countOnly=oc.checked;
+    target.includeTrend=tc.checked;
+    machine.modes[modeName]=d;
+    localStorage.setItem(KEY,JSON.stringify(state));
+  }
+  [nameInput,display].forEach(el=>el.addEventListener('input',persistSettings));
+  [color,method,display,zc,oc,tc,...rateInputs].forEach(el=>el.addEventListener('change',persistSettings));
+
+}
+
+function openCounterEdit(machineName,onlyMode){
+  const machine=state.machines[machineName];const editMode=onlyMode||displayMode;if(!machine||!machine.modes[editMode])return;if(normalizeData(machine.modes[editMode]).layout==='memo')return;
+  resetModalSections();
+  const box=document.getElementById('modeSettings');box.style.display='block';box.innerHTML='';
+  const d=normalizeData(machine.modes[editMode]);
   const title=document.createElement('div');title.className='label';title.textContent=`「${machineName}」のカウンター編集（${editMode}）`;box.appendChild(title);
-  const hint=document.createElement('div');hint.className='small';hint.textContent='この画面ではレイアウト編集だけできます。';box.appendChild(hint);
-  const layoutBtn=document.createElement('button');layoutBtn.className='primary';layoutBtn.style.cssText='width:100%;height:48px;border-radius:10px;margin-top:12px';layoutBtn.textContent='レイアウト編集';layoutBtn.onclick=()=>openLayoutEdit(machineName,editMode);box.appendChild(layoutBtn);
-  const back=document.createElement('button');back.className='headerBtn';back.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:10px';back.textContent='← 機種・モード管理に戻る';back.onclick=()=>openModeSettings(machineName);box.appendChild(back);
+  const hint=document.createElement('div');hint.className='small';hint.textContent='「編集」を押すと☰が表示され、☰を押したまま上下にスワイプして並び替えできます。';box.appendChild(hint);
+
+  const addBtn=document.getElementById('manageAdd');
+  const editBtn=document.getElementById('manageEdit');
+  const closeTop=document.getElementById('closeTop');
+  let counterBackTop=document.getElementById('counterBackTop');
+  if(!counterBackTop){
+    counterBackTop=document.createElement('button');
+    counterBackTop.id='counterBackTop';
+    counterBackTop.className='headerBtn';
+    counterBackTop.type='button';
+    counterBackTop.textContent='← 戻る';
+    closeTop.parentNode.insertBefore(counterBackTop,closeTop);
+  }
+  counterBackTop.style.display='inline-flex';
+  counterBackTop.onclick=()=>openModeSettings(machineName);
+  if(addBtn){addBtn.style.display='none';}
+  if(editBtn){editBtn.style.display='inline-flex';editBtn.textContent='編集';}
+  const list=document.createElement('div');list.style.marginTop='4px';box.appendChild(list);
+  let reorderMode=false;
+  function saveCounters(){machine.modes[editMode]=d;localStorage.setItem(KEY,JSON.stringify(state));render();}
+  function renderCounterList(){
+    list.innerHTML='';
+    if(!d.counters.length){const empty=document.createElement('div');empty.className='small';empty.style.padding='10px 0';empty.textContent='まだ小役ボタンがありません。「＋」で追加できます。';list.appendChild(empty);return}
+    d.counters.forEach((c,i)=>{
+      const row=document.createElement('div');row.className='item';row.style.cssText='display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:8px;align-items:center;width:100%;min-width:0;box-sizing:border-box;margin-top:8px;padding:8px 0;border-bottom:1px solid #26303b';
+      const handle=document.createElement('div');handle.className='counterDragHandle';handle.textContent='☰';handle.setAttribute('aria-label','小役を並べ替え');handle.style.cssText='height:38px;width:36px;display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;cursor:grab;touch-action:none;user-select:none;visibility:'+(reorderMode?'visible':'hidden')+';opacity:'+(reorderMode?'1':'0')+';border-radius:9px;background:#20262f';
+      const name=document.createElement('button');name.type='button';name.textContent=c.name;name.style.cssText='font-weight:800;display:flex;align-items:center;min-height:38px;background:transparent;border:0;color:#fff;padding:0;text-align:left;font-size:16px;cursor:pointer';name.onclick=()=>openCounterSettings(machineName,editMode,c);
+      const del=document.createElement('button');del.className='del';del.style.cssText='height:38px;padding:0 10px;border-radius:9px';del.textContent='削除';del.style.display=reorderMode?'block':'none';
+      del.onclick=()=>{if(confirm(`「${c.name}」のカウントボタンを削除しますか？`)){d.counters.splice(i,1);saveCounters();renderCounterList()}};
+      row.append(handle,name,del);list.appendChild(row);
+      if(reorderMode){
+        let drag=null;
+        const getRows=()=>[...list.querySelectorAll('.item')].filter(r=>r!==row);
+        const move=(e)=>{
+          if(!drag||drag.row!==row)return;
+          e.preventDefault();
+          const dx=e.clientX-drag.startX,dy=e.clientY-drag.startY;
+          if(!drag.moved && Math.hypot(dx,dy)<8)return;
+          if(!drag.moved){
+            drag.moved=true;
+            drag.placeholder.style.display='block';
+            row.style.position='fixed';
+            row.style.left=drag.left+'px';
+            row.style.top=drag.top+'px';
+            row.style.width=drag.width+'px';
+            row.style.height=drag.height+'px';
+            row.style.minWidth=drag.width+'px';
+            row.style.maxWidth=drag.width+'px';
+            row.style.minHeight=drag.height+'px';
+            row.style.maxHeight=drag.height+'px';
+            row.style.margin='0';
+            row.style.boxSizing='border-box';
+            row.style.zIndex='9999';
+            row.style.pointerEvents='none';
+          }
+          row.style.transform=`translate3d(${dx}px,${dy}px,0)`;
+          const others=getRows();
+          let target=others.length;
+          for(let i=0;i<others.length;i++){
+            const rect=others[i].getBoundingClientRect();
+            if(e.clientY < rect.top + rect.height/2){target=i;break}
+          }
+          if(target!==drag.target){
+            drag.target=target;
+            const before=others[target];
+            if(before) list.insertBefore(drag.placeholder,before);
+            else list.appendChild(drag.placeholder);
+          }
+        };
+        const end=(e)=>{
+          if(!drag||drag.row!==row)return;
+          if(e)e.preventDefault();
+          if(drag.moved){
+            row.style.position='';
+            row.style.left='';
+            row.style.top='';
+            row.style.width='';
+            row.style.height='';
+            row.style.minWidth='';
+            row.style.maxWidth='';
+            row.style.minHeight='';
+            row.style.maxHeight='';
+            row.style.margin='';
+            row.style.boxSizing='';
+            row.style.zIndex='';
+            row.style.pointerEvents='';
+            row.style.transform='';
+            list.insertBefore(row,drag.placeholder);
+            // ドロップした時点のDOM順を即座にデータへ反映する。
+            const droppedNames=[...list.querySelectorAll('.item button:not(.del)')].map(b=>b.textContent);
+            const droppedMap=new Map(d.counters.map(c=>[c.name,c]));
+            const droppedOrder=droppedNames.map(n=>droppedMap.get(n)).filter(Boolean);
+            if(droppedOrder.length===d.counters.length){
+              d.counters=droppedOrder;
+              machine.modes[editMode]=d;
+              localStorage.setItem(KEY,JSON.stringify(state));
+            }
+          }
+          drag.placeholder.remove();
+          handle.removeEventListener('pointermove',move);
+          handle.removeEventListener('pointerup',end);
+          handle.removeEventListener('pointercancel',end);
+          if(drag.pointerId!=null){try{handle.releasePointerCapture(drag.pointerId)}catch(_){} }
+          drag=null;
+        };
+        handle.addEventListener('pointerdown',e=>{
+          if(e.button!==undefined&&e.button!==0)return;
+          e.preventDefault();
+          try{handle.setPointerCapture(e.pointerId)}catch(_){}
+          const rect=row.getBoundingClientRect();
+          const ph=document.createElement('div');
+          ph.style.cssText=`height:${rect.height}px;width:${rect.width}px;min-width:${rect.width}px;max-width:${rect.width}px;min-height:${rect.height}px;max-height:${rect.height}px;margin:8px 0 0;box-sizing:border-box;display:none;pointer-events:none`;
+          row.parentNode.insertBefore(ph,row.nextSibling);
+          drag={row,startY:e.clientY,startX:e.clientX,left:rect.left,top:rect.top,width:rect.width,height:rect.height,placeholder:ph,target:getRows().length,moved:false,pointerId:e.pointerId};
+          handle.addEventListener('pointermove',move);
+          handle.addEventListener('pointerup',end);
+          handle.addEventListener('pointercancel',end);
+        });
+      }
+    });
+  }
+  if(editBtn)editBtn.onclick=()=>{
+    reorderMode=!reorderMode;
+    editBtn.textContent='編集';
+    if(addBtn)addBtn.style.display=reorderMode?'inline-flex':'none';
+    renderCounterList();
+  };
+  function addCounter(){
+    let n=1;let name=`ボタン${n}`;
+    while(d.counters.some(c=>c.name===name)){n++;name=`ボタン${n}`}
+    d.counters.push({name,count:0});saveCounters();renderCounterList();
+  }
+  if(addBtn) addBtn.onclick=addCounter;
+  renderCounterList();
+
 }
 function openModeOrder(machineName){
   const machine=state.machines[machineName];resetModalSections();const box=document.getElementById('modeSettings');box.style.display='block';box.innerHTML='';
   const title=document.createElement('div');title.className='label';title.textContent=`「${machineName}」のモード順`;box.appendChild(title);
-  const hint=document.createElement('div');hint.className='small';hint.textContent='☰をつかんで、そのまま上下にスワイプすると並び替えできます。';box.appendChild(hint);
+  const hint=document.createElement('div');hint.className='small';hint.textContent='「編集」を押すと☰が表示されます。☰を押したまま上下にスワイプして並び替えできます。';box.appendChild(hint);
   const list=document.createElement('div');list.style.marginTop='8px';
   machine.modeOrder.forEach((mode,i)=>{const row=document.createElement('div');row.className='item dragRow';row.style.gridTemplateColumns='34px 1fr';
     const handle=document.createElement('div');handle.className='dragHandle';handle.textContent='☰';handle.setAttribute('aria-label','並べ替え');handle.style.cssText='font-size:22px;line-height:1;text-align:center;cursor:grab;user-select:none';
@@ -223,7 +482,7 @@ function openLayoutEdit(machineName,mode){
   const machine=state.machines[machineName];if(!machine||!machine.modes[mode||displayMode])return;
   const editMode=mode||displayMode;const d=normalizeData(machine.modes[editMode]);
   resetModalSections();const box=document.getElementById('modeSettings');box.style.display='block';box.innerHTML='';
-  const title=document.createElement('div');title.className='label';title.textContent='レイアウト編集';box.appendChild(title);
+  const title=document.createElement('div');title.className='label';title.style.cssText='text-align:center';title.textContent='レイアウト編集';box.appendChild(title);
   const wrap=document.createElement('div');wrap.style.cssText='display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start;margin-top:10px';box.appendChild(wrap);
   const choicesBox=document.createElement('div');wrap.appendChild(choicesBox);
   const previewBox=document.createElement('div');previewBox.style.cssText='position:sticky;top:8px;min-width:0;max-width:100%;overflow:hidden';wrap.appendChild(previewBox);
@@ -242,7 +501,7 @@ function openLayoutEdit(machineName,mode){
     }
   }
   const choices=[['2','2列'],['1','1列'],['first1','1行目だけ1列＋2行目以降2列'],['first2','1・2行目だけ1列＋3行目以降2列'],['memo','メモ帳']];
-  choices.forEach(([v,label])=>{const b=document.createElement('button');b.className='headerBtn';b.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:8px;text-align:left;font-size:12px;line-height:1.3;white-space:normal;overflow-wrap:anywhere;box-sizing:border-box';b.textContent=(d.layout===v?'✓ ':'')+label;b.onclick=()=>{d.layout=v;machine.modes[editMode]=d;localStorage.setItem(KEY,JSON.stringify(state));render();openLayoutEdit(machineName,editMode)};choicesBox.appendChild(b)});
+  choices.forEach(([v,label])=>{const b=document.createElement('button');b.className='headerBtn';b.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:8px;text-align:center;font-size:12px;line-height:1.3;white-space:normal;overflow-wrap:anywhere;box-sizing:border-box';b.textContent=(d.layout===v?'✓ ':'')+label;b.onclick=()=>{d.layout=v;machine.modes[editMode]=d;localStorage.setItem(KEY,JSON.stringify(state));render();openLayoutEdit(machineName,editMode)};choicesBox.appendChild(b)});
   renderPreview();
   const done=document.createElement('button');done.className='primary';done.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:12px';done.textContent='完了';done.onclick=()=>openCounterEdit(machineName,editMode);box.appendChild(done)
 }
@@ -251,14 +510,14 @@ document.getElementById('machineMinus').onclick=()=>{minusMode=!minusMode;docume
 document.getElementById('judge').onclick=()=>alert('設定判別機能は準備中です。小役データをもとに判別機能を追加できます。');
 let rateSettingActive=false;document.getElementById('rateBtn').onclick=()=>{rateSettingActive=!rateSettingActive;const b=document.getElementById('rateBtn');b.textContent='当選率';b.classList.toggle('active',rateSettingActive);render()};
 function setDisplayMode(mode){const m=current();if(!m||!m.modes||!m.modes[mode])return;displayMode=mode;combined=false;render()}
-function setupGameInput(id,key){const el=document.getElementById(id);el.addEventListener('focus',()=>{if(el.value==='0')el.value=''});el.addEventListener('click',()=>{if(el.value==='0')el.value=''});el.addEventListener('blur',()=>{if(el.value==='')el.value='0'});el.addEventListener('change',()=>{if(combined)return;currentData()[key]=Math.max(0,parseInt(el.value||'0',10)||0);save()})}
+function setupGameInput(id,key){const el=document.getElementById(id);el.addEventListener('focus',()=>{if(el.value==='0')el.value=''});el.addEventListener('click',()=>{if(el.value==='0')el.value=''});el.addEventListener('blur',()=>{if(el.value==='')el.value='0'});const commit=()=>{if(combined)return;const m=current();if(!m||!m.modes[displayMode])return;const d=normalizeData(m.modes[displayMode]);d[key]=Math.max(0,parseInt(el.value||'0',10)||0);m.modes[displayMode]=d;localStorage.setItem(KEY,JSON.stringify(state));render()};el.addEventListener('input',commit);el.addEventListener('change',commit)}
 setupGameInput('gamesInput','games');setupGameInput('startGamesInput','startGames');
 document.getElementById('reset').onclick=()=>{if(confirm(`「${state.selected}」の「${displayMode}」のゲーム数と小役カウントをリセットしますか？`)){const d=currentData();d.games=0;d.startGames=0;d.counters.forEach(c=>c.count=0);save()}};
 function historyData(){const m=current();if(!m||!m.modes||!m.modes[displayMode])return [];m.modes[displayMode].history=m.modes[displayMode].history||[];return m.modes[displayMode].history}
 function migrateHistory(){if(!state.history)return;Object.keys(state.history).forEach(k=>{const parts=k.split('\u0000');if(parts.length!==2)return;const m=state.machines[parts[0]],mode=parts[1];if(m&&m.modes&&m.modes[mode]){m.modes[mode].history=m.modes[mode].history||[];if(!m.modes[mode].history.length)m.modes[mode].history=state.history[k]||[];}});delete state.history;}
-function saveProgress(){const d=currentData();const rows=historyData();rows.push({time:new Date().toLocaleString('ja-JP'),games:d.games,startGames:d.startGames,counters:d.counters.map(c=>({name:c.name,count:c.count,rate:rate(c.count,d)}))});if(rows.length>50)rows.splice(0,rows.length-50);save();alert('途中経過を「小役確率の推移」に保存しました');}
+function saveProgress(){const d=currentData();const rows=historyData();rows.push({time:new Date().toLocaleString('ja-JP'),games:d.games,startGames:d.startGames,counters:d.counters.filter(c=>c.includeTrend!==false).map(c=>({name:c.name,count:c.count,rate:rate(c.count,d,c)}))});if(rows.length>50)rows.splice(0,rows.length-50);save();alert('途中経過を「小役確率の推移」に保存しました');}
 function showTrend(){const box=document.getElementById('historyView');modal.classList.add('show');document.getElementById('modalTitle').textContent='小役確率の推移';document.getElementById('newMachine').style.display='none';document.querySelector('.sheetRow').style.display='none';document.getElementById('machines').style.display='none';document.getElementById('modeSettings').style.display='none';box.style.display='block';box.innerHTML='';const title=document.createElement('div');title.className='label';title.textContent=`「${state.selected}」・「${displayMode}」の小役確率の推移`;box.appendChild(title);const rows=historyData();const tabs=document.createElement('div');tabs.className='historyTabs';const trendTab=document.createElement('button');trendTab.className='historyTab active';trendTab.textContent='推移';const tableTab=document.createElement('button');tableTab.className='historyTab';tableTab.textContent='表';tabs.appendChild(trendTab);tabs.appendChild(tableTab);box.appendChild(tabs);const content=document.createElement('div');box.appendChild(content);function renderTrendList(){content.innerHTML='';if(!rows.length){const e=document.createElement('div');e.style.cssText='padding:14px 0;color:#9da8b7';e.textContent='保存された途中経過はありません。';content.appendChild(e)}else{rows.forEach(h=>{const r=document.createElement('div');r.className='historyRow';const rates=h.counters.map(c=>`${c.name} ${c.rate}`).join('　');r.innerHTML=`<div class="historyTime">${h.time}　${h.games}G</div><div class="historyMain">${rates}</div>`;content.appendChild(r)})}}function renderHistoryTable(){content.innerHTML='';if(!rows.length){const e=document.createElement('div');e.style.cssText='padding:14px 0;color:#9da8b7';e.textContent='保存された途中経過はありません。';content.appendChild(e);return}const wrap=document.createElement('div');wrap.className='historyTableWrap';const table=document.createElement('table');table.className='historyTable';const head=document.createElement('thead');const hr=document.createElement('tr');const thg=document.createElement('th');thg.textContent='ゲーム数';hr.appendChild(thg);const names=[];rows.forEach(h=>h.counters.forEach(c=>{if(!names.includes(c.name))names.push(c.name)}));names.forEach(n=>{const th=document.createElement('th');th.textContent=n;hr.appendChild(th)});head.appendChild(hr);table.appendChild(head);const body=document.createElement('tbody');rows.forEach(h=>{const tr=document.createElement('tr');const tdg=document.createElement('td');tdg.textContent=h.games+'G';tr.appendChild(tdg);names.forEach(n=>{const td=document.createElement('td');const c=h.counters.find(x=>x.name===n);td.textContent=c?c.count:0;tr.appendChild(td)});body.appendChild(tr)});table.appendChild(body);wrap.appendChild(table);content.appendChild(wrap)}trendTab.onclick=()=>{trendTab.classList.add('active');tableTab.classList.remove('active');renderTrendList()};tableTab.onclick=()=>{tableTab.classList.add('active');trendTab.classList.remove('active');renderHistoryTable()};renderTrendList();const back=document.createElement('button');back.className='headerBtn';back.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:10px';back.textContent='← 戻る';back.onclick=()=>{box.style.display='none';modal.classList.remove('show');render()};box.appendChild(back);}document.getElementById('saveProgress').onclick=saveProgress;document.getElementById('showTrend').onclick=showTrend;
-const modal=document.getElementById('modal');document.getElementById('manage').onclick=()=>{modal.classList.add('show');document.getElementById('modalTitle').textContent='機種を管理';document.getElementById('newMachine').style.display='none';document.querySelector('.sheetRow').style.display='none';document.getElementById('manageEdit').style.display='inline-flex';openModeSettings(state.selected)};document.getElementById('manageEdit').onclick=()=>{if(state.selected)toggleModeEdit()};document.getElementById('addMachine').onclick=()=>{modal.classList.add('show');document.getElementById('modalTitle').textContent='機種を追加';document.getElementById('newMachine').style.display='block';document.querySelector('.sheetRow').style.display='flex';document.getElementById('manageEdit').style.display='none';document.getElementById('newMachine').focus()};document.getElementById('close').onclick=()=>modal.classList.remove('show');document.getElementById('closeTop').onclick=()=>{document.getElementById('manageEdit').style.display='none';modal.classList.remove('show')};modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show')});document.getElementById('add').onclick=()=>{const i=document.getElementById('newMachine'),n=i.value.trim();if(!n)return;if(state.machines[n]){alert('その機種はすでに登録されています');return}state.machines[n]=blankMachine();state.selected=n;displayMode='通常';combined=false;i.value='';save();modal.classList.remove('show')};
+const modal=document.getElementById('modal');document.getElementById('manage').onclick=()=>{modal.classList.add('show');document.getElementById('modalTitle').textContent='機種を管理';document.getElementById('newMachine').style.display='none';document.querySelector('.sheetRow').style.display='none';document.getElementById('manageAdd').style.display='none';document.getElementById('manageEdit').style.display='inline-flex';openModeSettings(state.selected)};document.getElementById('manageEdit').onclick=()=>{if(state.selected)toggleModeEdit()};document.getElementById('addMachine').onclick=()=>{modal.classList.add('show');document.getElementById('modalTitle').textContent='機種を追加';document.getElementById('newMachine').style.display='block';document.querySelector('.sheetRow').style.display='flex';document.getElementById('manageAdd').style.display='none';document.getElementById('manageEdit').style.display='none';document.getElementById('newMachine').focus()};document.getElementById('close').onclick=()=>modal.classList.remove('show');document.getElementById('closeTop').onclick=()=>{document.getElementById('manageAdd').style.display='none';document.getElementById('manageEdit').style.display='none';modal.classList.remove('show');render()};modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show')});document.getElementById('add').onclick=()=>{const i=document.getElementById('newMachine'),n=i.value.trim();if(!n)return;if(state.machines[n]){alert('その機種はすでに登録されています');return}state.machines[n]=blankMachine();state.selected=n;displayMode='通常';combined=false;i.value='';save();modal.classList.remove('show')};
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));migrateHistory();save();render();
 </script>
 </body>
