@@ -8,11 +8,12 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="小役カウンター">
 <link rel="manifest" href="manifest.webmanifest">
-<title>小役カウンター v1.1.143</title>
+<title>小役カウンター v1.1.231</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
-html{touch-action:manipulation;-webkit-text-size-adjust:100%;overscroll-behavior:none}body{margin:0;touch-action:manipulation;background:#0b0f14;color:#f5f7fa;min-height:100vh;overscroll-behavior:none}
+html{touch-action:manipulation;-webkit-text-size-adjust:100%;overscroll-behavior:none}.machineListScreen{display:none;min-height:100vh;width:100%;max-width:560px;margin:0 auto;box-sizing:border-box;padding:18px}.machineListHeader{display:flex;align-items:center;justify-content:space-between;font-size:18px;font-weight:900;margin-bottom:12px}.machineListEditBtn,.machineListCreateBtn{height:34px;padding:0 12px;border-radius:9px;background:#343d49;color:#fff;font-size:13px;font-weight:800}.machineListHeaderActions{display:flex;gap:7px;align-items:center}.machineList{display:grid;gap:8px}.machineList button{width:100%;height:52px;border:1px solid #303a48;border-radius:12px;background:#151b23;color:#fff;text-align:left;padding:0 14px;font-size:16px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.machineList button.active{background:#2563eb;border-color:#2563eb}.machineListFooter{margin-top:14px}.machineListFooter button{width:100%;height:44px;border-radius:10px;background:#343d49;color:#fff;border:0;font-weight:800}.screenMode{display:none}
+body{margin:0;touch-action:manipulation;background:#0b0f14;color:#f5f7fa;min-height:100vh;overscroll-behavior:none}
 main{max-width:560px;margin:auto;padding:calc(env(safe-area-inset-top) + 10px) 14px calc(env(safe-area-inset-bottom) + 24px)}
 header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 h1{font-size:22px;margin:0}.sub{font-size:12px;color:#7f8a99;margin-top:3px}
@@ -20,22 +21,23 @@ button{border:0;touch-action:manipulation;color:#fff;font:inherit;font-weight:70
 .headerBtn{background:#222a35;border-radius:12px;padding:10px 12px}
 .card{background:#151b23;border:1px solid #27303c;border-radius:18px;padding:15px;margin-bottom:11px}
 .label{font-size:12px;color:#9da8b7}
-.machineRow{display:grid;grid-template-columns:1fr auto;gap:5px;align-items:center}.machineRow select{height:30px;padding:0 8px;font-size:16px}.machineMinus{width:34px;height:30px;border-radius:9px;background:#343d49;font-size:20px}
-.topGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:7px}.machineTop{grid-column:1 / -1;height:62px}.compactCard{padding:4px 6px;height:62px;min-height:62px}.buttonOnly{display:flex;align-items:center;justify-content:center}.gamePair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.compactJudge{height:34px;margin-top:4px}.ginput{height:34px;font-size:18px;padding:0 4px;text-align:center;letter-spacing:-1px}
+.mainBack,.machineRow select,.machineMinus{height:38px;border:1px solid #27303c;border-radius:12px;background:#151b23;color:#fff;box-sizing:border-box}.mainBack{padding:0 12px;font-size:13px;font-weight:800;white-space:nowrap}.machineRow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px;align-items:center}.machineRow select{width:100%;padding:0 10px;font-size:16px;font-weight:700}.machineMinus{width:40px;font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center}.machineTop{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;height:auto}
+.topGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:7px}.machineTop{grid-column:1 / -1;height:62px;margin-bottom:5px}.compactCard{padding:4px 6px;height:62px;min-height:62px}.buttonOnly{display:flex;align-items:center;justify-content:center}.gamePair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.compactJudge{height:34px;margin-top:4px}.ginput{height:34px;font-size:18px;padding:0 4px;text-align:center;letter-spacing:-1px}
 .topCard{background:#151b23;border:1px solid #27303c;border-radius:14px;padding:7px}
 .judgeBtn{width:100%;height:34px;border-radius:10px;background:#2563eb;white-space:nowrap;font-size:13px}.rateBtn{width:100%;height:34px;border-radius:10px;background:#343d49;font-size:14px}.rateBtn.active{background:#2563eb}.progressTools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.progressTools button{height:42px;border-radius:12px;background:#222a35}.historyRow{padding:9px 0;border-bottom:1px solid #26303b}.historyTime{font-size:12px;color:#9da8b7}.historyMain{font-size:14px;font-weight:700;margin-top:3px}.historyTabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#222a35;border-radius:10px;padding:3px;margin:10px 0}.historyTab{height:36px;border-radius:8px;background:transparent;color:#aeb4aa;font-weight:800}.historyTab.active{background:#2563eb;color:#fff}.historyTableWrap{overflow-x:auto;border:1px solid #27303c;border-radius:12px;margin-top:10px}.historyTable{width:100%;border-collapse:collapse;min-width:max-content}.historyTable th,.historyTable td{padding:9px 10px;border-bottom:1px solid #27303c;text-align:center;white-space:nowrap}.historyTable th{background:#1c2430;font-size:12px}.historyTable td{font-size:13px;font-weight:700}.historyTable tr:last-child td{border-bottom:0}
-.modeTools{display:flex;justify-content:center;margin:6px 0 8px}.modeTools .headerBtn{width:150px;height:38px;border-radius:10px}.modeSwitch{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#2a2d27;border-radius:8px;padding:1px;margin:0 auto 7px;max-width:50%}.modeBtn{height:20px;border-radius:7px;background:transparent;color:#aeb4aa;font-weight:800;font-size:11px;padding:0}.modeBtn.active{background:#19d8e8;color:#071114}.counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.counterGrid.oneCol{grid-template-columns:1fr}.counterGrid.firstOne .card:first-child{grid-column:1 / -1}.counterGrid.firstTwo .card:nth-child(-n+2){grid-column:1 / -1}
-.counterGrid .card{margin-bottom:0;min-height:112px;padding:10px}.memoBox{grid-column:1 / -1;width:100%;min-height:280px;border:1px solid #303a48;border-radius:14px;background:#10151c;color:#fff;padding:14px;font:inherit;font-size:16px;line-height:1.6;resize:vertical;outline:none;box-sizing:border-box}.memoBox:focus{outline:2px solid #2563eb}
+.modeTools{display:flex;justify-content:center;margin:6px 0 8px}.modeTools .headerBtn{width:150px;height:38px;border-radius:10px} .modeSwitch{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0;background:#2a2d27;border-radius:8px;padding:1px;margin:0 0 7px;width:100%;max-width:none;box-sizing:border-box;overflow:hidden}.modeBtn{position:relative;z-index:2;height:20px;border-radius:7px;background:transparent;color:#aeb4aa;font-weight:800;font-size:11px;padding:0;transition:color .24s ease}.modeBtn.active{background:transparent;color:#071114}.modeIndicator{position:absolute;z-index:1;left:1px;top:1px;height:20px;width:calc((100% - 2px) / 2);background:#19d8e8;border-radius:7px;transform:translateX(0);transition:transform .26s cubic-bezier(.22,.61,.36,1);pointer-events:none}.counterGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.counterGrid.oneCol{grid-template-columns:1fr}.counterGrid.firstOne .card:first-child{grid-column:1 / -1}.counterGrid.firstTwo .card:nth-child(-n+2){grid-column:1 / -1}.counterGrid.firstTwoFourThree{grid-template-columns:repeat(12,1fr)}.counterGrid.firstTwoFourThree .card:nth-child(-n+2){grid-column:1 / -1}.counterGrid.firstTwoFourThree .card:nth-child(n+3):nth-child(-n+6){grid-column:span 3}.counterGrid.firstTwoFourThree .card:nth-child(n+7){grid-column:span 4}.counterGrid.firstTwoFourThreeFiveOne{grid-template-columns:repeat(12,1fr)}.counterGrid.firstTwoFourThreeFiveOne .card:nth-child(-n+2){grid-column:1 / -1}.counterGrid.firstTwoFourThreeFiveOne .card:nth-child(n+3):nth-child(-n+6){grid-column:span 3}.counterGrid.firstTwoFourThreeFiveOne .card:nth-child(n+7):nth-child(-n+9){grid-column:span 4}.counterGrid.firstTwoFourThreeFiveOne .card:nth-child(10){grid-column:1 / -1}.counterGrid.firstTwoFourThreeFiveOne .card:nth-child(n+11){grid-column:1 / -1}.counterGrid.firstTwoFourThreeFiveOne .card{min-height:145px;padding:13px}
+.counterGrid .card{margin-bottom:0;min-height:112px;padding:10px}.layoutFiveRow{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;box-sizing:border-box}.layoutNumberBox{width:100%;height:76px;border:1px solid #303a48;border-radius:14px;background:#10151c;color:#fff;padding:10px 14px;font:inherit;font-size:24px;font-weight:800;text-align:center;box-sizing:border-box;outline:none}.layoutNumberBox:focus{outline:2px solid #2563eb}.layoutHistoryBtn{width:100%;height:76px;border:1px solid #303a48;border-radius:14px;background:#26303b;color:#fff;font:inherit;font-size:18px;font-weight:800;box-sizing:border-box}.layoutHistoryBtn:active{transform:scale(.99)}.layoutHistoryMain{font-size:18px;font-weight:900;letter-spacing:.3px;color:#fff}.layoutHistoryMain .historyPrize.big{color:#ef4444}.layoutHistoryMain .historyPrize.reg{color:#3b82f6}.memoBox{grid-column:1 / -1;width:100%;min-height:280px;border:1px solid #303a48;border-radius:14px;background:#10151c;color:#fff;padding:14px;font:inherit;font-size:16px;line-height:1.6;resize:vertical;outline:none;box-sizing:border-box}.memoBox:focus{outline:2px solid #2563eb}
 select{width:100%;height:30px;border-radius:10px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font:inherit;font-weight:700}
 .gbox{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:stretch;padding:10px}
 .gitem{background:#10151c;border-radius:12px;padding:10px}.gcount,.startGames{font-size:24px;font-weight:800;letter-spacing:-1px;cursor:pointer;margin-top:3px}.ginput{width:100%;height:34px;border:1px solid #303a48;border-radius:9px;background:#0d1218;color:#fff;padding:0 8px;font:inherit;font-size:20px;font-weight:800;touch-action:manipulation}.ginput:focus{outline:2px solid #2563eb}
 
 .primary,.plus{background:#2563eb!important}
-.counter{display:flex;min-height:112px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;text-align:center}.counter.settingRates{height:112px;min-height:112px;max-height:112px;padding:6px 8px;gap:0}.settingRate{display:flex;justify-content:center;align-items:center;gap:6px;width:100%;font-size:11px;font-weight:800;line-height:1}.settingRate span{min-width:44px;text-align:right}.settingRate b{min-width:54px;text-align:left}.name{order:1;font-size:18px;font-weight:800;line-height:1.2;width:100%;text-align:center}.countLine{order:2;font-size:22px;font-weight:800;line-height:1.25;margin-top:5px;width:100%;text-align:center}.rate{order:3;font-size:15px;font-weight:800;color:#f5f7fa;line-height:1.2;margin-top:4px;width:100%;text-align:center}
+.counter{display:flex;min-height:112px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;text-align:center}.counter.countOnly .rate{display:none}.counter.settingRates{min-height:150px;padding:9px 10px;gap:6px;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;overflow:hidden}.settingRateView{width:100%;display:flex;flex-direction:column;box-sizing:border-box;min-width:0}.settingRateName{display:none}.settingRateCurrent{display:none}.settingRateList{display:grid;grid-template-columns:1fr;gap:4px;width:100%;min-width:0}.settingRateItem{display:grid;grid-template-columns:42px minmax(0,1fr);align-items:center;min-width:0;padding:5px 6px;border-radius:7px;background:#1b222c;box-sizing:border-box;gap:6px}.settingRateItem span{display:none;font-size:12px;font-weight:800;color:#b9c0ca;white-space:nowrap;overflow:hidden;text-overflow:clip}.settingRateItem b{font-size:15px;font-weight:900;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:clip;text-align:left;min-width:0;width:100%;display:block;letter-spacing:-.15px;box-sizing:border-box}.settingRateItem.approxMatch{outline:2px solid #2563eb;background:#182a45}.name{order:1;font-size:18px;font-weight:800;line-height:1.2;width:100%;text-align:center}.countLine{order:2;font-size:22px;font-weight:800;line-height:1.25;margin-top:5px;width:100%;text-align:center}.rate{order:3;font-size:15px;font-weight:800;color:#f5f7fa;line-height:1.2;margin-top:4px;width:100%;text-align:center}.approxBadge{display:none}
 .actions{display:flex;gap:7px}.minus{width:48px;height:58px;border-radius:14px;background:#343d49;font-size:22px}
 .plus{width:76px;height:58px;border-radius:14px;font-size:28px}
 .small{margin-top:7px;font-size:11px;color:#687585}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#10151c;border-radius:14px;padding:11px}
+.judgeTitle{font-size:20px;font-weight:800;text-align:center;margin-bottom:4px}.judgeSummary{background:#fff;border:1px solid #ddd;border-radius:14px;padding:12px;margin-top:10px;box-shadow:0 4px 14px #0001}.judgeResultHeader{background:#444;color:#fff;border-radius:12px 12px 0 0;min-height:86px;display:grid;grid-template-columns:92px 1fr 92px;align-items:center;gap:8px;padding:10px 12px;margin:0 -1px}.judgeResultHeader .judgeHeaderBtn{border:0;background:#fff;color:#1683df;border-radius:22px;padding:8px 13px;font-size:15px;font-weight:700;box-shadow:0 1px 3px #0002}.judgeResultTitle{text-align:center;font-size:20px;font-weight:800;line-height:1.15}.judgeResultTitle small{display:block;font-size:14px;font-weight:600;margin-bottom:2px}.judgeGrid{display:grid;grid-template-columns:1fr;gap:0;width:100%;max-width:520px;margin:0 auto;background:#fff;border:1px solid #ddd;border-top:0;border-radius:0 0 14px 14px;padding:12px 14px 10px;box-sizing:border-box}.judgeSetting{background:#fff;width:100%;max-width:480px;margin:0 auto;padding:10px 2px;display:grid;grid-template-columns:22px 50px 1fr 118px;align-items:center;gap:10px;min-height:60px;box-sizing:border-box}.judgeSetting strong{display:flex;align-items:center;gap:0;font-size:0;color:#111;font-weight:800}.judgeSettingLabel{font-size:14px;font-weight:800;color:#111;white-space:nowrap;text-align:left}.judgeCheckLabel{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;flex:0 0 18px;cursor:pointer;position:relative}.judgeCheck{position:absolute!important;opacity:0!important;width:1px!important;height:1px!important;margin:0!important;padding:0!important;appearance:none!important;-webkit-appearance:none!important;pointer-events:none}.judgeCheckMark{width:14px;height:14px;box-sizing:border-box;border:2px solid #111;border-radius:1px;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}.judgeCheck:checked + .judgeCheckMark{background:#111;border-color:#111}.judgeCheck:checked + .judgeCheckMark::after{content:"";width:6px;height:3px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px);display:block}.judgeCheckLabel:focus-within .judgeCheckMark{outline:2px solid #93c5fd;outline-offset:2px}.judgeSetting.disabled{opacity:.45}.judgeSetting.disabled .judgeBar i{width:0!important}.judgeScale{display:grid;grid-template-columns:22px 50px 1fr 118px;width:100%;max-width:480px;margin:0 auto;gap:10px;align-items:end;padding:0 2px 2px;color:#777;font-size:11px;box-sizing:border-box}.judgeScale > div:nth-child(2){display:block}.judgeScale > div:nth-child(3){display:flex;justify-content:space-between}.judgeScaleLabel{text-align:right}.judgeBar{height:40px;border-radius:9px;background:#ececec;overflow:hidden;margin-top:0}.judgeBar i{display:block;height:100%;background:#aaa;border-radius:9px;transition:width .45s cubic-bezier(.22,1,.36,1)}.judgePercent{font-size:22px;text-align:right;font-weight:800;font-variant-numeric:tabular-nums;color:#111;white-space:nowrap}.judgeSetting.low .judgeBar i{background:#ff2020}.judgeSetting.low .judgePercent{color:#ef2222}.judgeSetting.high .judgeBar i{background:#1976d2}.judgeSetting.high .judgePercent{color:#1976d2}.judgeDetail{margin-top:12px;border-top:1px solid #ddd;padding-top:10px}.judgeDetailRow{display:grid;grid-template-columns:1fr auto;gap:8px;padding:7px 0;border-bottom:1px solid #eee;font-size:13px}.judgeDetailRow:last-child{border-bottom:0}@media(max-width:520px){.judgeResultHeader{grid-template-columns:82px 1fr 82px;min-height:78px;padding:8px}.judgeResultHeader .judgeHeaderBtn{font-size:13px;padding:7px 8px}.judgeResultTitle{font-size:18px}.judgeGrid{max-width:100%;padding:10px 10px 8px}.judgeScale{grid-template-columns:18px 44px 1fr 104px;max-width:100%;gap:7px;padding:0 0 2px;font-size:10px}.judgeSetting{grid-template-columns:18px 44px 1fr 104px;max-width:100%;gap:7px;padding:8px 0}.judgeSetting strong{font-size:0}.judgeBar{height:34px}.judgePercent{font-size:19px}.judgeCheckLabel{width:18px;height:18px;flex-basis:18px}.judgeCheckMark{width:14px;height:14px}}
 .stat b{display:block;font-size:19px;margin-top:3px}
 .reset{width:100%;height:48px;border-radius:14px;color:#ffb4b4;background:#2a2022;margin-top:2px}
 footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12px 8px 4px;margin-top:8px;border-top:1px solid #27303c}
@@ -44,13 +46,13 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 .sheet input{width:100%;height:48px;border-radius:12px;border:1px solid #303a48;background:#0d1218;color:#fff;padding:0 12px;font-size:17px}
 .sheetRow{display:flex;gap:8px;margin-top:10px}.sheetRow button{flex:1;height:46px;border-radius:12px;background:#2a3340}.sheetRow .primary{background:#2563eb}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.keypad button{height:52px;border-radius:12px;background:#2a3340;font-size:20px}.keypad .wide{grid-column:span 2}
 .item.dragging{opacity:.95;box-shadow:0 8px 20px rgba(0,0,0,.35);z-index:10;position:relative}.dragRow{transition:transform .12s ease}.dragHandle{touch-action:none}.item{display:grid;grid-template-columns:1fr auto auto auto;gap:7px;align-items:center;margin-top:10px;padding:10px 0;border-bottom:1px solid #26303b}.rename{background:#263a52;border-radius:9px;padding:7px 10px}.del{background:#3a2528;border-radius:9px;padding:7px 10px;color:#ffb4b4}
-</style>
+<style>@media(max-width:520px){.counter.settingRates{min-height:150px;padding:8px 9px}.settingRateName{font-size:16px}.settingRateItem{grid-template-columns:42px minmax(0,1fr);padding:4px 5px}.settingRateItem b{font-size:14px}.settingRateItem span{font-size:11px}}</style></style>
 </head>
 <body>
 <main>
+<section class="topCard compactCard machineTop"><div class="machineRow"><button class="mainBack" id="mainBack" type="button">← 戻る</button><select id="machine"></select><button class="machineMinus" id="machineMinus">−</button></div></section>
 <div class="modeSwitch"><button class="modeBtn active" id="normalMode">通常</button><button class="modeBtn" id="combineMode">合成</button></div>
 <div class="topGrid">
-<section class="topCard compactCard machineTop"><div class="machineRow"><select id="machine"></select><button class="machineMinus" id="machineMinus">−</button></div></section>
 <section class="topCard compactCard"><div class="label">総ゲーム</div><input class="ginput" id="gamesInput" type="number" inputmode="numeric" min="0" step="1" value="0"></section>
 <section class="topCard compactCard"><div class="label">打ち始め</div><input class="ginput" id="startGamesInput" type="number" inputmode="numeric" min="0" step="1" value="0"></section>
 <section class="topCard compactCard buttonOnly"><button class="rateBtn" id="rateBtn">当選率</button></section>
@@ -60,9 +62,10 @@ footer{text-align:center;color:#8b98aa;font-size:12px;font-weight:700;padding:12
 
 <div class="progressTools"><button id="saveProgress">途中経過の保存</button><button id="showTrend">小役確率の推移</button></div>
 <button class="reset" id="reset">この機種のデータをリセット</button>
-<div class="machineTools"><button class="headerBtn" id="addMachine">＋ 機種を追加</button><button class="headerBtn" id="manage">⚙ 機種を管理</button></div>
-<footer><span>Ver. 1.1.143</span></footer>
+<div class="machineTools"><button class="headerBtn" id="addMachine" style="display:none" aria-hidden="true">＋ 機種を追加</button><button class="headerBtn" id="manage">⚙ 機種を管理</button></div>
+<footer><span>Ver. 1.1.231</span></footer>
 </main>
+<section id="machineListScreen" class="machineListScreen" aria-label="機種一覧画面"><div class="machineListHeader"><span>機種一覧</span><div class="machineListHeaderActions"><button id="machineListCreateBtn" class="machineListCreateBtn" type="button">新規作成</button><button id="machineListEditBtn" class="machineListEditBtn" type="button">編集</button></div></div><div id="machineListScreenItems" class="machineList"></div></section>
 <div class="modal" id="modal"><div class="sheet"><div style="display:flex;justify-content:space-between;align-items:center"><div class="label" id="modalTitle">機種を追加</div><div style="display:flex;gap:8px;align-items:center"><button id="manageAdd" class="headerBtn" type="button" style="display:none">＋</button><button id="manageEdit" class="headerBtn" type="button" style="display:none">編集</button><button id="closeTop" class="headerBtn" type="button">閉じる</button></div></div><div style="margin-top:7px"><input id="newMachine" maxlength="40" placeholder="例：マイジャグラーV"></div><div class="sheetRow"><button id="close">閉じる</button><button class="primary" id="add">追加</button></div><div id="machines"></div><div id="modeSettings" style="display:none"></div><div id="historyView" style="display:none"></div></div></div>
 <script>
 // スマホの意図しない拡大を防止
@@ -76,12 +79,14 @@ document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
 const KEY="koyaku-counter-v3",OLD_KEY="koyaku-counter-v2",DEFAULT_COUNTERS=["ベル","スイカ","チェリー"],DEFAULT_MACHINES=["マイジャグラーV","アイムジャグラーEX","その他"];
 let minusMode=false;
 let modeEditActive=false;
-function blankData(){return {games:0,startGames:0,counters:DEFAULT_COUNTERS.map(name=>({name,count:0})),layout:'2',memo:''}}
+function blankData(){return {games:0,startGames:0,counters:DEFAULT_COUNTERS.map(name=>({name,count:0})),layout:'2',memo:'',layoutNumber:'',layoutNumberHistory:[]}}
 function normalizeData(d){
   d.games=Number(d.games)||0;d.startGames=Number(d.startGames)||0;
   d.counters=(d.counters&&d.counters.length?d.counters:DEFAULT_COUNTERS.map(name=>({name,count:0}))).map(c=>({name:String(c.name||'小役'),count:Number(c.count)||0,color:String(c.color||''),countMethod:String(c.countMethod||'プッシュ'),countFormula:String(c.countFormula||''),gameFormula:String(c.gameFormula||''),displayFormat:['fraction','percent'].includes(c.displayFormat)?c.displayFormat:'fraction',settingRates:Array.from({length:6},(_,i)=>String(Array.isArray(c.settingRates)?(c.settingRates[i]??''):(c.settingRates&&typeof c.settingRates==='object'?c.settingRates[i+1]??'':''))),zeroCountGuess:c.zeroCountGuess!==false,countOnly:c.countOnly===true,includeTrend:c.includeTrend!==false,alias:String(c.alias||'')}));
-  d.layout=['2','1','first1','first2','memo'].includes(d.layout)?d.layout:'2';
+  if(!['2','1','first1','first2','first2four3','first2four3five1','memo'].includes(d.layout)) d.layout='first2four3';
   d.memo=String(d.memo||'');
+  d.layoutNumber=String(d.layoutNumber??'');
+  d.layoutNumberHistory=Array.isArray(d.layoutNumberHistory)?d.layoutNumberHistory:[];
   return d;
 }
 function normalizeMachine(m){
@@ -92,10 +97,13 @@ function normalizeMachine(m){
   if(!Array.isArray(m.modeOrder))m.modeOrder=Object.keys(m.modes);
   m.modeOrder=m.modeOrder.filter(k=>m.modes[k]);
   Object.keys(m.modes).forEach(k=>{if(!m.modeOrder.includes(k))m.modeOrder.push(k)});
+  const allowed=(Array.isArray(m.settingLevels)?m.settingLevels:[]).map(Number).filter(n=>[1,2,3,4,5,6].includes(n));
+  m.settingLevels=[...new Set(allowed)].sort((a,b)=>a-b);
+  if(!m.settingLevels.length)m.settingLevels=[1,2,3,4,5,6];
   delete m.games;delete m.startGames;delete m.counters;
   return m;
 }
-function blankMachine(){return {modes:{通常:blankData(),合成:blankData()},modeOrder:['通常','合成']}}
+function blankMachine(settingLevels=[1,2,3,4,5,6]){return {modes:{通常:blankData(),合成:blankData()},modeOrder:['通常','合成'],settingLevels:[...settingLevels]}}
 let state=JSON.parse(localStorage.getItem(KEY)||"null");
 if(!state){const old=JSON.parse(localStorage.getItem(OLD_KEY)||"null");state={selected:"マイジャグラーV",machines:{}};DEFAULT_MACHINES.forEach(n=>state.machines[n]=blankMachine());if(old)state.machines["マイジャグラーV"].modes.通常={games:old.games||0,startGames:old.startGames||0,counters:(old.counters||[]).map(c=>({name:c.name,count:c.count||0})),layout:'2'};localStorage.setItem(KEY,JSON.stringify(state))}
 Object.keys(state.machines||{}).forEach(n=>state.machines[n]=normalizeMachine(state.machines[n]));
@@ -105,14 +113,29 @@ function current(){return state.machines[state.selected]}
 function currentData(){const m=current();if(!m.modes[displayMode]){displayMode=m.modeOrder[0]||Object.keys(m.modes)[0]||"通常";if(!m.modes[displayMode])m.modes.通常=blankData()}return normalizeData(m.modes[displayMode])}
 function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
 function displayData(){return currentData()}
-function evalFormula(data,formula,counter){
+function resolveCounterValue(data,counter,stack=[]){
+  if(!counter)return 0;
+  const name=String(counter.name||'');
+  if(stack.includes(counter)||stack.includes(name))return Number(counter.count)||0;
+  const formula=String(counter.countFormula||'').trim();
+  if(String(counter.countMethod||'プッシュ')==='計算式' && formula){
+    const result=evalFormula(data,formula,counter,[...stack,counter,name]);
+    return Number.isFinite(result)?result:Number(counter.count)||0;
+  }
+  return Number(counter.count)||0;
+}
+function evalFormula(data,formula,counter,stack=[]){
   const games=Number(data?.games)||0;
   const start=Number(data?.startGames)||0;
   let expr=String(formula||'').trim();
   if(!expr)return 0;
   expr=expr.replace(/総ゲーム\s*[-−－ー]\s*打ち始めゲーム数/g,'(総ゲーム-打ち始めゲーム数)');
   const values={};
-  (data?.counters||[]).forEach(c=>{values[String(c.name)]=Number(c.count)||0;if(c.alias)values[String(c.alias)]=Number(c.count)||0});
+  (data?.counters||[]).forEach(c=>{
+    const v=resolveCounterValue(data,c,stack);
+    values[String(c.name)]=v;
+    if(c.alias)values[String(c.alias)]=v;
+  });
   values['総ゲーム']=games;values['打ち始め']=start;values['総ゲーム数']=games;values['打ち始めゲーム数']=start;
   values['小役数']=Number(counter?.count)||0;
   Object.keys(values).sort((a,b)=>b.length-a.length).forEach(k=>{const esc=k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');expr=expr.replace(new RegExp(esc,'g'),String(values[k]))});
@@ -120,7 +143,7 @@ function evalFormula(data,formula,counter){
   if(!expr)return 0;
   try{const v=Function('return ('+expr+')')();return Number.isFinite(v)?v:0}catch(e){return 0}
 }
-function calcCountFormula(data,counter){return evalFormula(data,counter?.countFormula,counter)}
+function calcCountFormula(data,counter){return evalFormula(data,counter?.countFormula,counter,[])}
 function calcGameFormula(data,counter){return evalFormula(data,counter?.gameFormula,counter)}
 function effectiveCount(data,counter){
   if(!counter)return 0;
@@ -141,21 +164,115 @@ function rate(n,data,counter){
   const ratio=denominator/count;
   return counter?.displayFormat==='percent'?`${(100/ratio).toFixed(2)}%`:`1/${ratio.toFixed(2)}`;
 }
-function renderModeSwitch(){const sw=document.querySelector('.modeSwitch');sw.innerHTML='';const machine=current();const modes=(machine.modeOrder||Object.keys(machine.modes||{})).filter(x=>machine.modes[x]);modes.forEach(mode=>{const b=document.createElement('button');b.className='modeBtn'+(displayMode===mode?' active':'');b.textContent=mode;b.onclick=()=>setDisplayMode(mode);sw.appendChild(b)});sw.style.gridTemplateColumns=`repeat(${Math.max(1,modes.length)},1fr)`}
-function renderMachineSelect(){const s=document.getElementById("machine");s.innerHTML="";Object.keys(state.machines).forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;o.selected=n===state.selected;s.appendChild(o)})}
+function renderModeSwitch(){const sw=document.querySelector('.modeSwitch');const prevIndex=Number.isFinite(Number(sw.dataset.activeIndex))?Number(sw.dataset.activeIndex):-1;sw.innerHTML='';const machine=current();const modes=(machine.modeOrder||Object.keys(machine.modes||{})).filter(x=>machine.modes[x]);const n=Math.max(1,modes.length);const activeIndex=Math.max(0,modes.indexOf(displayMode));sw.style.gridTemplateColumns=`repeat(${n},1fr)`;const indicator=document.createElement('span');indicator.className='modeIndicator';indicator.style.width=`calc((100% - 2px) / ${n})`;const startIndex=prevIndex<0?activeIndex:Math.min(prevIndex,n-1);indicator.style.transform=`translateX(${startIndex*100}%)`;sw.appendChild(indicator);modes.forEach(mode=>{const b=document.createElement('button');b.className='modeBtn'+(displayMode===mode?' active':'');b.textContent=mode;b.onclick=()=>setDisplayMode(mode);sw.appendChild(b)});sw.dataset.activeIndex=String(activeIndex);requestAnimationFrame(()=>{indicator.style.transform=`translateX(${activeIndex*100}%)`;});}
+function renderMachineSelect(){const s=document.getElementById("machine");s.innerHTML="";Object.keys(state.machines).forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;o.selected=n===state.selected;s.appendChild(o)});s.disabled=true;s.setAttribute("aria-disabled","true")}
 function render(){
   renderMachineSelect();renderModeSwitch();
   const d=displayData();
   document.getElementById("gamesInput").value=d.games;document.getElementById("startGamesInput").value=d.startGames||0;
-  const root=document.getElementById("counters");root.className='counterGrid'+(d.layout==='1'?' oneCol':d.layout==='first1'?' firstOne':d.layout==='first2'?' firstTwo':'');root.innerHTML="";
+  const root=document.getElementById("counters");root.className='counterGrid '+(d.layout==='first2four3five1'?'firstTwoFourThreeFiveOne':d.layout==='first2four3'?'firstTwoFourThree':'');root.innerHTML="";
   if(d.layout==='memo'){const memo=document.createElement('textarea');memo.className='memoBox';memo.placeholder='ここに自由にメモを書けます';memo.value=d.memo;memo.addEventListener('input',()=>{d.memo=memo.value;localStorage.setItem(KEY,JSON.stringify(state))});root.appendChild(memo);return}
-  d.counters.forEach(c=>{const card=document.createElement("section");card.className="card counter";if(c.color)card.style.background=c.color;if(rateSettingActive){card.classList.add('settingRates');card.innerHTML=Array.from({length:6},(_,i)=>`<div class="settingRate"><span>設定${i+1}</span><b>${c.settingRates?.[i]||'1/0.00'}</b></div>`).join('');}else{card.innerHTML='<div class="name"></div><div class="countLine"></div><div class="rate"></div>';card.querySelector('.name').textContent=c.name;const numerator=effectiveCount(d,c);card.querySelector('.countLine').textContent=String(numerator);card.querySelector('.rate').textContent=c.countOnly?'':rate(numerator,d,c);}let pressTimer=null,longPress=false;
-    if(!combined){card.addEventListener('pointerdown',()=>{longPress=false;pressTimer=setTimeout(()=>{longPress=true;const v=prompt(`${c.name} のカウントを入力`,String(c.count));if(v!==null){const n=parseInt(v,10);if(!Number.isNaN(n)&&n>=0){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=n;save()}}}},600)});card.addEventListener('pointerup',()=>{clearTimeout(pressTimer);if(!longPress){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=Math.max(0,target.count+(minusMode?-1:1));save()}}});card.addEventListener('pointerleave',()=>clearTimeout(pressTimer));}else{card.style.opacity='.92';card.style.cursor='default'}
+  const countersToRender=d.layout==='first2four3five1'?d.counters.slice(0,6):d.counters;
+  const machineSettings=(Array.isArray(current()?.settingLevels)&&current().settingLevels.length?current().settingLevels:[1,2,3,4,5,6]);
+  countersToRender.forEach(c=>{const card=document.createElement("section");card.className="card counter"+(c.countOnly?" countOnly":"");const isFormula=String(c.countMethod||'プッシュ')==='計算式';if(isFormula){card.style.background='#151b23';card.style.borderColor=c.color||'#27303c';card.style.borderWidth='3px';card.style.transition='border-color .25s ease,background-color .25s ease'}else if(c.color){card.style.background=c.color;card.style.borderColor='#27303c'}if(rateSettingActive){card.classList.add('settingRates');const currentText=rate(effectiveCount(d,c),d,c);const parseProb=v=>{v=String(v||'').trim();if(v.endsWith('%')){const n=parseFloat(v);return Number.isFinite(n)?n/100:null}const m=v.match(/^1\s*\/\s*(\d+(?:\.\d+)?)$/);if(m){const n=parseFloat(m[1]);return n>0?1/n:null}const d=v.match(/^(\d+(?:\.\d+)?)$/);if(d){const n=parseFloat(d[1]);return n>0?1/n:null}return null};const currentProb=parseProb(currentText);let best=-1,bestDiff=Infinity;if(currentProb!==null){c.settingRates?.slice(0,6).forEach((v,i)=>{const p=parseProb(v);if(p!==null){const diff=Math.abs(p-currentProb);if(diff<bestDiff){bestDiff=diff;best=i}}})}const rateName=String(c.name||'小役');const allRates=machineSettings.map(level=>{const i=level-1;return `<div class="settingRateItem${i===best?' approxMatch':''}"><span>設定${level}</span><b>${c.settingRates?.[i]||'1/0.00'}</b></div>`}).join('');card.innerHTML=`<div class="settingRateView"><div class="settingRateName">${rateName}</div><div class="settingRateCurrent">現在の実測　${currentText}</div><div class="settingRateList">${allRates}</div></div>`;card.querySelectorAll('.settingRateItem b').forEach(el=>{el.style.fontSize='15px';let guard=0;while(el.scrollWidth>el.clientWidth&&guard<12){const fs=parseFloat(getComputedStyle(el).fontSize);el.style.fontSize=Math.max(9,fs-0.5)+'px';guard++}});}else{card.innerHTML='<div class="name"></div><div class="countLine"></div><div class="rate"></div>';card.querySelector('.name').textContent=c.name;const numerator=effectiveCount(d,c);card.querySelector('.countLine').textContent=String(numerator);if(c.countOnly){card.querySelector('.rate').textContent='';card.querySelector('.rate').style.display='none'}else{card.querySelector('.rate').style.display='';card.querySelector('.rate').textContent=rate(numerator,d,c)}}let pressTimer=null,longPress=false;
+    if(!combined&&!isFormula){card.addEventListener('pointerdown',()=>{longPress=false;pressTimer=setTimeout(()=>{longPress=true;const v=prompt(`${c.name} のカウントを入力`,String(c.count));if(v!==null){const n=parseInt(v,10);if(!Number.isNaN(n)&&n>=0){const target=currentData().counters.find(x=>x.name===c.name);if(target){target.count=n;save()}}}},600)});card.addEventListener('pointerup',()=>{clearTimeout(pressTimer);if(!longPress){const target=currentData().counters.find(x=>x.name===c.name);if(target){const wasMinus=minusMode;const previousCount=Number(target.count)||0;const nextCount=Math.max(0,previousCount+(wasMinus?-1:1));target.count=nextCount;if(d.layout==='first2four3five1' && countersToRender.indexOf(c)>=2 && countersToRender.indexOf(c)<=5){d.layoutNumberHistory=Array.isArray(d.layoutNumberHistory)?d.layoutNumberHistory:[];if(wasMinus){if(nextCount<previousCount){for(let hi=d.layoutNumberHistory.length-1;hi>=0;hi--){if(String(d.layoutNumberHistory[hi].counter||'')===String(c.name)){d.layoutNumberHistory.splice(hi,1);break}}}}else{const num=String(d.layoutNumber||'').trim();if(num!==''){d.layoutNumberHistory.push({time:new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'}),value:num,counter:c.name});if(d.layoutNumberHistory.length>50)d.layoutNumberHistory.splice(0,d.layoutNumberHistory.length-50);d.layoutNumber='';}}}save()}}});card.addEventListener('pointerleave',()=>clearTimeout(pressTimer));}else{card.style.opacity='.92';card.style.cursor='default';card.style.pointerEvents='none'}
     root.appendChild(card);
   });
-  document.getElementById('gamesInput').disabled=combined;document.getElementById('startGamesInput').disabled=combined;document.getElementById('machineMinus').disabled=combined;document.getElementById('reset').style.display=combined?'none':'block';document.getElementById('machine').disabled=combined;
+  if(d.layout==='first2four3five1'){
+    const five=document.createElement('div');five.className='layoutFiveRow';
+    const input=document.createElement('input');
+    input.type='number';input.inputMode='numeric';input.min='0';input.step='1';input.className='layoutNumberBox';input.placeholder='数字を入力';input.value=d.layoutNumber||'';
+    let lastCommittedNumber=d.layoutNumber||'';
+    const commitNumber=()=>{const v=input.value.replace(/[^0-9]/g,'');if(input.value!==v)input.value=v;if(v!==lastCommittedNumber){d.layoutNumber=v;lastCommittedNumber=v;localStorage.setItem(KEY,JSON.stringify(state));}};
+    input.addEventListener('input',()=>{const v=input.value.replace(/[^0-9]/g,'');if(input.value!==v)input.value=v;});
+    input.addEventListener('change',commitNumber);input.addEventListener('blur',commitNumber);input.addEventListener('keydown',e=>{if(['e','E','+','-','.'].includes(e.key))e.preventDefault();if(e.key==='Enter'){e.preventDefault();commitNumber();input.blur()}});
+    const historyBtn=document.createElement('button');historyBtn.type='button';historyBtn.className='layoutHistoryBtn';historyBtn.textContent='当選履歴';
+    historyBtn.onclick=()=>showLayoutNumberHistory(d);
+    five.append(input,historyBtn);root.appendChild(five);
+  }
+  document.getElementById('gamesInput').disabled=combined;document.getElementById('startGamesInput').disabled=combined;document.getElementById('machineMinus').disabled=combined;document.getElementById('reset').style.display=combined?'none':'block';document.getElementById('machine').disabled=true;
 }
 function resetModalSections(){document.getElementById('newMachine').style.display='none';document.querySelector('.sheetRow').style.display='none';document.getElementById('machines').style.display='none';document.getElementById('modeSettings').style.display='none';document.getElementById('historyView').style.display='none'}
+function showMachineListScreen(){
+  const screen=document.getElementById('machineListScreen');
+  const items=document.getElementById('machineListScreenItems');
+  const editBtn=document.getElementById('machineListEditBtn');
+  const createBtn=document.getElementById('machineListCreateBtn');
+  if(!screen||!items)return;
+  document.querySelector('main').style.display='none';
+  document.getElementById('modal').classList.remove('show');
+  screen.style.display='block';
+  if(screen.dataset.editMode!=='1')screen.dataset.editMode='0';
+  const renderList=()=>{
+    items.innerHTML='';
+    const editing=screen.dataset.editMode==='1';
+    if(editBtn)editBtn.textContent=editing?'完了':'編集';
+    if(createBtn)createBtn.style.display=editing?'inline-flex':'none';
+    Object.keys(state.machines||{}).forEach(n=>{
+      const row=document.createElement('div');
+      row.style.cssText='display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:7px;align-items:center';
+      const b=document.createElement('button');
+      b.type='button';
+      b.className=n===state.selected?'active':'';
+      b.textContent=n;
+      b.onclick=()=>{
+        if(editing)return;
+        state.selected=n;
+        displayMode=Object.keys(state.machines[n]?.modes||{})[0]||'通常';
+        combined=false;
+        save();
+        screen.style.display='none';
+        document.querySelector('main').style.display='block';
+        render();
+      };
+      row.appendChild(b);
+      if(editing){
+        const rename=document.createElement('button');
+        rename.type='button';rename.className='rename';rename.textContent='名称変更';
+        rename.onclick=()=>renameMachine(n);
+        const del=document.createElement('button');
+        del.type='button';del.className='del';del.textContent='削除';
+        del.onclick=()=>deleteMachine(n);
+        row.append(rename,del);
+      }else{
+        const spacer=document.createElement('div');spacer.style.width='0';row.appendChild(spacer);row.appendChild(document.createElement('div'));
+      }
+      items.appendChild(row);
+    });
+  };
+  if(editBtn&&!editBtn.dataset.bound){
+    editBtn.dataset.bound='1';
+    editBtn.onclick=()=>{screen.dataset.editMode=screen.dataset.editMode==='1'?'0':'1';renderList()};
+  }
+  if(createBtn&&!createBtn.dataset.bound){
+    createBtn.dataset.bound='1';
+    createBtn.onclick=()=>{
+      const modal=document.getElementById('modal');
+      modal.classList.add('show');
+      document.getElementById('modalTitle').textContent='機種を追加';
+      resetModalSections();
+      document.getElementById('newMachine').style.display='block';
+      document.querySelector('.sheetRow').style.display='flex';
+      document.getElementById('manageAdd').style.display='none';
+      document.getElementById('manageEdit').style.display='none';
+      document.getElementById('newMachine').value='';
+      let levelSelect=document.getElementById('newMachineLevels');
+      if(!levelSelect){
+        const host=document.getElementById('newMachine').parentElement;
+        const wrap=document.createElement('div');wrap.style.cssText='margin-top:8px;display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center';
+        const lab=document.createElement('label');lab.textContent='設定段階';lab.style.fontSize='13px';lab.style.fontWeight='800';
+        levelSelect=document.createElement('select');levelSelect.id='newMachineLevels';levelSelect.style.cssText='height:40px;border-radius:10px;padding:0 10px;background:#1c2430;color:#fff;border:1px solid #303a48;font-size:14px';
+        [['123456','設定1～6（6段階）'],['1256','設定1・2・5・6（4段階）'],['12456','設定1・2・4・5・6（5段階）']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;levelSelect.appendChild(o)});
+        wrap.append(lab,levelSelect);host.appendChild(wrap);
+      }
+      levelSelect.value='123456';
+      document.getElementById('newMachine').focus();
+    };
+  }
+  renderList();
+}
+
+function renderAllMachineList(){showMachineListScreen()}
 function renderMachineList(){
   const e=document.getElementById('machines');resetModalSections();e.style.display='block';e.innerHTML='';
   const n=state.selected,machine=state.machines[n];if(!machine)return;
@@ -194,24 +311,25 @@ function openModeSettings(machineName){
   const machine=state.machines[machineName];
   modeEditActive=false;
   const editBtn=document.getElementById('manageEdit');
-  if(editBtn){editBtn.style.display='inline-flex';editBtn.textContent='編集';editBtn.onclick=()=>toggleModeEdit();}
+  if(editBtn){editBtn.style.display='none';}
   resetModalSections();
   const box=document.getElementById('modeSettings');box.style.display='block';box.innerHTML='';
   const oldCounterBack=document.getElementById('counterBackTop');if(oldCounterBack)oldCounterBack.remove();
-  const title=document.createElement('div');title.className='label';title.textContent=`「${machineName}」の機種・モード管理`;box.appendChild(title);
+  const header=document.createElement('div');header.style.cssText='display:grid;grid-template-columns:minmax(0,1fr);align-items:center;gap:8px;margin-bottom:4px';const title=document.createElement('div');title.className='label';title.style.cssText='text-align:center;margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap';title.textContent=machineName;header.appendChild(title);box.appendChild(header);
   const hint=document.createElement('div');hint.className='small';hint.textContent='「編集」を押すと、この画面のままモード左側に☰が表示され、ドラッグして順番を変更できます。';box.appendChild(hint);
   const modeTitle=document.createElement('div');modeTitle.className='label';modeTitle.style.marginTop='14px';modeTitle.textContent='この機種のモード';box.appendChild(modeTitle);
   const list=document.createElement('div');list.style.marginTop='8px';list.dataset.machine=machineName;box.appendChild(list);
   let drag=null;
   (machine.modeOrder||Object.keys(machine.modes)).forEach(mode=>{
     if(!machine.modes[mode])return;
-    const row=document.createElement('div');row.className='item modeReorderRow';row.dataset.mode=mode;row.style.gridTemplateColumns='34px 1fr auto auto auto';
+    const row=document.createElement('div');row.className='item modeReorderRow';row.dataset.mode=mode;row.style.gridTemplateColumns='34px 1fr auto auto auto auto';
     const handle=document.createElement('div');handle.className='dragHandle modeDragHandle';handle.textContent='☰';handle.setAttribute('aria-label','モードを並び替え');handle.style.cssText='font-size:22px;line-height:1;text-align:center;cursor:grab;touch-action:none;user-select:none;visibility:hidden;opacity:0;transition:opacity .15s';
     const span=document.createElement('span');span.textContent=mode;span.style.cssText='font-weight:800;display:flex;align-items:center';
     const layout=document.createElement('button');layout.className='headerBtn';layout.style.cssText='height:38px;min-width:120px;border-radius:9px;padding:0 10px;font-size:13px;display:none;align-items:center;justify-content:center;text-align:center;white-space:nowrap;';layout.textContent='レイアウト編集';layout.onclick=()=>openLayoutEdit(machineName,mode);
     const counter=document.createElement('button');counter.className='headerBtn';counter.style.cssText='height:38px;border-radius:9px;padding:0 10px;font-size:13px';counter.textContent='⚙ カウンター編集';if(normalizeData(machine.modes[mode]).layout==='memo'){counter.disabled=true;counter.title='メモ帳レイアウトではカウンター編集できません';counter.style.opacity='.45';counter.style.cursor='not-allowed'}else{counter.onclick=()=>openCounterEdit(machineName,mode)}
-    const edit=document.createElement('button');edit.className='rename';edit.textContent='変更';edit.style.display='none';edit.onclick=()=>openModeRename(machineName,mode);
-    row.append(handle,span,layout,counter,edit);list.appendChild(row);
+    const edit=document.createElement('button');edit.className='rename';edit.textContent='名称変更';edit.style.display='none';edit.onclick=()=>openModeRename(machineName,mode);
+    const del=document.createElement('button');del.className='del';del.textContent='削除';del.style.display='none';del.onclick=()=>deleteMode(machineName,mode);
+    row.append(handle,span,layout,counter,edit,del);list.appendChild(row);
     handle.addEventListener('pointerdown',ev=>{if(!modeEditActive)return;ev.preventDefault();handle.setPointerCapture?.(ev.pointerId);drag={row,startY:ev.clientY,moved:false};row.classList.add('dragging');row.style.transition='none'});
     handle.addEventListener('pointermove',ev=>{if(!drag||drag.row!==row||!modeEditActive)return;ev.preventDefault();const dy=ev.clientY-drag.startY;drag.moved=true;row.style.transform=`translateY(${dy}px)`;const rows=[...list.querySelectorAll('.modeReorderRow')],idx=rows.indexOf(row),next=rows[idx+1],prev=rows[idx-1];if(next&&ev.clientY>next.getBoundingClientRect().top+next.offsetHeight/2){list.insertBefore(next,row);drag.startY=ev.clientY;row.style.transform='translateY(0)'}else if(prev&&ev.clientY<prev.getBoundingClientRect().top+prev.offsetHeight/2){list.insertBefore(row,prev);drag.startY=ev.clientY;row.style.transform='translateY(0)'}});
     const end=()=>{if(!drag||drag.row!==row)return;row.classList.remove('dragging');row.style.transition='';row.style.transform='';if(drag.moved){machine.modeOrder=[...list.querySelectorAll('.modeReorderRow')].map(r=>r.dataset.mode);save();if(state.selected===machineName)renderModeSwitch()}drag=null};
@@ -223,12 +341,46 @@ function openModeSettings(machineName){
     modeEditActive=!modeEditActive;
     if(editBtn)editBtn.textContent=modeEditActive?'完了':'編集';
     list.querySelectorAll('.modeDragHandle').forEach(h=>{h.style.visibility=modeEditActive?'visible':'hidden';h.style.opacity=modeEditActive?'1':'0'});
-    list.querySelectorAll('.modeReorderRow').forEach(r=>{r.style.gridTemplateColumns=modeEditActive?'34px 1fr auto auto auto':'0 1fr auto auto auto'});
-    list.querySelectorAll('.modeReorderRow .rename').forEach(b=>{b.style.display=modeEditActive?'inline-flex':'none'});list.querySelectorAll('.modeReorderRow .headerBtn').forEach((b,i)=>{if(i%2===0)b.style.display=modeEditActive?'inline-flex':'none'});
+    list.querySelectorAll('.modeReorderRow').forEach(r=>{r.style.gridTemplateColumns=modeEditActive?'34px 1fr auto auto auto auto':'0 1fr auto auto auto auto'});
+    list.querySelectorAll('.modeReorderRow .rename').forEach(b=>{b.style.display=modeEditActive?'inline-flex':'none'});list.querySelectorAll('.modeReorderRow .del').forEach(b=>{b.style.display=modeEditActive?'inline-flex':'none'});list.querySelectorAll('.modeReorderRow .headerBtn').forEach((b,i)=>{if(i%2===0)b.style.display=modeEditActive?'inline-flex':'none'});
   };
 }
 function toggleModeEdit(){const box=document.getElementById('modeSettings');if(box&&typeof box._toggleModeEdit==='function')box._toggleModeEdit();}
 
+function deleteMode(machineName,mode){
+  const machine=state.machines[machineName];
+  if(!machine||!machine.modes[mode])return;
+  if(mode==='通常'){alert('「通常」は基本モードのため削除できません');return}
+  const modeNames=Object.keys(machine.modes);
+  if(modeNames.length<=1){alert('モードは1つ以上必要です');return}
+  if(!confirm(`「${mode}」を削除しますか？`))return;
+
+  // 削除前の編集状態を保持
+  const wasEditing=modeEditActive;
+
+  // データと並び順から完全に削除
+  delete machine.modes[mode];
+  machine.modeOrder=(machine.modeOrder||Object.keys(machine.modes)).filter(x=>x!==mode&&machine.modes[x]);
+
+  // 表示中のモードを安全に次のモードへ移動
+  const remainingModes=(machine.modeOrder.length?machine.modeOrder:Object.keys(machine.modes)).filter(x=>machine.modes[x]);
+  if(state.selected===machineName&&!remainingModes.includes(displayMode)){
+    displayMode=remainingModes[0]||'通常';
+  }
+
+  save();
+
+  // 本体・モード切替・機種管理画面をすべて即時更新
+  renderMachineSelect();
+  renderModeSwitch();
+  if(state.selected===machineName)render();
+
+  // 「機種を管理」画面を開いたまま、削除した行が確実に消えるよう再描画
+  if(state.selected===machineName){
+    openModeSettings(machineName);
+    if(wasEditing) toggleModeEdit();
+  }
+}
 function openModeRename(machineName,onlyMode){const machine=state.machines[machineName];const mode=onlyMode||displayMode;const nn=prompt('変更後のモード名を入力してください',mode);if(nn===null)return;const name=nn.trim();if(!name){alert('モード名を入力してください');return}if(mode==='通常'){alert('「通常」は基本モードのため名前を変更できません');return}if(name!==mode&&machine.modes[name]){alert('そのモード名はすでにあります');return}if(name!==mode){machine.modes[name]=machine.modes[mode];delete machine.modes[mode];machine.modeOrder=machine.modeOrder.map(x=>x===mode?name:x);if(state.selected===machineName&&displayMode===mode)displayMode=name;save()}openModeSettings(machineName)}
 function openCounterSettings(machineName,modeName,counter){
   const machine=state.machines[machineName];if(!machine||!machine.modes[modeName])return;
@@ -242,8 +394,47 @@ function openCounterSettings(machineName,modeName,counter){
   const form=document.createElement('div');form.style.cssText='display:grid;gap:10px;margin-top:12px';box.appendChild(form);
   function field(label,control){const wrap=document.createElement('div');const lab=document.createElement('div');lab.className='label';lab.textContent=label;lab.style.marginBottom='5px';wrap.append(lab,control);form.appendChild(wrap);return control}
   const nameInput=document.createElement('input');nameInput.value=target.name;nameInput.maxLength=40;field('小役の名前',nameInput);
-  const color=document.createElement('input');color.type='color';color.value=/^#[0-9a-fA-F]{6}$/.test(target.color)?target.color:'#151b23';color.style.cssText='width:100%;height:44px;border:1px solid #303a48;border-radius:10px;background:#0d1218;padding:4px';field('カウンターの色',color);
-  const method=document.createElement('select');['プッシュ','計算式','エイリアス'].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;method.appendChild(o)});method.value=target.countMethod||'プッシュ';field('カウント方法',method);
+  const color=document.createElement('div');
+  const colorOptions=[
+    ['', 'デフォ'],['#d85c5c','赤'],['#5b7fc4','青'],['#5eaa76','緑'],['#d47b91','桃'],
+    ['#c6a44a','黄'],['#5baeb5','水'],['#8a72b8','紫'],['#d7d7d7','白'],['#7a8088','灰']
+  ];
+  color.style.cssText='display:grid;grid-template-columns:repeat(10,1fr);gap:0;width:100%;height:58px;border-radius:12px;background:#20251d;padding:4px;overflow:hidden';
+  const colorButtons=[];
+  const currentColor=String(target.color||'').toLowerCase();
+  colorOptions.forEach(([v,t])=>{
+    const b=document.createElement('button');b.type='button';b.textContent=t;
+    const baseBg=v||'#171d26';
+    b.dataset.baseColor=v;b.style.cssText='height:50px;border:0;border-right:1px solid rgba(255,255,255,.10);border-radius:0;background:'+baseBg+';color:'+(v==='#f5f5f5'?'#111':'#fff')+';opacity:.42;font-size:16px;font-weight:800;padding:0;touch-action:manipulation;transition:background-color .25s ease,color .25s ease,opacity .25s ease,box-shadow .25s ease,border-radius .25s ease';
+    const chooseColor=(e)=>{e.preventDefault();e.stopPropagation();target.color=v;colorButtons.forEach(x=>{const cv=x.dataset.baseColor;const cb=cv||'#171d26';x.style.background=cb;x.style.color=cv==='#f5f5f5'?'#111':'#fff';x.style.opacity='.42';x.style.outline='none';x.style.boxShadow='none';x.style.borderRadius='0'});b.style.background=baseBg;b.style.color=(v==='#f5f5f5')?'#111':'#fff';b.style.opacity='1';b.style.borderRadius='9px';b.style.boxShadow='0 0 0 1px rgba(255,255,255,.08) inset';machine.modes[modeName]=d;localStorage.setItem(KEY,JSON.stringify(state));};
+    b.addEventListener('pointerup',chooseColor);
+    color.appendChild(b);colorButtons.push(b);
+  });
+  const selected=colorButtons.find((b,i)=>colorOptions[i][0].toLowerCase()===currentColor)||colorButtons[0];
+  colorButtons.forEach((b,i)=>{const v=colorOptions[i][0];b.style.background=v||'#171d26';b.style.color=v==='#f5f5f5'?'#111':'#fff';b.style.opacity='.42'});
+  if(selected){const idx=colorButtons.indexOf(selected),v=colorOptions[idx][0];selected.style.background=v||'#171d26';selected.style.color=v==='#f5f5f5'?'#111':'#fff';selected.style.opacity='1';selected.style.borderRadius='9px';selected.style.boxShadow='0 0 0 1px rgba(255,255,255,.08) inset'}
+  field('カウンターの色',color);
+  const method=document.createElement('div');
+  const methodOptions=['プッシュ','計算式','エイリアス'];
+  method.style.cssText='position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%;height:52px;border-radius:12px;background:#20251d;padding:4px;overflow:hidden;box-sizing:border-box';
+  const methodIndicator=document.createElement('span');
+  methodIndicator.style.cssText='position:absolute;top:4px;left:4px;width:calc((100% - 8px)/3);height:44px;border-radius:9px;background:#171d26;box-shadow:0 0 0 1px rgba(255,255,255,.08) inset;transition:transform .28s cubic-bezier(.22,.61,.36,1),background-color .2s ease,box-shadow .2s ease;pointer-events:none;z-index:0';
+  method.appendChild(methodIndicator);
+  const methodButtons=[];
+  const currentMethod=String(target.countMethod||'プッシュ');
+  methodOptions.forEach(v=>{
+    const b=document.createElement('button');b.type='button';b.textContent=v;
+    b.style.cssText='height:44px;border:0;border-right:1px solid rgba(255,255,255,.10);border-radius:0;background:transparent;color:#fff;opacity:.42;font-size:15px;font-weight:800;padding:0;touch-action:manipulation;transition:color .2s ease,opacity .2s ease;position:relative;z-index:1';
+    b.dataset.method=v;
+    methodButtons.push(b);method.appendChild(b);
+  });
+  const selectMethod=(v)=>{
+    methodButtons.forEach(b=>{b.style.opacity='.42';});
+    const idx=methodOptions.indexOf(v);
+    if(idx>=0){methodIndicator.style.transform=`translateX(${idx*100}%)`;methodButtons[idx].style.opacity='1';}
+  };
+  methodButtons.forEach(b=>b.addEventListener('pointerup',e=>{e.preventDefault();e.stopPropagation();method.value=b.dataset.method;method.dispatchEvent(new Event('change'));selectMethod(method.value)}));
+  method.value=currentMethod;selectMethod(currentMethod);field('カウント方法',method);
   const gameFormula=document.createElement('button');gameFormula.type='button';gameFormula.className='headerBtn';gameFormula.style.cssText='width:100%;height:48px;border-radius:10px;text-align:center;font-weight:800';gameFormula.textContent=target.gameFormula||'計算式を入力';field('ゲームの計算式',gameFormula);
   function openFormulaInput(kind){
     const isCount=kind==='count';
@@ -252,7 +443,7 @@ function openCounterSettings(machineName,modeName,counter){
     localStorage.setItem(KEY,JSON.stringify(state));
     const sourceFormula=isCount?(target.countFormula||''):(target.gameFormula||'');
     gameFormula.textContent=target.gameFormula||'計算式を入力';
-    form.style.display='none';formulaBox.innerHTML='';
+    formulaBox.innerHTML='';
     const ft=document.createElement('div');ft.className='label';ft.style.cssText='text-align:center;font-size:16px;color:#fff;font-weight:800';ft.textContent=isCount?'計算式の入力':'ゲームの計算式の入力';formulaBox.appendChild(ft);
     const fs=document.createElement('div');fs.className='small';fs.style.cssText='text-align:center;margin:6px 0 12px';fs.textContent=isCount?'この式の結果が小役のカウント（分子）になります。':'ゲーム数を計算する式を入力してください。';formulaBox.appendChild(fs);
     const fi=document.createElement('input');fi.type='text';fi.value=sourceFormula;fi.placeholder=isCount?'例：ベル＋チェリー':'例：総ゲーム−打ち始めゲーム数';fi.style.cssText='width:100%;height:54px;font-size:18px;font-weight:800;text-align:center;border:1px solid #3b4655;border-radius:10px;background:#0d1218;color:#fff;padding:0 12px';formulaBox.appendChild(fi);
@@ -283,37 +474,42 @@ function openCounterSettings(machineName,modeName,counter){
     const keyRow2=document.createElement('div');keyRow2.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:7px';formulaBox.appendChild(keyRow2);
     const addOp2=(label,fn)=>{const b=document.createElement('button');b.type='button';b.className='headerBtn';b.style.cssText='height:44px;border-radius:9px;font-size:16px;font-weight:800';b.textContent=label;b.onclick=fn;keyRow2.appendChild(b)};
     addOp2('×',()=>{fi.value=fi.value.replace(/\s*$/, '')+'×';persistFormula();fi.focus()});addOp2('(',()=>{fi.value=fi.value.replace(/\s*$/, '')+'(';persistFormula();fi.focus()});addOp2(')',()=>{fi.value=fi.value.replace(/\s*$/, '')+')';persistFormula();fi.focus()});
-    const fback=document.createElement('button');fback.className='headerBtn';fback.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:8px';fback.textContent='← 設定画面に戻る';fback.onclick=()=>{formulaBox.style.display='none';form.style.display='grid';render()};formulaBox.appendChild(fback);formulaBox.style.display='block';
+    const fback=document.createElement('button');fback.className='headerBtn';fback.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:8px';fback.textContent='← 設定画面に戻る';fback.onclick=()=>{formulaBox.style.display='none';render()};formulaBox.appendChild(fback);formulaBox.style.display='block';
   }
-  const formulaBox=document.createElement('div');formulaBox.style.cssText='display:none;margin-top:12px';box.appendChild(formulaBox);
+  const formulaBox=document.createElement('div');formulaBox.style.cssText='display:none;margin-top:12px';method.parentElement.after(formulaBox);
   gameFormula.onclick=()=>openFormulaInput('game');
   method.onchange=()=>{
     target.countMethod=method.value;
     if(method.value!=='計算式'){target.countFormula='';}
     d.counters=d.counters.map(c=>c===target?target:c);machine.modes[modeName]=d;localStorage.setItem(KEY,JSON.stringify(state));
-    if(method.value==='計算式')openFormulaInput('count');
+    if(method.value==='計算式'){openFormulaInput('count')}else{formulaBox.style.display='none';}
   };
   const display=document.createElement('select');[['fraction','分数（1/○○）'],['percent','パーセント（○○%）']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;display.appendChild(o)});display.value=target.displayFormat||'fraction';field('表示形式',display);
-  const ratesWrap=document.createElement('div');const ratesTitle=document.createElement('div');ratesTitle.className='label';ratesTitle.textContent='設定ごとの確率';ratesTitle.style.marginBottom='5px';ratesWrap.appendChild(ratesTitle);const ratesGrid=document.createElement('div');ratesGrid.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:7px';ratesWrap.appendChild(ratesGrid);form.appendChild(ratesWrap);
-  const rateInputs=[];for(let i=0;i<6;i++){const w=document.createElement('div');w.style.cssText='display:grid;grid-template-columns:42px 1fr;gap:5px;align-items:center';const l=document.createElement('span');l.textContent=`設定${i+1}`;l.style.fontSize='12px';const inp=document.createElement('input');inp.value=target.settingRates?.[i]||'';inp.placeholder='1/○○';inp.style.height='40px';w.append(l,inp);ratesGrid.appendChild(w);rateInputs.push(inp)}
-  const zero=document.createElement('label');zero.style.cssText='display:flex;align-items:center;gap:8px;padding:8px 0;font-size:13px;font-weight:700';const zc=document.createElement('input');zc.type='checkbox';zc.checked=target.zeroCountGuess!==false;zc.style.width='20px';zc.style.height='20px';zero.append(zc,document.createTextNode('カウントが0でも設定推測に反映する'));form.appendChild(zero);
-  const only=document.createElement('label');only.style.cssText='display:flex;align-items:center;gap:8px;padding:8px 0;font-size:13px;font-weight:700';const oc=document.createElement('input');oc.type='checkbox';oc.checked=target.countOnly===true;oc.style.width='20px';oc.style.height='20px';only.append(oc,document.createTextNode('カウントのみのボタンにする'));form.appendChild(only);
-  const trend=document.createElement('label');trend.style.cssText='display:flex;align-items:center;gap:8px;padding:8px 0;font-size:13px;font-weight:700';const tc=document.createElement('input');tc.type='checkbox';tc.checked=target.includeTrend!==false;tc.style.width='20px';tc.style.height='20px';trend.append(tc,document.createTextNode('カウントの推移に反映する'));form.appendChild(trend);
+  const ratesWrap=document.createElement('div');const ratesTitle=document.createElement('div');ratesTitle.className='label';ratesTitle.textContent='設定ごとの確率';ratesTitle.style.marginBottom='5px';ratesWrap.appendChild(ratesTitle);const ratesGrid=document.createElement('div');ratesGrid.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:7px 10px';ratesWrap.appendChild(ratesGrid);form.appendChild(ratesWrap);
+  const rateInputs=Array(6);const settingLevels=Array.isArray(machine.settingLevels)&&machine.settingLevels.length?machine.settingLevels:[1,2,3,4,5,6];const displaySettingLevels=(settingLevels.length===4&&settingLevels.includes(1)&&settingLevels.includes(2)&&settingLevels.includes(5)&&settingLevels.includes(6))?[1,2,5,6]:[1,2,3,4,5,6].filter(level=>settingLevels.includes(level));displaySettingLevels.forEach((level,levelPos)=>{const i=level-1;const w=document.createElement('div');w.style.cssText='display:grid;grid-template-columns:42px 24px 1fr;gap:5px;align-items:center';const l=document.createElement('span');l.textContent=`設定${level}`;l.style.fontSize='12px';const prefix=document.createElement('span');prefix.textContent='1/';prefix.style.cssText='font-size:15px;font-weight:800;text-align:right';const inp=document.createElement('input');inp.type='number';inp.inputMode='decimal';inp.step='0.01';inp.min='0';inp.setAttribute('pattern','[0-9]*');const saved=String(target.settingRates?.[i]||'').trim();inp.value=saved? saved.replace(/^1\s*\//,''):'0.00';inp.style.height='40px';inp.addEventListener('focus',()=>{inp.select()});inp.addEventListener('input',()=>{const cleaned=inp.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');if(inp.value!==cleaned)inp.value=cleaned;});inp.addEventListener('keydown',e=>{if(['e','E','+','-'].includes(e.key)){e.preventDefault();return;}if(e.key==='Enter'){e.preventDefault();const next=rateInputs[displaySettingLevels[levelPos+1]-1];if(next){next.focus();next.select();}else{inp.blur();}}});w.append(l,prefix,inp);ratesGrid.appendChild(w);rateInputs[i]=inp})
+  const zero=document.createElement('label');zero.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;font-size:13px;font-weight:700;cursor:pointer';const ztext=document.createElement('span');ztext.textContent='カウントが0でも設定推測に反映する';const zwrap=document.createElement('span');zwrap.style.cssText='position:relative;display:inline-flex;align-items:center;width:48px;height:28px;flex:none';const zc=document.createElement('input');zc.type='checkbox';zc.checked=target.zeroCountGuess!==false;zc.style.cssText='position:absolute;opacity:0;width:1px;height:1px;pointer-events:none';const ztrack=document.createElement('span');ztrack.style.cssText='position:absolute;inset:0;border-radius:999px;background:#343d49;transition:background .2s ease;box-sizing:border-box';const zknob=document.createElement('span');zknob.style.cssText='position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.35);transition:transform .2s ease';ztrack.appendChild(zknob);zwrap.append(zc,ztrack);const updateZeroToggle=()=>{ztrack.style.background=zc.checked?'#5eaa76':'#343d49';zknob.style.transform=zc.checked?'translateX(20px)':'translateX(0)'};zc.addEventListener('change',()=>{target.zeroCountGuess=zc.checked;machine.modes[modeName]=d;localStorage.setItem(KEY,JSON.stringify(state));updateZeroToggle()});updateZeroToggle();zero.append(ztext,zwrap);form.appendChild(zero);
+  const only=document.createElement('label');only.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;font-size:13px;font-weight:700;cursor:pointer';const otext=document.createElement('span');otext.textContent='カウントのみのボタンにする';const owrap=document.createElement('span');owrap.style.cssText='position:relative;display:inline-flex;align-items:center;width:48px;height:28px;flex:none';const oc=document.createElement('input');oc.type='checkbox';oc.checked=target.countOnly===true;oc.style.cssText='position:absolute;opacity:0;width:1px;height:1px;pointer-events:none';const otrack=document.createElement('span');otrack.style.cssText='position:absolute;inset:0;border-radius:999px;background:#343d49;transition:background .2s ease;box-sizing:border-box';const oknob=document.createElement('span');oknob.style.cssText='position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.35);transition:transform .2s ease';otrack.appendChild(oknob);owrap.append(oc,otrack);const updateOnlyToggle=()=>{otrack.style.background=oc.checked?'#5eaa76':'#343d49';oknob.style.transform=oc.checked?'translateX(20px)':'translateX(0)'};oc.addEventListener('change',()=>{target.countOnly=oc.checked;machine.modes[modeName]=d;localStorage.setItem(KEY,JSON.stringify(state));updateOnlyToggle();render()});updateOnlyToggle();only.append(otext,owrap);form.appendChild(only);
+  const trend=document.createElement('label');trend.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;font-size:13px;font-weight:700;cursor:pointer';const ttext=document.createElement('span');ttext.textContent='カウントの推移に反映する';const twrap=document.createElement('span');twrap.style.cssText='position:relative;display:inline-flex;align-items:center;width:48px;height:28px;flex:none';const tc=document.createElement('input');tc.type='checkbox';tc.checked=target.includeTrend!==false;tc.style.cssText='position:absolute;opacity:0;width:1px;height:1px;pointer-events:none';const ttrack=document.createElement('span');ttrack.style.cssText='position:absolute;inset:0;border-radius:999px;background:#343d49;transition:background .2s ease;box-sizing:border-box';const tknob=document.createElement('span');tknob.style.cssText='position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.35);transition:transform .2s ease';ttrack.appendChild(tknob);twrap.append(tc,ttrack);const updateTrendToggle=()=>{ttrack.style.background=tc.checked?'#5eaa76':'#343d49';tknob.style.transform=tc.checked?'translateX(20px)':'translateX(0)'};tc.addEventListener('change',()=>{target.includeTrend=tc.checked;machine.modes[modeName]=d;localStorage.setItem(KEY,JSON.stringify(state));updateTrendToggle()});updateTrendToggle();trend.append(ttext,twrap);form.appendChild(trend);
+  const targetIndex=d.counters.indexOf(target);
   function persistSettings(){
+    const savedTarget=(targetIndex>=0&&d.counters[targetIndex])?d.counters[targetIndex]:target;
     const nn=nameInput.value.trim();
-    if(nn && !d.counters.some(x=>x!==target&&x.name===nn)) target.name=nn;
-    target.color=color.value;
-    target.countMethod=method.value;
-    target.countFormula=target.countFormula||'';target.gameFormula=target.gameFormula||'';
-    target.displayFormat=display.value;
-    target.settingRates=rateInputs.map(x=>x.value.trim());
-    target.zeroCountGuess=zc.checked;
-    target.countOnly=oc.checked;
-    target.includeTrend=tc.checked;
+    if(nn) savedTarget.name=nn;
+    savedTarget.countMethod=method.value;
+    savedTarget.countFormula=savedTarget.countFormula||'';savedTarget.gameFormula=savedTarget.gameFormula||'';
+    savedTarget.displayFormat=display.value;
+    savedTarget.settingRates=rateInputs.map(x=>{const v=x.value.trim();return v?`1/${v}`:''});
+    savedTarget.zeroCountGuess=zc.checked;
+    savedTarget.countOnly=oc.checked;
+    savedTarget.includeTrend=tc.checked;
     machine.modes[modeName]=d;
     localStorage.setItem(KEY,JSON.stringify(state));
   }
-  [nameInput,display].forEach(el=>el.addEventListener('input',persistSettings));
+  nameInput.addEventListener('input',persistSettings);
+  nameInput.addEventListener('change',persistSettings);
+  nameInput.addEventListener('blur',persistSettings);
+  nameInput.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();nameInput.blur();}});
+  display.addEventListener('input',persistSettings);
   [color,method,display,zc,oc,tc,...rateInputs].forEach(el=>el.addEventListener('change',persistSettings));
 
 }
@@ -349,9 +545,12 @@ function openCounterEdit(machineName,onlyMode){
     list.innerHTML='';
     if(!d.counters.length){const empty=document.createElement('div');empty.className='small';empty.style.padding='10px 0';empty.textContent='まだ小役ボタンがありません。「＋」で追加できます。';list.appendChild(empty);return}
     d.counters.forEach((c,i)=>{
-      const row=document.createElement('div');row.className='item';row.style.cssText='display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:8px;align-items:center;width:100%;min-width:0;box-sizing:border-box;margin-top:8px;padding:8px 0;border-bottom:1px solid #26303b';
+      const row=document.createElement('div');row.className='item';row.style.cssText='display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:8px;align-items:center;width:100%;min-width:0;box-sizing:border-box;margin-top:8px;padding:8px 0;border-bottom:1px solid #26303b;transition:transform .14s ease';
       const handle=document.createElement('div');handle.className='counterDragHandle';handle.textContent='☰';handle.setAttribute('aria-label','小役を並べ替え');handle.style.cssText='height:38px;width:36px;display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;cursor:grab;touch-action:none;user-select:none;visibility:'+(reorderMode?'visible':'hidden')+';opacity:'+(reorderMode?'1':'0')+';border-radius:9px;background:#20262f';
-      const name=document.createElement('button');name.type='button';name.textContent=c.name;name.style.cssText='font-weight:800;display:flex;align-items:center;min-height:38px;background:transparent;border:0;color:#fff;padding:0;text-align:left;font-size:16px;cursor:pointer';name.onclick=()=>openCounterSettings(machineName,editMode,c);
+      const name=document.createElement('button');name.type='button';name.style.cssText='font-weight:800;display:flex;align-items:center;gap:9px;min-height:38px;background:transparent;border:0;color:#fff;padding:0;text-align:left;font-size:16px;cursor:pointer;min-width:0';
+      const colorDot=document.createElement('span');colorDot.style.cssText='width:16px;height:16px;min-width:16px;border-radius:50%;display:inline-block;background:'+(c.color||'#343d49')+';border:1px solid rgba(255,255,255,.18);box-shadow:0 0 0 1px rgba(0,0,0,.18) inset';
+      const nameText=document.createElement('span');nameText.textContent=c.name;nameText.style.cssText='overflow:hidden;text-overflow:ellipsis;white-space:nowrap';
+      name.append(colorDot,nameText);name.onclick=()=>openCounterSettings(machineName,editMode,c);
       const del=document.createElement('button');del.className='del';del.style.cssText='height:38px;padding:0 10px;border-radius:9px';del.textContent='削除';del.style.display=reorderMode?'block':'none';
       del.onclick=()=>{if(confirm(`「${c.name}」のカウントボタンを削除しますか？`)){d.counters.splice(i,1);saveCounters();renderCounterList()}};
       row.append(handle,name,del);list.appendChild(row);
@@ -379,6 +578,7 @@ function openCounterEdit(machineName,onlyMode){
             row.style.boxSizing='border-box';
             row.style.zIndex='9999';
             row.style.pointerEvents='none';
+            row.style.transition='none';
           }
           row.style.transform=`translate3d(${dx}px,${dy}px,0)`;
           const others=getRows();
@@ -411,6 +611,7 @@ function openCounterEdit(machineName,onlyMode){
             row.style.boxSizing='';
             row.style.zIndex='';
             row.style.pointerEvents='';
+            row.style.transition='transform .14s ease';
             row.style.transform='';
             list.insertBefore(row,drag.placeholder);
             // ドロップした時点のDOM順を即座にデータへ反映する。
@@ -490,34 +691,157 @@ function openLayoutEdit(machineName,mode){
   const preview=document.createElement('div');preview.style.cssText='margin-top:8px;padding:10px;border:1px solid #27303c;border-radius:12px;background:#10151c;display:grid;gap:6px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);box-sizing:border-box;min-width:0;max-width:100%;overflow:hidden';previewBox.appendChild(preview);
   function renderPreview(){
     preview.innerHTML='';
-    const cols=d.layout==='1'?'1':'2';preview.style.gridTemplateColumns=`repeat(${cols},minmax(0,1fr))`;
-    if(d.layout==='memo'){const memoPreview=document.createElement('div');memoPreview.style.cssText='grid-column:1 / -1;min-height:150px;border-radius:10px;background:#10151c;border:1px solid #27303c;box-sizing:border-box;padding:10px;color:#687585;font-size:12px;white-space:normal;overflow:hidden';memoPreview.textContent='自由にメモを書けるメモ帳';preview.appendChild(memoPreview);return}
-    const count=d.layout==='1'?4:d.layout==='first1'?7:6;
+    if(d.layout==='memo'){const memoPreview=document.createElement('div');memoPreview.style.cssText='grid-column:1 / -1;min-height:150px;border-radius:10px;background:#10151c;border:1px solid #27303c;box-sizing:border-box;padding:10px;color:#687585;font-size:12px;white-space:normal;overflow:hidden';memoPreview.textContent='自由にメモを書けるメモ帳';preview.style.gridTemplateColumns='repeat(2,minmax(0,1fr))';preview.appendChild(memoPreview);return}
+    const isNew=d.layout==='first2four3five1';
+    preview.style.gridTemplateColumns='repeat(12,minmax(0,1fr))';
+    const count=6;
     for(let i=0;i<count;i++){
-      const cell=document.createElement('div');cell.textContent='';cell.style.cssText='height:34px;border-radius:8px;background:#26303b;min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden';
-      if(d.layout==='first1'&&i===0)cell.style.gridColumn='1 / -1';
-      if(d.layout==='first2'&&i<2)cell.style.gridColumn='1 / -1';
+      const cell=document.createElement('div');cell.textContent='';cell.style.cssText='height:46px;border-radius:8px;background:#26303b;min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden';
+      if(i<2)cell.style.gridColumn='1 / -1';else cell.style.gridColumn='span 3';
       preview.appendChild(cell);
     }
+    if(isNew){const inputPreview=document.createElement('div');inputPreview.style.cssText='height:44px;border-radius:10px;background:#10151c;border:2px solid #394553;box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#687585;font-size:12px';inputPreview.textContent='数字入力';const historyPreview=document.createElement('div');historyPreview.style.cssText='height:44px;border-radius:10px;background:#26303b;border:2px solid #394553;box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px';historyPreview.textContent='当選履歴';const previewRow=document.createElement('div');previewRow.style.cssText='grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:6px;min-width:0';previewRow.append(inputPreview,historyPreview);preview.appendChild(previewRow)}
   }
-  const choices=[['2','2列'],['1','1列'],['first1','1行目だけ1列＋2行目以降2列'],['first2','1・2行目だけ1列＋3行目以降2列'],['memo','メモ帳']];
+  const choices=[['first2four3five1','1・2行目1列＋3行目4列＋5行目1列（4行目なし）'],['2','2列'],['1','1列'],['first1','1行目だけ1列＋2行目以降2列'],['first2','1・2行目だけ1列＋3行目以降2列'],['memo','メモ帳']];
   choices.forEach(([v,label])=>{const b=document.createElement('button');b.className='headerBtn';b.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:8px;text-align:center;font-size:12px;line-height:1.3;white-space:normal;overflow-wrap:anywhere;box-sizing:border-box';b.textContent=(d.layout===v?'✓ ':'')+label;b.onclick=()=>{d.layout=v;machine.modes[editMode]=d;localStorage.setItem(KEY,JSON.stringify(state));render();openLayoutEdit(machineName,editMode)};choicesBox.appendChild(b)});
   renderPreview();
   const done=document.createElement('button');done.className='primary';done.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:12px';done.textContent='完了';done.onclick=()=>openCounterEdit(machineName,editMode);box.appendChild(done)
 }
+document.getElementById('mainBack').onclick=()=>showMachineListScreen();
 document.getElementById('machine').onchange=e=>{state.selected=e.target.value;displayMode=Object.keys(current().modes)[0]||'通常';combined=false;save()};
 document.getElementById('machineMinus').onclick=()=>{minusMode=!minusMode;document.getElementById('machineMinus').textContent=minusMode?'＋':'−';document.getElementById('machineMinus').style.background=minusMode?'#2563eb':'#343d49'};
-document.getElementById('judge').onclick=()=>alert('設定判別機能は準備中です。小役データをもとに判別機能を追加できます。');
-let rateSettingActive=false;document.getElementById('rateBtn').onclick=()=>{rateSettingActive=!rateSettingActive;const b=document.getElementById('rateBtn');b.textContent='当選率';b.classList.toggle('active',rateSettingActive);render()};
+function parseSettingRate(raw,counter){
+  let v=String(raw??'').trim().replace(/％/g,'%').replace(/,/g,'');
+  if(!v)return 0;
+  const isPercent=String(counter?.displayFormat||'fraction')==='percent' || v.includes('%');
+  v=v.replace(/1\s*\/\s*/,'').replace('%','').trim();
+  const n=Number(v);
+  if(!Number.isFinite(n)||n<=0)return 0;
+  return isPercent?n:1/n;
+}
+function judgeSetting(){
+  const d=currentData();
+  const usable=[];
+  (d.counters||[]).forEach(c=>{
+    const rates=Array.isArray(c.settingRates)?c.settingRates:[];
+    const count=effectiveCount(d,c);
+    if(count<=0 && c.zeroCountGuess===false)return;
+    let exposure=Number(d.games)||0;
+    const gf=String(c.gameFormula||'').trim();
+    if(gf)exposure=calcGameFormula(d,c);
+    if(!Number.isFinite(exposure)||exposure<=0)return;
+    const observed=count/exposure;
+    if(!Number.isFinite(observed))return;
+    const expected=rates.map(x=>parseSettingRate(x,c));
+    if(expected.some(x=>x>0))usable.push({c,count,exposure,observed,expected});
+  });
+  const logs=Array(6).fill(-Infinity);
+  const allowedJudge=Array.isArray(current()?.settingLevels)&&current().settingLevels.length?current().settingLevels:[1,2,3,4,5,6];
+  usable.forEach(u=>u.expected.forEach((p,i)=>{if(allowedJudge.includes(i+1)&&p>0){const lambda=u.exposure*p;const k=u.count;logs[i]=(Number.isFinite(logs[i])?logs[i]:0)+k*Math.log(lambda)-lambda-(k>1?(k*Math.log(k)-k):0)}}));
+  const finiteLogs=logs.filter(Number.isFinite);
+  const max=finiteLogs.length?Math.max(...finiteLogs):-Infinity;
+  const weights=logs.map(x=>Number.isFinite(x)&&max>-Infinity?Math.exp(x-max):0);
+  const active=Array(6).fill(false);allowedJudge.forEach(n=>{active[n-1]=true});
+  const calcProbs=()=>{
+    const selected=weights.map((w,i)=>active[i]?w:0);
+    const sum=selected.reduce((a,b)=>a+b,0);
+    return selected.map(x=>sum?x/sum*100:0);
+  };
+  const box=document.getElementById('historyView');
+  modal.classList.add('show');
+  document.getElementById('modalTitle').textContent='設定判別';
+  document.getElementById('newMachine').style.display='none';
+  document.querySelector('.sheetRow').style.display='none';
+  document.getElementById('machines').style.display='none';
+  document.getElementById('modeSettings').style.display='none';
+  box.style.display='block';
+  box.innerHTML='';
+
+  const head=document.createElement('div');head.className='judgeResultHeader';
+  head.innerHTML=`<button type="button" class="judgeHeaderBtn" id="judgeCountBtn">回数表示</button><div class="judgeResultTitle"><small>${state.selected}</small>判別結果</div><button type="button" class="judgeHeaderBtn" id="judgeDetailBtn">内訳表示</button>`;
+  box.appendChild(head);
+
+  const grid=document.createElement('div');grid.className='judgeGrid';
+  const scale=document.createElement('div');scale.className='judgeScale';scale.innerHTML='<div></div><div><span>0%</span><span class="judgeScaleLabel">100%</span></div><div></div>';grid.appendChild(scale);
+
+  const prevBarWidths=Array(6).fill(0);
+  const renderRows=()=>{
+    const oldCards=[...grid.querySelectorAll('.judgeSetting')];
+    oldCards.forEach((el,i)=>{
+      const bar=el.querySelector('.judgeBar i');
+      if(bar){ const m=String(bar.style.width||'0').match(/[0-9.]+/); prevBarWidths[i]=m?Number(m[0]):prevBarWidths[i]||0; }
+    });
+    oldCards.forEach(el=>el.remove());
+
+    const probs=calcProbs();
+    const enabledProbs=probs.filter((p,i)=>active[i] && weights[i]>0);
+    const minProb=enabledProbs.length?Math.min(...enabledProbs):0;
+    const maxProb=enabledProbs.length?Math.max(...enabledProbs):0;
+    const bars=[];
+    for(let i=0;i<6;i++){
+      const p=probs[i];
+      const card=document.createElement('div');
+      const isAllowed=allowedJudge.includes(i+1);
+      const isEnabled=isAllowed&&active[i];
+      if(!isAllowed)card.style.display='none';
+      const isLow=isEnabled&&weights[i]>0&&p===minProb;
+      const isHigh=isEnabled&&weights[i]>0&&p===maxProb;
+      card.className='judgeSetting'+(isLow?' low':'')+(isHigh?' high':'')+(!isEnabled?' disabled':'');
+      const barWidth=isEnabled?Math.min(100,Math.max(0,p)):0;
+      const startWidth=Math.min(100,Math.max(0,prevBarWidths[i]||0));
+      card.innerHTML=`<label class="judgeCheckLabel" aria-label="設定${i+1}"><input class="judgeCheck" type="checkbox" ${isEnabled?'checked':''}><span class="judgeCheckMark" aria-hidden="true"></span></label><div class="judgeSettingLabel">設定${i+1}</div><div class="judgeBar"><i style="width:${startWidth}%"></i></div><div class="judgePercent">${p.toFixed(3)} %</div>`;
+      const bar=card.querySelector('.judgeBar i');
+      bars.push({bar,target:barWidth,i});
+      const chk=card.querySelector('.judgeCheck');
+      chk.addEventListener('change',()=>{active[i]=chk.checked;renderRows()});
+      grid.appendChild(card);
+    }
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        bars.forEach(({bar,target,i})=>{bar.style.width=target+'%';prevBarWidths[i]=target});
+        grid.querySelectorAll('.judgePercent').forEach(el=>{
+          let size=22;
+          el.style.fontSize=size+'px';
+          el.style.whiteSpace='nowrap';
+          while(el.scrollWidth>el.clientWidth && size>12){
+            size-=1;
+            el.style.fontSize=size+'px';
+          }
+        });
+      });
+    });
+  };
+  box.appendChild(grid);
+  renderRows();
+
+  const detail=document.createElement('div');detail.className='judgeDetail';
+  if(!usable.length){detail.innerHTML='<div style="padding:10px 0;color:#9da8b7">設定1～6の確率が登録されているカウンターがありません。<br>機種管理 → カウンター編集で設定値を登録してください。</div>'}
+  else{usable.forEach(u=>{const row=document.createElement('div');row.className='judgeDetailRow';const rateText=u.c.displayFormat==='percent'?`${(u.observed*100).toFixed(2)}%`:`1/${(1/u.observed).toFixed(2)}`;row.innerHTML=`<span>${u.c.name}　実測 ${rateText}</span><span>${u.count}回</span>`;detail.appendChild(row)})}
+  box.appendChild(detail);
+  document.getElementById('judgeDetailBtn').onclick=()=>{detail.scrollIntoView({behavior:'smooth',block:'start'});};
+  document.getElementById('judgeCountBtn').onclick=()=>{detail.style.display=detail.style.display==='none'?'block':'none';};
+  const back=document.createElement('button');back.className='headerBtn';back.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:12px';back.textContent='← 戻る';back.onclick=()=>{box.style.display='none';modal.classList.remove('show');render()};box.appendChild(back);
+}
+document.getElementById('judge').onclick=judgeSetting;
+let rateSettingActive=false;let rateDismissOverlay=null;function closeRateSetting(){if(!rateSettingActive)return;rateSettingActive=false;if(rateDismissOverlay){rateDismissOverlay.remove();rateDismissOverlay=null}const b=document.getElementById('rateBtn');b.textContent='当選率';b.classList.remove('active');render()}function openRateDismissOverlay(){if(rateDismissOverlay)return;const ov=document.createElement('div');ov.id='rateDismissOverlay';ov.style.cssText='position:fixed;inset:0;z-index:9999;background:transparent;touch-action:manipulation;cursor:pointer';ov.addEventListener('pointerup',e=>{e.preventDefault();e.stopPropagation();closeRateSetting()},{capture:true});ov.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();closeRateSetting()},{capture:true});document.body.appendChild(ov);rateDismissOverlay=ov}document.getElementById('rateBtn').onclick=(e)=>{e.preventDefault();e.stopPropagation();rateSettingActive=true;const b=document.getElementById('rateBtn');b.textContent='当選率';b.classList.add('active');render();requestAnimationFrame(openRateDismissOverlay)};
 function setDisplayMode(mode){const m=current();if(!m||!m.modes||!m.modes[mode])return;displayMode=mode;combined=false;render()}
 function setupGameInput(id,key){const el=document.getElementById(id);el.addEventListener('focus',()=>{if(el.value==='0')el.value=''});el.addEventListener('click',()=>{if(el.value==='0')el.value=''});el.addEventListener('blur',()=>{if(el.value==='')el.value='0'});const commit=()=>{if(combined)return;const m=current();if(!m||!m.modes[displayMode])return;const d=normalizeData(m.modes[displayMode]);d[key]=Math.max(0,parseInt(el.value||'0',10)||0);m.modes[displayMode]=d;localStorage.setItem(KEY,JSON.stringify(state));render()};el.addEventListener('input',commit);el.addEventListener('change',commit)}
 setupGameInput('gamesInput','games');setupGameInput('startGamesInput','startGames');
-document.getElementById('reset').onclick=()=>{if(confirm(`「${state.selected}」の「${displayMode}」のゲーム数と小役カウントをリセットしますか？`)){const d=currentData();d.games=0;d.startGames=0;d.counters.forEach(c=>c.count=0);save()}};
+document.getElementById('reset').onclick=()=>{if(confirm(`「${state.selected}」の「${displayMode}」のゲーム数と小役カウント、小役確率の推移をリセットしますか？`)){const d=currentData();d.games=0;d.startGames=0;d.counters.forEach(c=>c.count=0);d.history=[];save()}};
+function formatLayoutHistoryTime(v){const s=String(v||'');const m=s.match(/(?:^|\s)(\d{1,2}):(\d{2})(?::\d{2})?(?:\s|$)/);return m?String(m[1]).padStart(2,'0')+':'+m[2]:s;}
+function showLayoutNumberHistory(d){
+  const box=document.getElementById('historyView');modal.classList.add('show');document.getElementById('modalTitle').textContent='当選履歴';document.getElementById('newMachine').style.display='none';document.querySelector('.sheetRow').style.display='none';document.getElementById('machines').style.display='none';document.getElementById('modeSettings').style.display='none';box.style.display='block';box.innerHTML='';
+  const title=document.createElement('div');title.className='label';title.textContent=`「${state.selected}」・「${displayMode}」の当選履歴`;box.appendChild(title);
+  const rows=Array.isArray(d.layoutNumberHistory)?[...d.layoutNumberHistory].reverse():[];
+  const list=document.createElement('div');box.appendChild(list);
+  if(!rows.length){const e=document.createElement('div');e.style.cssText='padding:14px 0;color:#9da8b7';e.textContent='当選履歴はありません。';list.appendChild(e)}else rows.forEach(h=>{const r=document.createElement('div');r.className='historyRow';const name=String(h.counter||'');const kind=/REG/i.test(name)?'reg':/BIG/i.test(name)?'big':'';const main=document.createElement('div');main.className='layoutHistoryMain';const time=document.createElement('span');time.className='historyTime';time.textContent=formatLayoutHistoryTime(h.time);const sep0=document.createElement('span');sep0.textContent='　';const g=document.createElement('span');g.textContent=`${h.value}G`;const sep=document.createElement('span');sep.textContent='　';const prize=document.createElement('span');prize.className='historyPrize'+(kind?' '+kind:'');prize.textContent=name;main.append(g,sep,prize,sep0,time);r.appendChild(main);list.appendChild(r)});
+  const back=document.createElement('button');back.className='headerBtn';back.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:12px';back.textContent='← 戻る';back.onclick=()=>{box.style.display='none';modal.classList.remove('show');render()};box.appendChild(back);
+}
 function historyData(){const m=current();if(!m||!m.modes||!m.modes[displayMode])return [];m.modes[displayMode].history=m.modes[displayMode].history||[];return m.modes[displayMode].history}
 function migrateHistory(){if(!state.history)return;Object.keys(state.history).forEach(k=>{const parts=k.split('\u0000');if(parts.length!==2)return;const m=state.machines[parts[0]],mode=parts[1];if(m&&m.modes&&m.modes[mode]){m.modes[mode].history=m.modes[mode].history||[];if(!m.modes[mode].history.length)m.modes[mode].history=state.history[k]||[];}});delete state.history;}
 function saveProgress(){const d=currentData();const rows=historyData();rows.push({time:new Date().toLocaleString('ja-JP'),games:d.games,startGames:d.startGames,counters:d.counters.filter(c=>c.includeTrend!==false).map(c=>({name:c.name,count:c.count,rate:rate(c.count,d,c)}))});if(rows.length>50)rows.splice(0,rows.length-50);save();alert('途中経過を「小役確率の推移」に保存しました');}
-function showTrend(){const box=document.getElementById('historyView');modal.classList.add('show');document.getElementById('modalTitle').textContent='小役確率の推移';document.getElementById('newMachine').style.display='none';document.querySelector('.sheetRow').style.display='none';document.getElementById('machines').style.display='none';document.getElementById('modeSettings').style.display='none';box.style.display='block';box.innerHTML='';const title=document.createElement('div');title.className='label';title.textContent=`「${state.selected}」・「${displayMode}」の小役確率の推移`;box.appendChild(title);const rows=historyData();const tabs=document.createElement('div');tabs.className='historyTabs';const trendTab=document.createElement('button');trendTab.className='historyTab active';trendTab.textContent='推移';const tableTab=document.createElement('button');tableTab.className='historyTab';tableTab.textContent='表';tabs.appendChild(trendTab);tabs.appendChild(tableTab);box.appendChild(tabs);const content=document.createElement('div');box.appendChild(content);function renderTrendList(){content.innerHTML='';if(!rows.length){const e=document.createElement('div');e.style.cssText='padding:14px 0;color:#9da8b7';e.textContent='保存された途中経過はありません。';content.appendChild(e)}else{rows.forEach(h=>{const r=document.createElement('div');r.className='historyRow';const rates=h.counters.map(c=>`${c.name} ${c.rate}`).join('　');r.innerHTML=`<div class="historyTime">${h.time}　${h.games}G</div><div class="historyMain">${rates}</div>`;content.appendChild(r)})}}function renderHistoryTable(){content.innerHTML='';if(!rows.length){const e=document.createElement('div');e.style.cssText='padding:14px 0;color:#9da8b7';e.textContent='保存された途中経過はありません。';content.appendChild(e);return}const wrap=document.createElement('div');wrap.className='historyTableWrap';const table=document.createElement('table');table.className='historyTable';const head=document.createElement('thead');const hr=document.createElement('tr');const thg=document.createElement('th');thg.textContent='ゲーム数';hr.appendChild(thg);const names=[];rows.forEach(h=>h.counters.forEach(c=>{if(!names.includes(c.name))names.push(c.name)}));names.forEach(n=>{const th=document.createElement('th');th.textContent=n;hr.appendChild(th)});head.appendChild(hr);table.appendChild(head);const body=document.createElement('tbody');rows.forEach(h=>{const tr=document.createElement('tr');const tdg=document.createElement('td');tdg.textContent=h.games+'G';tr.appendChild(tdg);names.forEach(n=>{const td=document.createElement('td');const c=h.counters.find(x=>x.name===n);td.textContent=c?c.count:0;tr.appendChild(td)});body.appendChild(tr)});table.appendChild(body);wrap.appendChild(table);content.appendChild(wrap)}trendTab.onclick=()=>{trendTab.classList.add('active');tableTab.classList.remove('active');renderTrendList()};tableTab.onclick=()=>{tableTab.classList.add('active');trendTab.classList.remove('active');renderHistoryTable()};renderTrendList();const back=document.createElement('button');back.className='headerBtn';back.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:10px';back.textContent='← 戻る';back.onclick=()=>{box.style.display='none';modal.classList.remove('show');render()};box.appendChild(back);}document.getElementById('saveProgress').onclick=saveProgress;document.getElementById('showTrend').onclick=showTrend;
-const modal=document.getElementById('modal');document.getElementById('manage').onclick=()=>{modal.classList.add('show');document.getElementById('modalTitle').textContent='機種を管理';document.getElementById('newMachine').style.display='none';document.querySelector('.sheetRow').style.display='none';document.getElementById('manageAdd').style.display='none';document.getElementById('manageEdit').style.display='inline-flex';openModeSettings(state.selected)};document.getElementById('manageEdit').onclick=()=>{if(state.selected)toggleModeEdit()};document.getElementById('addMachine').onclick=()=>{modal.classList.add('show');document.getElementById('modalTitle').textContent='機種を追加';document.getElementById('newMachine').style.display='block';document.querySelector('.sheetRow').style.display='flex';document.getElementById('manageAdd').style.display='none';document.getElementById('manageEdit').style.display='none';document.getElementById('newMachine').focus()};document.getElementById('close').onclick=()=>modal.classList.remove('show');document.getElementById('closeTop').onclick=()=>{document.getElementById('manageAdd').style.display='none';document.getElementById('manageEdit').style.display='none';modal.classList.remove('show');render()};modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show')});document.getElementById('add').onclick=()=>{const i=document.getElementById('newMachine'),n=i.value.trim();if(!n)return;if(state.machines[n]){alert('その機種はすでに登録されています');return}state.machines[n]=blankMachine();state.selected=n;displayMode='通常';combined=false;i.value='';save();modal.classList.remove('show')};
+function showTrend(){const box=document.getElementById('historyView');modal.classList.add('show');document.getElementById('modalTitle').textContent='小役確率の推移';document.getElementById('newMachine').style.display='none';document.querySelector('.sheetRow').style.display='none';document.getElementById('machines').style.display='none';document.getElementById('modeSettings').style.display='none';box.style.display='block';box.innerHTML='';const title=document.createElement('div');title.className='label';title.textContent=`「${state.selected}」・「${displayMode}」の小役確率の推移`;box.appendChild(title);const rows=historyData();const tabs=document.createElement('div');tabs.className='historyTabs';const trendTab=document.createElement('button');trendTab.className='historyTab active';trendTab.textContent='推移';const tableTab=document.createElement('button');tableTab.className='historyTab';tableTab.textContent='表';tabs.appendChild(trendTab);tabs.appendChild(tableTab);box.appendChild(tabs);const content=document.createElement('div');box.appendChild(content);function renderTrendList(){content.innerHTML='';if(!rows.length){const e=document.createElement('div');e.style.cssText='padding:14px 0;color:#9da8b7';e.textContent='保存された途中経過はありません。';content.appendChild(e)}else{rows.forEach(h=>{const r=document.createElement('div');r.className='historyRow';const rates=h.counters.map(c=>`${c.name} ${c.rate}`).join('　');r.innerHTML=`<div class="historyTime">${h.time}　${h.games}G</div><div class="historyMain">${rates}</div>`;content.appendChild(r)})}}function renderHistoryTable(){content.innerHTML='';if(!rows.length){const e=document.createElement('div');e.style.cssText='padding:14px 0;color:#9da8b7';e.textContent='保存された途中経過はありません。';content.appendChild(e);return}const wrap=document.createElement('div');wrap.className='historyTableWrap';const table=document.createElement('table');table.className='historyTable';const head=document.createElement('thead');const hr=document.createElement('tr');const thg=document.createElement('th');thg.textContent='ゲーム数';hr.appendChild(thg);const names=[];rows.forEach(h=>h.counters.forEach(c=>{if(!names.includes(c.name))names.push(c.name)}));names.forEach(n=>{const th=document.createElement('th');th.textContent=n;hr.appendChild(th)});head.appendChild(hr);table.appendChild(head);const body=document.createElement('tbody');rows.forEach(h=>{const tr=document.createElement('tr');const tdg=document.createElement('td');tdg.textContent=h.games+'G';tr.appendChild(tdg);names.forEach(n=>{const td=document.createElement('td');const c=h.counters.find(x=>x.name===n);td.textContent=c&&c.rate?c.rate:'—';tr.appendChild(td)});body.appendChild(tr)});table.appendChild(body);wrap.appendChild(table);content.appendChild(wrap)}trendTab.onclick=()=>{trendTab.classList.add('active');tableTab.classList.remove('active');renderTrendList()};tableTab.onclick=()=>{tableTab.classList.add('active');trendTab.classList.remove('active');renderHistoryTable()};renderTrendList();const back=document.createElement('button');back.className='headerBtn';back.style.cssText='width:100%;height:44px;border-radius:10px;margin-top:10px';back.textContent='← 戻る';back.onclick=()=>{box.style.display='none';modal.classList.remove('show');render()};box.appendChild(back);}document.getElementById('saveProgress').onclick=saveProgress;document.getElementById('showTrend').onclick=showTrend;
+const modal=document.getElementById('modal');document.getElementById('manage').onclick=()=>{modal.classList.add('show');document.getElementById('modalTitle').textContent='機種を管理';document.getElementById('newMachine').style.display='none';document.querySelector('.sheetRow').style.display='none';document.getElementById('manageAdd').style.display='none';document.getElementById('manageEdit').style.display='none';openModeSettings(state.selected)};document.getElementById('manageEdit').onclick=()=>{if(state.selected)toggleModeEdit()};document.getElementById('addMachine').onclick=()=>{modal.classList.add('show');document.getElementById('modalTitle').textContent='機種を追加';document.getElementById('newMachine').style.display='block';document.querySelector('.sheetRow').style.display='flex';document.getElementById('manageAdd').style.display='none';document.getElementById('manageEdit').style.display='none';document.getElementById('newMachine').focus()};document.getElementById('close').onclick=()=>modal.classList.remove('show');document.getElementById('closeTop').onclick=()=>{document.getElementById('manageAdd').style.display='none';document.getElementById('manageEdit').style.display='none';modal.classList.remove('show');render()};modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show')});document.getElementById('add').onclick=()=>{const i=document.getElementById('newMachine'),n=i.value.trim();if(!n)return;if(state.machines[n]){alert('その機種はすでに登録されています');return}const ls=document.getElementById('newMachineLevels');const settingLevels=(ls?.value||'123456').split('').map(Number);state.machines[n]=blankMachine(settingLevels);state.selected=n;displayMode='通常';combined=false;i.value='';save();modal.classList.remove('show');const screen=document.getElementById('machineListScreen');if(screen&&screen.style.display==='block'){screen.dataset.editMode='0';showMachineListScreen()}else{render()}};
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));migrateHistory();save();render();
 </script>
 </body>
