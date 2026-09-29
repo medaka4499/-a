@@ -1,10 +1,10 @@
 {
   "name": "小役カウンター",
   "short_name": "小役カウンター",
-  "start_url": "./",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0b0f14",
-  "theme_color": "#111827",
+  "theme_color": "#0b0f14",
   "lang": "ja",
-  "icons": []
+  "version": "1.1.282"
 }
